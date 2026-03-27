@@ -1,7 +1,7 @@
 title: Showroom Docs MCP Server
 description: >-
-  Quarkus MCP Server que indexa documentacion de Red Hat y del workshop
-  "IA Development From Zero To Hero" para OpenShift Lightspeed RAG.
+  Quarkus MCP Server that indexes Red Hat product documentation and the
+  "IA Development From Zero To Hero" workshop for OpenShift Lightspeed.
 baseurl: "/showroom-docs-mcp"
 url: "https://maximilianopizarro.github.io"
 
@@ -10,6 +10,7 @@ plugins:
   - jekyll-remote-theme
 
 logo: assets/images/logo.svg
+favicon: assets/images/favicon.svg
 show_downloads: false
 
 markdown: kramdown
