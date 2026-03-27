@@ -112,7 +112,7 @@ spec:
         models:
           - name: llama-32-3b-instruct
             parameters:
-              maxTokensForResponse: 512
+              maxTokensForResponse: 4096
         name: red_hat_openshift_ai
         type: rhoai_vllm
         url: 'http://llama-32-3b-instruct-openai.my-first-model.svc.cluster.local/v1'
@@ -239,8 +239,38 @@ quarkus.log.category."com.neuralbank".level=DEBUG
 
 ## Helm Chart Values
 
+The chart includes a `values.schema.json` for input validation. Full parameters:
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `replicaCount` | int | `1` | Number of replicas |
+| `image.repository` | string | `quay.io/maximilianopizarro/showroom-docs-mcp` | Container image |
+| `image.tag` | string | `latest` | Image tag |
+| `image.pullPolicy` | string | `Always` | Pull policy (`Always`, `IfNotPresent`, `Never`) |
+| `nameOverride` | string | `""` | Override chart name |
+| `fullnameOverride` | string | `""` | Override full release name |
+| `namespace` | string | `openshift-lightspeed` | Target namespace |
+| `service.type` | string | `ClusterIP` | Service type (`ClusterIP`, `NodePort`, `LoadBalancer`) |
+| `service.port` | int | `8080` | Service port |
+| `resources.requests.cpu` | string | `100m` | CPU request |
+| `resources.requests.memory` | string | `256Mi` | Memory request |
+| `resources.limits.cpu` | string | `500m` | CPU limit |
+| `resources.limits.memory` | string | `512Mi` | Memory limit |
+| `readinessProbe.httpGet.path` | string | `/q/health/ready` | Readiness probe path |
+| `readinessProbe.initialDelaySeconds` | int | `5` | Readiness probe initial delay |
+| `livenessProbe.httpGet.path` | string | `/q/health/live` | Liveness probe path |
+| `livenessProbe.initialDelaySeconds` | int | `10` | Liveness probe initial delay |
+| `nodeSelector` | object | `{}` | Node selector constraints |
+| `tolerations` | list | `[]` | Pod tolerations |
+| `affinity` | object | `{}` | Pod affinity rules |
+| `olsConfig.enabled` | bool | `false` | Enable OLSConfig integration |
+| `olsConfig.mcpServerName` | string | `showroom-docs-mcp` | MCP server name |
+| `olsConfig.mcpServerTimeout` | int | `10` | MCP timeout (seconds) |
+
+Example with custom values:
+
 ```yaml
-replicaCount: 1
+replicaCount: 2
 
 image:
   repository: quay.io/maximilianopizarro/showroom-docs-mcp
@@ -253,11 +283,11 @@ service:
 
 resources:
   requests:
-    cpu: 100m
-    memory: 256Mi
-  limits:
-    cpu: 500m
+    cpu: 200m
     memory: 512Mi
+  limits:
+    cpu: 1
+    memory: 1Gi
 
 namespace: openshift-lightspeed
 ```

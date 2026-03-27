@@ -112,7 +112,7 @@ spec:
         models:
           - name: llama-32-3b-instruct
             parameters:
-              maxTokensForResponse: 512
+              maxTokensForResponse: 4096
         name: red_hat_openshift_ai
         type: rhoai_vllm
         url: 'http://llama-32-3b-instruct-openai.my-first-model.svc.cluster.local/v1'
@@ -239,8 +239,38 @@ quarkus.log.category."com.neuralbank".level=DEBUG
 
 ## Valores del Helm Chart
 
+El chart incluye un `values.schema.json` para validacion de entrada. Parametros completos:
+
+| Parametro | Tipo | Valor por defecto | Descripcion |
+|-----------|------|-------------------|-------------|
+| `replicaCount` | int | `1` | Numero de replicas |
+| `image.repository` | string | `quay.io/maximilianopizarro/showroom-docs-mcp` | Imagen del contenedor |
+| `image.tag` | string | `latest` | Tag de la imagen |
+| `image.pullPolicy` | string | `Always` | Politica de descarga (`Always`, `IfNotPresent`, `Never`) |
+| `nameOverride` | string | `""` | Sobreescribir nombre del chart |
+| `fullnameOverride` | string | `""` | Sobreescribir nombre completo del release |
+| `namespace` | string | `openshift-lightspeed` | Namespace destino |
+| `service.type` | string | `ClusterIP` | Tipo de servicio (`ClusterIP`, `NodePort`, `LoadBalancer`) |
+| `service.port` | int | `8080` | Puerto del servicio |
+| `resources.requests.cpu` | string | `100m` | Solicitud de CPU |
+| `resources.requests.memory` | string | `256Mi` | Solicitud de memoria |
+| `resources.limits.cpu` | string | `500m` | Limite de CPU |
+| `resources.limits.memory` | string | `512Mi` | Limite de memoria |
+| `readinessProbe.httpGet.path` | string | `/q/health/ready` | Ruta del probe de disponibilidad |
+| `readinessProbe.initialDelaySeconds` | int | `5` | Demora inicial del probe de disponibilidad |
+| `livenessProbe.httpGet.path` | string | `/q/health/live` | Ruta del probe de vida |
+| `livenessProbe.initialDelaySeconds` | int | `10` | Demora inicial del probe de vida |
+| `nodeSelector` | object | `{}` | Restricciones de seleccion de nodo |
+| `tolerations` | list | `[]` | Toleraciones del pod |
+| `affinity` | object | `{}` | Reglas de afinidad del pod |
+| `olsConfig.enabled` | bool | `false` | Habilitar integracion OLSConfig |
+| `olsConfig.mcpServerName` | string | `showroom-docs-mcp` | Nombre del servidor MCP |
+| `olsConfig.mcpServerTimeout` | int | `10` | Timeout MCP (segundos) |
+
+Ejemplo con valores personalizados:
+
 ```yaml
-replicaCount: 1
+replicaCount: 2
 
 image:
   repository: quay.io/maximilianopizarro/showroom-docs-mcp
@@ -253,11 +283,11 @@ service:
 
 resources:
   requests:
-    cpu: 100m
-    memory: 256Mi
-  limits:
-    cpu: 500m
+    cpu: 200m
     memory: 512Mi
+  limits:
+    cpu: 1
+    memory: 1Gi
 
 namespace: openshift-lightspeed
 ```

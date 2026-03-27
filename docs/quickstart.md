@@ -29,6 +29,37 @@ helm install showroom-docs-mcp showroom-docs-mcp/showroom-docs-mcp \
   --set image.pullPolicy=Always
 ```
 
+### Helm Chart Values
+
+The chart includes a `values.schema.json` for input validation. Key configurable values:
+
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| `replicaCount` | `1` | Number of replicas |
+| `image.repository` | `quay.io/maximilianopizarro/showroom-docs-mcp` | Container image |
+| `image.tag` | `latest` | Image tag |
+| `image.pullPolicy` | `Always` | Pull policy (`Always`, `IfNotPresent`, `Never`) |
+| `namespace` | `openshift-lightspeed` | Target namespace |
+| `service.type` | `ClusterIP` | Service type |
+| `service.port` | `8080` | Service port |
+| `resources.requests.cpu` | `100m` | CPU request |
+| `resources.requests.memory` | `256Mi` | Memory request |
+| `resources.limits.cpu` | `500m` | CPU limit |
+| `resources.limits.memory` | `512Mi` | Memory limit |
+| `olsConfig.enabled` | `false` | Enable OLSConfig integration |
+| `olsConfig.mcpServerName` | `showroom-docs-mcp` | MCP server name in OLSConfig |
+| `olsConfig.mcpServerTimeout` | `10` | MCP timeout (seconds) |
+
+Example with custom values:
+
+```bash
+helm install showroom-docs-mcp showroom-docs-mcp/showroom-docs-mcp \
+  --namespace openshift-lightspeed \
+  --set image.pullPolicy=Always \
+  --set resources.limits.memory=1Gi \
+  --set replicaCount=2
+```
+
 ## Option 2: Direct Manifests
 
 ```bash
