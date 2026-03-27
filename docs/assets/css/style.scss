@@ -1,0 +1,47 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+pre, code {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+pre {
+  padding: 15px;
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+#main_content {
+  max-width: 800px;
+  margin: 0 auto;
+
+  pre {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  table {
+    width: 100%;
+    overflow-x: auto;
+    display: block;
+
+    th, td {
+      white-space: normal;
+      word-wrap: break-word;
+    }
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+.language-yaml, .language-bash, .language-properties, .language-json {
+  white-space: pre-wrap;
+  word-break: break-all;
+}
