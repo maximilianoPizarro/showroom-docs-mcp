@@ -20,6 +20,10 @@ The server exposes 4 tools via Model Context Protocol (MCP).
 
 Search all indexed documentation using keywords. This is the primary tool for answering questions about Red Hat products and the Neuralbank workshop.
 
+<p align="center">
+  <img src="{{ '/assets/images/lightspeed-search.png' | relative_url }}" alt="searchDocs tool output" width="100%"/>
+</p>
+
 **Input:**
 ```json
 {
@@ -114,6 +118,10 @@ List all available documentation files with their titles.
 
 **Output:** Table of contents organized by category (Workshop / Red Hat Products).
 
+<p align="center">
+  <img src="{{ '/assets/images/lightspeed-doc-index.png' | relative_url }}" alt="listDocSections tool output" width="100%"/>
+</p>
+
 ---
 
 ## getDocSummary
@@ -123,6 +131,10 @@ Get a summary of the entire knowledge base including statistics and example ques
 **Input:** none
 
 **Output:** Overview of indexed content, product versions, and suggested queries.
+
+<p align="center">
+  <img src="{{ '/assets/images/lightspeed-summary.png' | relative_url }}" alt="getDocSummary tool output" width="100%"/>
+</p>
 
 ---
 
@@ -159,3 +171,17 @@ Once the MCP server is registered in OLSConfig, you can ask Lightspeed these typ
 - "What is RAG and how does it work with vector databases?"
 - "How do I use DevSpaces for development?"
 - "How do I deploy and integrate the MCP agent?"
+
+## Official Red Hat Documentation Links
+
+| Product | Documentation |
+|---------|---------------|
+| OpenShift Service Mesh 3.3 | [docs.redhat.com](https://docs.redhat.com/en/documentation/red_hat_openshift_service_mesh/3.3) |
+| Connectivity Link 1.3 | [docs.redhat.com](https://docs.redhat.com/en/documentation/red_hat_connectivity_link/1.3) |
+| Developer Hub 1.9 | [docs.redhat.com](https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.9) |
+| OpenShift Lightspeed 1.0 | [docs.redhat.com](https://docs.redhat.com/en/documentation/red_hat_openshift_lightspeed/1.0) |
+| OpenShift Observability 1 | [docs.redhat.com](https://docs.redhat.com/en/documentation/red_hat_openshift_observability/1) |
+| OpenTelemetry 3.9 | [docs.redhat.com](https://docs.redhat.com/en/documentation/red_hat_build_of_opentelemetry/3.9) |
+| OpenShift Pipelines 1.21 | [docs.redhat.com](https://docs.redhat.com/en/documentation/red_hat_openshift_pipelines/1.21) |
+| API Management 1 | [docs.redhat.com](https://docs.redhat.com/en/documentation/red_hat_openshift_api_management/1) |
+| OpenShift AI 1 | [docs.redhat.com](https://docs.redhat.com/en/documentation/red_hat_openshift_ai_cloud_service/1) |

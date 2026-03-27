@@ -18,4 +18,5 @@ _site/
 Gemfile.lock
 pdfs/
 *.py
-*.png
+docs/*.png
+!docs/assets/images/*.png

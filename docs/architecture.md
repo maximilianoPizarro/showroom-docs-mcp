@@ -12,6 +12,14 @@ permalink: /architecture/
 
 <p align="center"><strong>English</strong> | <a href="{{ '/es/architecture/' | relative_url }}">Espanol</a></p>
 
+## OpenShift Topology
+
+The following screenshot shows the showroom-docs-mcp deployment in the OpenShift topology view, alongside the Lightspeed components:
+
+<p align="center">
+  <img src="{{ '/assets/images/topology-overview.png' | relative_url }}" alt="OpenShift Topology showing showroom-docs-mcp deployment" width="100%"/>
+</p>
+
 ## Overview Diagram
 
 ```
@@ -80,6 +88,46 @@ The LLM decides which tools to call based on the question:
 | "What products are indexed?" | `getDocSummary` → returns overview |
 | "How many pods are running?" | `kubernetes-mcp` tools |
 | "What namespaces exist?" | `kubernetes-mcp` tools |
+
+## Tool Output Examples
+
+### searchDocs - Searching Documentation
+
+<p align="center">
+  <img src="{{ '/assets/images/lightspeed-search.png' | relative_url }}" alt="searchDocs tool output in Lightspeed" width="100%"/>
+</p>
+
+### listDocSections - Documentation Index
+
+<p align="center">
+  <img src="{{ '/assets/images/lightspeed-doc-index.png' | relative_url }}" alt="listDocSections tool output in Lightspeed" width="100%"/>
+</p>
+
+### getDocSummary - Knowledge Base Summary
+
+<p align="center">
+  <img src="{{ '/assets/images/lightspeed-summary.png' | relative_url }}" alt="getDocSummary tool output in Lightspeed" width="100%"/>
+</p>
+
+### Lightspeed Chat Using getDocSection
+
+<p align="center">
+  <img src="{{ '/assets/images/topology-chat.png' | relative_url }}" alt="Lightspeed answering questions using documentation" width="100%"/>
+</p>
+
+## Official Red Hat Documentation Links
+
+| Product | Documentation |
+|---------|---------------|
+| OpenShift Service Mesh 3.3 | [docs.redhat.com](https://docs.redhat.com/en/documentation/red_hat_openshift_service_mesh/3.3) |
+| Connectivity Link 1.3 | [docs.redhat.com](https://docs.redhat.com/en/documentation/red_hat_connectivity_link/1.3) |
+| Developer Hub 1.9 | [docs.redhat.com](https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.9) |
+| OpenShift Lightspeed 1.0 | [docs.redhat.com](https://docs.redhat.com/en/documentation/red_hat_openshift_lightspeed/1.0) |
+| OpenShift Observability 1 | [docs.redhat.com](https://docs.redhat.com/en/documentation/red_hat_openshift_observability/1) |
+| OpenTelemetry 3.9 | [docs.redhat.com](https://docs.redhat.com/en/documentation/red_hat_build_of_opentelemetry/3.9) |
+| OpenShift Pipelines 1.21 | [docs.redhat.com](https://docs.redhat.com/en/documentation/red_hat_openshift_pipelines/1.21) |
+| API Management 1 | [docs.redhat.com](https://docs.redhat.com/en/documentation/red_hat_openshift_api_management/1) |
+| OpenShift AI 1 | [docs.redhat.com](https://docs.redhat.com/en/documentation/red_hat_openshift_ai_cloud_service/1) |
 
 ## Technology Stack
 
