@@ -6,8 +6,8 @@ description: >-
   Provides 46 indexed documents covering 27 workshop modules, 9 Red Hat product
   docs (auto-sanitized from PDF), and 10 developer products with quick-start examples.
 type: application
-version: 1.3.0
-appVersion: "1.3.0"
+version: 1.4.0
+appVersion: "1.4.0"
 kubeVersion: ">=1.25.0-0"
 home: https://maximilianopizarro.github.io/showroom-docs-mcp
 icon: https://raw.githubusercontent.com/maximilianoPizarro/showroom-docs-mcp/main/docs/assets/images/logo.svg
@@ -57,20 +57,26 @@ annotations:
     - name: showroom-docs-mcp
       image: quay.io/maximilianopizarro/showroom-docs-mcp:latest
   artifacthub.io/screenshots: |
-    - title: OpenShift Lightspeed MCP Integration
-      url: https://raw.githubusercontent.com/maximilianoPizarro/showroom-docs-mcp/main/docs/assets/images/logo.svg
+    - title: OpenShift Topology - MCP Server Deployed
+      url: https://raw.githubusercontent.com/maximilianoPizarro/showroom-docs-mcp/main/docs/assets/images/topology-overview.png
+    - title: Lightspeed Chat with MCP Documentation
+      url: https://raw.githubusercontent.com/maximilianoPizarro/showroom-docs-mcp/main/docs/assets/images/topology-chat.png
+    - title: searchDocs Tool Output
+      url: https://raw.githubusercontent.com/maximilianoPizarro/showroom-docs-mcp/main/docs/assets/images/lightspeed-search.png
+    - title: getDocSummary Tool Output
+      url: https://raw.githubusercontent.com/maximilianoPizarro/showroom-docs-mcp/main/docs/assets/images/lightspeed-summary.png
+    - title: Documentation Index via listDocSections
+      url: https://raw.githubusercontent.com/maximilianoPizarro/showroom-docs-mcp/main/docs/assets/images/lightspeed-doc-index.png
+    - title: Available Documentation Listing
+      url: https://raw.githubusercontent.com/maximilianoPizarro/showroom-docs-mcp/main/docs/assets/images/lightspeed-doc-list.png
   artifacthub.io/changes: |
     - kind: added
-      description: "Auto-sanitization of PDF content: page numbers, legal notices, TOC artifacts removed on load"
+      description: "OpenShift console screenshots showing MCP tools in action"
     - kind: added
-      description: "Quick-start examples with CLI commands and code for 10 developer products"
+      description: "6 Artifact Hub screenshots: topology, chat, search, summary, doc-index, doc-list"
     - kind: changed
-      description: "Smart truncation at paragraph boundaries to prevent cut responses"
-    - kind: changed
-      description: "maxTokensForResponse increased to 8192 for fuller LLM responses"
-    - kind: added
-      description: "SVG architecture diagrams for GitHub Pages documentation"
-    - kind: changed
-      description: "searchDocs returns top 2 results (4KB each) for optimal LLM context"
+      description: "GitHub Pages documentation updated with live OpenShift Lightspeed captures"
+    - kind: fixed
+      description: "Helm repo index.yaml serving fixed for Artifact Hub compatibility"
   artifacthub.io/crds: ""
   artifacthub.io/crdsExamples: ""
