@@ -1,47 +1,35 @@
 ---
 ---
 
-@import "{{ site.theme }}";
+@import "jekyll-theme-midnight";
 
-pre, code {
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-  white-space: pre-wrap;
+section {
+  max-width: 900px !important;
+}
+
+.wrapper {
+  max-width: 900px !important;
 }
 
 pre {
-  padding: 15px;
-  overflow-x: auto;
-  max-width: 100%;
-}
+  padding: 12px 15px !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
 
-#main_content {
-  max-width: 800px;
-  margin: 0 auto;
-
-  pre {
-    width: 100%;
-    box-sizing: border-box;
-  }
-
-  table {
-    width: 100%;
-    overflow-x: auto;
-    display: block;
-
-    th, td {
-      white-space: normal;
-      word-wrap: break-word;
-    }
-  }
-
-  img {
-    max-width: 100%;
-    height: auto;
+  code {
+    white-space: pre-wrap !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
   }
 }
 
-.language-yaml, .language-bash, .language-properties, .language-json {
-  white-space: pre-wrap;
-  word-break: break-all;
+table {
+  display: table !important;
+  width: 100% !important;
+  table-layout: fixed !important;
+
+  th, td {
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+  }
 }
