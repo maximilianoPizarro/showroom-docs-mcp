@@ -15,7 +15,7 @@ permalink: /architecture/
 ## Architecture Overview
 
 <p align="center">
-  <img src="{{ '/assets/images/architecture-diagram.svg' | relative_url }}" alt="Architecture: OpenShift Lightspeed + MCP" width="100%"/>
+  <img src="{{ '/assets/images/architecture-diagram.svg' | relative_url }}?v=2" alt="Architecture: OpenShift Lightspeed + MCP" width="100%"/>
 </p>
 
 ## Components
@@ -63,13 +63,13 @@ The LLM decides which tools to call based on the question:
 ## Tool Selection Flow
 
 <p align="center">
-  <img src="{{ '/assets/images/mcp-tools-flow.svg' | relative_url }}" alt="MCP Tool Selection Flow" width="100%"/>
+  <img src="{{ '/assets/images/mcp-tools-flow.svg' | relative_url }}?v=2" alt="MCP Tool Selection Flow" width="100%"/>
 </p>
 
 ## Content Sources
 
 <p align="center">
-  <img src="{{ '/assets/images/content-sources.svg' | relative_url }}" alt="Knowledge Base: 46 Indexed Documents" width="100%"/>
+  <img src="{{ '/assets/images/content-sources.svg' | relative_url }}?v=2" alt="Knowledge Base: 46 Indexed Documents" width="100%"/>
 </p>
 
 ## Official Red Hat Documentation Links

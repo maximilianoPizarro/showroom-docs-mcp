@@ -15,7 +15,7 @@ permalink: /es/content-index/
 ## Fuentes de contenido
 
 <p align="center">
-  <img src="{{ '/assets/images/content-sources.svg' | relative_url }}" alt="Base de conocimiento: 46 documentos indexados" width="100%"/>
+  <img src="{{ '/assets/images/content-sources.svg' | relative_url }}?v=2" alt="Base de conocimiento: 46 documentos indexados" width="100%"/>
 </p>
 
 ## Workshop: IA Development From Zero To Hero (27 docs)

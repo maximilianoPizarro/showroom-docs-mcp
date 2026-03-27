@@ -98,7 +98,7 @@ Abre el chat de OpenShift Lightspeed en la consola y prueba estas preguntas:
 ## Arquitectura
 
 <p align="center">
-  <img src="{{ '/assets/images/architecture-diagram.svg' | relative_url }}" alt="Arquitectura: OpenShift Lightspeed + MCP" width="100%"/>
+  <img src="{{ '/assets/images/architecture-diagram.svg' | relative_url }}?v=2" alt="Arquitectura: OpenShift Lightspeed + MCP" width="100%"/>
 </p>
 
 ## Desarrollo local

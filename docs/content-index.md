@@ -15,7 +15,7 @@ permalink: /content-index/
 ## Content Sources Overview
 
 <p align="center">
-  <img src="{{ '/assets/images/content-sources.svg' | relative_url }}" alt="Knowledge Base: 46 Indexed Documents" width="100%"/>
+  <img src="{{ '/assets/images/content-sources.svg' | relative_url }}?v=2" alt="Knowledge Base: 46 Indexed Documents" width="100%"/>
 </p>
 
 ## Workshop: IA Development From Zero To Hero (27 docs)

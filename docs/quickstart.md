@@ -141,7 +141,7 @@ Once deployed, open the OpenShift Lightspeed chat in the console and try these q
 ### Architecture Overview
 
 <p align="center">
-  <img src="{{ '/assets/images/architecture-diagram.svg' | relative_url }}" alt="Architecture: OpenShift Lightspeed + MCP" width="100%"/>
+  <img src="{{ '/assets/images/architecture-diagram.svg' | relative_url }}?v=2" alt="Architecture: OpenShift Lightspeed + MCP" width="100%"/>
 </p>
 
 ## Local Development

@@ -18,6 +18,10 @@ kramdown:
   input: GFM
   syntax_highlighter: rouge
 
+include:
+  - index.yaml
+  - "*.tgz"
+
 exclude:
   - Gemfile
   - Gemfile.lock
@@ -28,6 +32,14 @@ defaults:
       path: ""
     values:
       layout: default
+  - scope:
+      path: "index.yaml"
+    values:
+      layout: null
+  - scope:
+      path: "*.tgz"
+    values:
+      layout: null
 
 navigation:
   - title: Home

@@ -49,7 +49,7 @@ title: Home
 ## Indexed Documentation
 
 <p align="center">
-  <img src="{{ '/assets/images/content-sources.svg' | relative_url }}" alt="Knowledge base: 46 indexed documents" width="100%"/>
+  <img src="{{ '/assets/images/content-sources.svg' | relative_url }}?v=2" alt="Knowledge base: 46 indexed documents" width="100%"/>
 </p>
 
 | Source | Documents | Content |
@@ -163,13 +163,13 @@ Open the OpenShift web console, click the Lightspeed chat icon, and ask any ques
 ## Architecture
 
 <p align="center">
-  <img src="{{ '/assets/images/architecture-diagram.svg' | relative_url }}" alt="Architecture: OpenShift Lightspeed + MCP" width="100%"/>
+  <img src="{{ '/assets/images/architecture-diagram.svg' | relative_url }}?v=2" alt="Architecture: OpenShift Lightspeed + MCP" width="100%"/>
 </p>
 
 ## How It Works
 
 <p align="center">
-  <img src="{{ '/assets/images/mcp-tools-flow.svg' | relative_url }}" alt="MCP Tool Selection Flow" width="100%"/>
+  <img src="{{ '/assets/images/mcp-tools-flow.svg' | relative_url }}?v=2" alt="MCP Tool Selection Flow" width="100%"/>
 </p>
 
 ## Example Questions for Lightspeed
