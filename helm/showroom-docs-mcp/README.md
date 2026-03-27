@@ -1,16 +1,17 @@
 # Showroom Docs MCP Server
 
-![Version: 1.1.0](https://img.shields.io/badge/Version-1.1.0-informational?style=flat-square)
+![Version: 1.2.0](https://img.shields.io/badge/Version-1.2.0-informational?style=flat-square)
 ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
-![AppVersion: 1.1.0](https://img.shields.io/badge/AppVersion-1.1.0-informational?style=flat-square)
+![AppVersion: 1.2.0](https://img.shields.io/badge/AppVersion-1.2.0-informational?style=flat-square)
+[![Artifact Hub](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/showroom-docs-mcp)](https://artifacthub.io/packages/helm/showroom-docs-mcp/showroom-docs-mcp)
 
 Quarkus MCP Server that indexes Red Hat product documentation and the "IA Development From Zero To Hero" workshop for OpenShift Lightspeed.
 
 ## Description
 
-This Helm chart deploys a [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) server built with [Quarkus](https://quarkus.io/) on OpenShift. The server indexes **35 documents** covering:
+This Helm chart deploys a [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) server built with [Quarkus](https://quarkus.io/) on OpenShift. The server indexes **46 documents** covering:
 
-- **Neuralbank Workshop** (16 docs): MCP agents, Golden Path, DevSpaces, Keycloak, RAG, OpenTelemetry
+- **Neuralbank Workshop** (27 docs): MCP agents, Golden Path, DevSpaces, Keycloak, RAG, OpenTelemetry, LLM, GPU, agents, platform engineering, data engineering
 - **Red Hat Product Documentation** (9 docs): Service Mesh, Connectivity Link, Developer Hub, Lightspeed, Observability, OpenTelemetry, Pipelines, API Management, OpenShift AI
 - **Red Hat Developer Products** (10 docs): Quarkus, OpenShift, RHEL, Dev Spaces, OpenShift AI, Developer Hub, Ansible, OpenShift Local, Connectivity Link, 3scale
 
@@ -105,9 +106,6 @@ spec:
         type: rhoai_vllm
         url: 'http://llama-32-3b-instruct-openai.my-first-model.svc.cluster.local/v1'
   mcpServers:
-    - name: kubernetes-mcp
-      timeout: 5
-      url: 'http://kubernetes-mcp-server.istio-system.svc.cluster.local:8080/mcp'
     - name: showroom-docs-mcp
       timeout: 10
       url: 'http://showroom-docs-mcp.openshift-lightspeed.svc.cluster.local:8080/mcp'
@@ -168,7 +166,6 @@ oc logs -n openshift-lightspeed deploy/lightspeed-app-server \
 
 # Expected:
 # Loaded 4 tools from MCP server 'showroom-docs-mcp'
-# Loaded 19 tools from MCP server 'kubernetes-mcp'
 ```
 
 ### Step 6: Test with Lightspeed
