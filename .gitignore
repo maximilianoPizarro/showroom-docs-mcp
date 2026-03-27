@@ -20,3 +20,4 @@ pdfs/
 *.py
 docs/*.png
 !docs/assets/images/*.png
+workshop-raw/

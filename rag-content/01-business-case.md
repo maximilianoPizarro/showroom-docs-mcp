@@ -56,14 +56,15 @@ As a new Java developer joining Neuralbank, you will:
 
 By the end of this journey, you will have:
 
-✅ A working MCP Agent deployed on OpenShift  
-✅ Integration with Neuralbank's credit risk system  
-✅ A chat interface for commercial agents  
-✅ Keycloak authentication and user management configured  
-✅ Connectivity Link integration for secure service communication  
-✅ Full observability with OpenTelemetry traces  
+✅ A working MCP Agent deployed on OpenShift 
+✅ Integration with Neuralbank's credit risk system 
+✅ A chat interface for commercial agents 
+✅ Keycloak authentication and user management configured 
+✅ Connectivity Link integration for secure service communication 
+✅ Full observability with OpenTelemetry traces 
 ✅ Understanding of best practices for AI/ML on OpenShift
 
 ## Next Steps
 
 Ready to begin? Let's start by [configuring your environment](0-getting-connected/2-configure-environment) to access OpenShift AI.
+

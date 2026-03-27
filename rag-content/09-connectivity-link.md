@@ -451,3 +451,4 @@ You now have a solid understanding of how Connectivity Link provides secure, obs
 Now that you understand Connectivity Link, let's test your `customer-service-mcp` service using **MCP Inspector** and **Cursor**.
 
 Click **Test with MCP Inspector** to continue.
+

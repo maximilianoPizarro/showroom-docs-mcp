@@ -10,7 +10,7 @@ Before we begin, familiarize yourself with the **Environment Dashboard** - your 
 
 ### Dashboard Access
 
-- **URL**: <a href="https://dashboard.apps.<CLUSTER_DOMAIN>" target="_blank">https://dashboard.apps.<CLUSTER_DOMAIN></a>
+- **URL**: https://dashboard.apps. 
 - **Description**: Centralized dashboard providing quick access to all platform services, tools, and credentials
 - **Access**: Available to all users with cluster access
 
@@ -28,46 +28,46 @@ Ensure you can access the following services. **Note**: The basename (cluster do
 
 ### OpenShift Console
 
-- **URL**: <a href="https://console-openshift-console.apps.<CLUSTER_DOMAIN>" target="_blank">https://console-openshift-console.apps.<CLUSTER_DOMAIN></a>
+- **URL**: https://console-openshift-console.apps. 
 - **Access**: Use your OpenShift credentials
 
 ### Single Sign-On (SSO)
 
-- **URL**: <a href="https://sso.apps.<CLUSTER_DOMAIN>" target="_blank">https://sso.apps.<CLUSTER_DOMAIN></a>
+- **URL**: https://sso.apps. 
 - **Access**: Use your OpenShift credentials
 
 ### GitLab
 
-- **URL**: <a href="https://gitlab-gitlab.apps.<CLUSTER_DOMAIN>" target="_blank">https://gitlab-gitlab.apps.<CLUSTER_DOMAIN></a>
+- **URL**: https://gitlab-gitlab.apps. 
 - **Users**:
-  - `root` / `backstage`
-  - `pe1` / `backstage`
-  - `pe2` / `backstage`
-  - `pe3` / `backstage`
-  - `dev1` / `backstage`
-  - `dev2` / `backstage`
-  - `dev3` / `backstage`
+ - `root` / `backstage`
+ - `pe1` / `backstage`
+ - `pe2` / `backstage`
+ - `pe3` / `backstage`
+ - `dev1` / `backstage`
+ - `dev2` / `backstage`
+ - `dev3` / `backstage`
 
 ### Quay Container Registry
 
-- **URL**: <a href="https://quay.apps.<CLUSTER_DOMAIN>" target="_blank">https://quay.apps.<CLUSTER_DOMAIN></a>
+- **URL**: https://quay.apps. 
 - **Users**:
-  - `quayadmin` / `backstage`
+ - `quayadmin` / `backstage`
 
 ### Developer Hub (Backstage)
 
-- **URL**: <a href="https://backstage-developer-hub-backstage.apps.<CLUSTER_DOMAIN>" target="_blank">https://backstage-developer-hub-backstage.apps.<CLUSTER_DOMAIN></a>
+- **URL**: https://backstage-developer-hub-backstage.apps. 
 - **Users**:
-  - `pe1` / `backstage`
-  - `pe2` / `backstage`
-  - `pe3` / `backstage`
-  - `dev1` / `backstage`
-  - `dev2` / `backstage`
-  - `dev3` / `backstage`
+ - `pe1` / `backstage`
+ - `pe2` / `backstage`
+ - `pe3` / `backstage`
+ - `dev1` / `backstage`
+ - `dev2` / `backstage`
+ - `dev3` / `backstage`
 
 ### Neuralbank Web Site
 
-- **URL**: <a href="https://neuralbank.apps.<CLUSTER_DOMAIN>" target="_blank">https://neuralbank.apps.<CLUSTER_DOMAIN></a>
+- **URL**: https://neuralbank.apps. 
 - **Realm**: `neuralbank`
 - **Admin User**: `admin` / `Welcome123`
 - **All Users Password**: `Welcome123`
@@ -108,7 +108,7 @@ The following users are pre-configured in the `neuralbank` realm with password `
 
 Make sure you have the following information ready:
 
-- **Cluster Domain**: `<CLUSTER_DOMAIN>` (set in the top navigation bar)
+- **Cluster Domain**: ` ` (set in the top navigation bar)
 - **Project Name**: `neuralbank` (Neuralbank project)
 - **Username**: Your OpenShift username
 - **Password**: Your OpenShift password
@@ -124,3 +124,4 @@ Your environment is now configured. In the next section, you'll learn about the 
 ## Continue Your Journey
 
 ✅ **Next**: [Introduction to MCP Agents](3-agents-tools/0-intro) - Learn about MCP and the Neuralbank use case
+

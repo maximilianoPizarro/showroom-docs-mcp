@@ -292,3 +292,4 @@ Your MCP Agent has been thoroughly tested and is ready for deployment! All tools
 Great! Your MCP Agent is tested and validated. Now let's **deploy it to OpenShift** and **integrate it with the frontend** so commercial agents can use it.
 
 Click **Deploy & Integrate** to continue.
+

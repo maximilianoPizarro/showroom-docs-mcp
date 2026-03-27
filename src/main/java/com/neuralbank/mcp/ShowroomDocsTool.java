@@ -37,6 +37,17 @@ public class ShowroomDocsTool {
         "docs/13-rag-intro.md",
         "docs/14-vector-databases.md",
         "docs/15-simple-rag.md",
+        "docs/16-llm-module.md",
+        "docs/16a-rag-getting-started.md",
+        "docs/16b-rag-validate.md",
+        "docs/16c-agents-getting-started.md",
+        "docs/16d-simple-agent-websearch.md",
+        "docs/16e-advanced-agent.md",
+        "docs/16f-agents-and-mcp.md",
+        "docs/16g-data-engineering.md",
+        "docs/17-llm-observability.md",
+        "docs/18-gpuaas.md",
+        "docs/19-platform.md",
         "docs/20-service-mesh.md",
         "docs/21-connectivity-link.md",
         "docs/22-developer-hub.md",
@@ -81,6 +92,7 @@ public class ShowroomDocsTool {
             "Connectivity Link, Developer Hub, Lightspeed, Observability, OpenTelemetry, " +
             "Pipelines, API Management, OpenShift AI, Neuralbank workshop, MCP, Quarkus, " +
             "Keycloak, DevSpaces, RAG, Golden Path, RHEL, Ansible, OpenShift Local, 3scale, " +
+            "LLM, GPU, agents, platform engineering, data engineering, LlamaStack, ArgoCD, " +
             "install, configure, deploy, architecture, getting started. " +
             "The returned text IS the authoritative answer - use it directly.")
     String searchDocs(
@@ -176,16 +188,27 @@ public class ShowroomDocsTool {
 
         sb.append("## Neuralbank Workshop (IA Development From Zero To Hero)\n\n");
         for (var entry : fileTitles.entrySet()) {
-            if (!entry.getKey().startsWith("docs/2")) {
-                String fn = entry.getKey().replace("docs/", "");
+            String key = entry.getKey();
+            if (!key.startsWith("docs/2") && !key.startsWith("docs/3")) {
+                String fn = key.replace("docs/", "");
                 sb.append("- **").append(fn).append("**: ").append(entry.getValue()).append("\n");
             }
         }
 
-        sb.append("\n## Red Hat Product Documentation\n\n");
+        sb.append("\n## Red Hat Product Documentation (docs.redhat.com)\n\n");
         for (var entry : fileTitles.entrySet()) {
-            if (entry.getKey().startsWith("docs/2")) {
-                String fn = entry.getKey().replace("docs/", "");
+            String key = entry.getKey();
+            if (key.startsWith("docs/2") && !key.startsWith("docs/2-") && key.compareTo("docs/20") >= 0) {
+                String fn = key.replace("docs/", "");
+                sb.append("- **").append(fn).append("**: ").append(entry.getValue()).append("\n");
+            }
+        }
+
+        sb.append("\n## Red Hat Developer Products (developers.redhat.com)\n\n");
+        for (var entry : fileTitles.entrySet()) {
+            String key = entry.getKey();
+            if (key.startsWith("docs/3")) {
+                String fn = key.replace("docs/", "");
                 sb.append("- **").append(fn).append("**: ").append(entry.getValue()).append("\n");
             }
         }
@@ -206,6 +229,12 @@ public class ShowroomDocsTool {
                 A hands-on workshop where you play Kevin, a Java developer at Neuralbank (a financial
                 institution), building an MCP Agent (customer-service-mcp) using Quarkus to automate
                 credit risk management via a chat interface.
+                Modules: Business Case, Workshop Overview, Environment Setup, MCP Agents Intro,
+                Golden Path & Developer Hub, DevSpaces, Keycloak User Management, Build MCP Agent,
+                Connectivity Link, MCP Inspector, Deploy & Integrate, OpenTelemetry, RAG (intro,
+                vector databases, simple RAG), LLM (intro, getting started, examples, summarisation,
+                extraction), LLM Observability, GPU as a Service, Platform Engineering, Data Engineering,
+                Advanced Agents, Simple Agent with Web Search, Agents & MCP.
                 Technologies: OpenShift AI, MCP, LlamaStack, DevSpaces, Developer Hub, Quarkus,
                 Keycloak, Connectivity Link, OpenTelemetry, GitLab, ArgoCD.
 

@@ -468,3 +468,4 @@ The Neuralbank realm includes the following groups and realm roles:
 Now that you understand user management in Keycloak, let's explore **Connectivity Link** to understand how services communicate securely in Neuralbank.
 
 Click **Connectivity Link** to continue, or proceed to **Build MCP Agent** if you're ready to start coding.
+

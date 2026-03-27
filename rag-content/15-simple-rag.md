@@ -42,6 +42,6 @@ This implementation demonstrates a simple but complete RAG system:
 4. **Vector Database**: Milvus for storing and searching embeddings
 5. **LLM Integration**: Llama model for generating responses
 
-From the rhoai-roadshow-v2/lab-materials/2-rag folder, please open the notebook called: <a href="https://github.com/odh-labs/rhoai-roadshow-v2/blob/main/docs/2-rag/notebook/4-simple-rag.ipynb" target="_blank">4-simple-rag.ipynb</a>
+From the rhoai-roadshow-v2/lab-materials/2-rag folder, please open the notebook called: 4-simple-rag.ipynb 
 
 When done, you can close the notebook and head to the next page.

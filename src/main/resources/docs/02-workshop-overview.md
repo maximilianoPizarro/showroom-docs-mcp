@@ -30,3 +30,4 @@ The workshop covers the full stack:
 ## Ready to Start?
 
 Let's begin with understanding the [Neuralbank Business Case](0-getting-connected/0-business-case) and your role as Kevin, the new Java developer joining the team.
+
