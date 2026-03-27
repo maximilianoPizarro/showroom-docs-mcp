@@ -1,0 +1,53 @@
+apiVersion: v1
+entries:
+  showroom-docs-mcp:
+  - annotations:
+      artifacthub.io/category: ai-machine-learning
+      artifacthub.io/changes: |
+        - kind: added
+          description: Initial release with 25 indexed documentation files
+        - kind: added
+          description: MCP tools for search, list, get, and summary
+        - kind: added
+          description: Red Hat docs for Service Mesh, Connectivity Link, Developer Hub, OLS, Observability, OpenTelemetry, Pipelines, API Management, OpenShift AI
+      artifacthub.io/containsSecurityUpdates: "false"
+      artifacthub.io/images: |
+        - name: showroom-docs-mcp
+          image: quay.io/maximilianopizarro/showroom-docs-mcp:latest
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/links: |
+        - name: Quay.io Image
+          url: https://quay.io/repository/maximilianopizarro/showroom-docs-mcp
+        - name: Workshop Source
+          url: https://github.com/maximilianoPizarro/rhoai-roadshow-from-zero-to-hero
+      artifacthub.io/operator: "false"
+      artifacthub.io/prerelease: "false"
+    apiVersion: v2
+    appVersion: 1.0.0
+    created: "2026-03-27T15:28:06.5863615-03:00"
+    description: Quarkus MCP Server that indexes Red Hat documentation and the "IA
+      Development From Zero To Hero" workshop for OpenShift Lightspeed RAG.
+    digest: 539603f1a299de11e9020e5bfd8987b82e6feaaae085ce99669b4169e75aea11
+    home: https://maximilianopizarro.github.io/showroom-docs-mcp
+    icon: https://raw.githubusercontent.com/maximilianoPizarro/showroom-docs-mcp/main/docs/assets/images/logo.svg
+    keywords:
+    - mcp
+    - openshift
+    - lightspeed
+    - rag
+    - quarkus
+    - ai
+    - documentation
+    - red-hat
+    kubeVersion: '>=1.25.0-0'
+    maintainers:
+    - name: maximilianopizarro
+      url: https://github.com/maximilianoPizarro
+    name: showroom-docs-mcp
+    sources:
+    - https://github.com/maximilianoPizarro/showroom-docs-mcp
+    type: application
+    urls:
+    - https://maximilianopizarro.github.io/showroom-docs-mcp/showroom-docs-mcp-1.0.0.tgz
+    version: 1.0.0
+generated: "2026-03-27T15:28:06.5853134-03:00"
