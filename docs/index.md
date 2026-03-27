@@ -22,6 +22,9 @@ title: Home
   <img src="https://img.shields.io/badge/MCP-1.8.1-purple" alt="MCP Server"/>
   <img src="https://img.shields.io/badge/Java-21-orange?logo=openjdk" alt="Java 21"/>
   <img src="https://img.shields.io/badge/license-Apache--2.0-green" alt="License"/>
+  <a href="https://artifacthub.io/packages/helm/showroom-docs-mcp/showroom-docs-mcp">
+    <img src="https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/showroom-docs-mcp" alt="Artifact Hub"/>
+  </a>
 </p>
 
 <p align="center"><strong>English</strong> | <a href="es/">Espanol</a></p>
@@ -44,7 +47,6 @@ title: Home
 - **Smart truncation** at paragraph boundaries to avoid cut responses
 - **Container image** ready for OpenShift deployment
 - **Helm chart** for declarative installation
-- [![Artifact Hub](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/showroom-docs-mcp)](https://artifacthub.io/packages/helm/showroom-docs-mcp/showroom-docs-mcp)
 
 ## Indexed Documentation
 
