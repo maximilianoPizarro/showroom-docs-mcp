@@ -29,11 +29,6 @@ defaults:
     values:
       layout: default
 
-collections:
-  docs:
-    output: true
-    permalink: /:collection/:name/
-
 navigation:
   - title: Home
     url: /
@@ -47,3 +42,5 @@ navigation:
     url: /api-tools/
   - title: Content Index
     url: /content-index/
+  - title: "Espanol"
+    url: /es/

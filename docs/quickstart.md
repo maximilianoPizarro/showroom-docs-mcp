@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Quick Start
+permalink: /quickstart/
 ---
 
 # Quick Start
@@ -8,6 +9,8 @@ title: Quick Start
 <p align="center">
   <img src="assets/images/logo.svg" alt="Logo" width="80"/>
 </p>
+
+<p align="center"><strong>English</strong> | <a href="{{ '/es/quickstart/' | relative_url }}">Espanol</a></p>
 
 ## Prerequisites
 

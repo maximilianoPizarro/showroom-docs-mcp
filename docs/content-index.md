@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Content Index
+permalink: /content-index/
 ---
 
 # Content Index
@@ -8,6 +9,8 @@ title: Content Index
 <p align="center">
   <img src="assets/images/logo.svg" alt="Logo" width="80"/>
 </p>
+
+<p align="center"><strong>English</strong> | <a href="{{ '/es/content-index/' | relative_url }}">Espanol</a></p>
 
 ## Workshop: IA Development From Zero To Hero
 

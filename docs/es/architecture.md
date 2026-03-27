@@ -1,18 +1,18 @@
 ---
 layout: default
-title: Architecture
-permalink: /architecture/
+title: Arquitectura
+permalink: /es/architecture/
 ---
 
-# Architecture
+# Arquitectura
 
 <p align="center">
-  <img src="assets/images/logo.svg" alt="Logo" width="80"/>
+  <img src="../assets/images/logo.svg" alt="Logo" width="80"/>
 </p>
 
-<p align="center"><strong>English</strong> | <a href="{{ '/es/architecture/' | relative_url }}">Espanol</a></p>
+<p align="center"><a href="{{ '/architecture/' | relative_url }}">English</a> | <strong>Espanol</strong></p>
 
-## Overview Diagram
+## Diagrama General
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -40,55 +40,53 @@ permalink: /architecture/
 └─────────────────────────────────────────────────────────────┘
 ```
 
-## Components
+## Componentes
 
 ### Showroom Docs MCP Server
 
-- **Runtime**: Quarkus 3.27.3 with Java 21
-- **Protocol**: MCP via Streamable HTTP (`/mcp`) and SSE (`/mcp/sse`)
-- **Content**: 25 embedded markdown documents (~3MB)
-- **Port**: 8080
+- **Runtime**: Quarkus 3.27.3 con Java 21
+- **Protocolo**: MCP via Streamable HTTP (`/mcp`) y SSE (`/mcp/sse`)
+- **Contenido**: 25 documentos markdown embebidos (~2.5MB de PDFs oficiales Red Hat)
+- **Puerto**: 8080
 
-### Data Flow
+### Flujo de datos
 
-1. The user asks a question in the OLS console
-2. OLS API Server receives the query and sends it to the LLM
-3. The LLM can invoke tools from both MCP servers:
-   - `kubernetes-mcp`: for cluster state queries (pods, services, namespaces)
-   - `showroom-docs-mcp`: for documentation queries (Red Hat products, workshop)
-4. The MCP server searches indexed documents and returns relevant sections
-5. The LLM generates a contextualized response using the retrieved documentation
+1. El usuario hace una pregunta en la consola de OLS
+2. OLS API Server recibe la consulta y la envia al LLM
+3. El LLM puede invocar tools de ambos servidores MCP:
+   - `kubernetes-mcp`: para consultas del estado del cluster (pods, servicios, namespaces)
+   - `showroom-docs-mcp`: para consultas de documentacion (productos Red Hat, workshop)
+4. El MCP server busca en los documentos indexados y devuelve secciones relevantes
+5. El LLM genera una respuesta contextualizada usando la documentacion obtenida
 
 ### MCP Tools
 
-| Tool | Description | Input |
+| Tool | Descripcion | Input |
 |------|-------------|-------|
-| `searchDocs` | Keyword search across all documentation | `query: string` |
-| `listDocSections` | List all available document sections | (no parameters) |
-| `getDocSection` | Get full content of a specific section (supports fuzzy matching) | `fileName: string` |
-| `getDocSummary` | Get knowledge base overview and example questions | (no parameters) |
+| `searchDocs` | Busqueda por keywords en toda la documentacion | `query: string` |
+| `listDocSections` | Lista todas las secciones disponibles | (sin parametros) |
+| `getDocSection` | Contenido completo de una seccion (soporta fuzzy matching) | `fileName: string` |
+| `getDocSummary` | Resumen del knowledge base y preguntas de ejemplo | (sin parametros) |
 
-### Tool Selection by the LLM
+### Seleccion de herramientas por el LLM
 
-The LLM decides which tools to call based on the question:
+| Tipo de pregunta | Tool esperado |
+|------------------|---------------|
+| "Como instalo Service Mesh?" | `searchDocs` → busca documentacion |
+| "Lista toda la documentacion disponible" | `listDocSections` → devuelve indice |
+| "Mostrame los docs de Developer Hub" | `getDocSection` → devuelve doc completo |
+| "Que productos estan indexados?" | `getDocSummary` → devuelve resumen |
+| "Cuantos pods estan corriendo?" | tools de `kubernetes-mcp` |
+| "Que namespaces existen?" | tools de `kubernetes-mcp` |
 
-| Question Type | Expected Tool |
-|---------------|---------------|
-| "How do I install Service Mesh?" | `searchDocs` → searches documentation |
-| "List all available documentation" | `listDocSections` → returns index |
-| "Show me the Developer Hub docs" | `getDocSection` → returns full doc |
-| "What products are indexed?" | `getDocSummary` → returns overview |
-| "How many pods are running?" | `kubernetes-mcp` tools |
-| "What namespaces exist?" | `kubernetes-mcp` tools |
+## Stack Tecnologico
 
-## Technology Stack
-
-| Component | Technology |
+| Componente | Tecnologia |
 |-----------|------------|
 | Framework | Quarkus 3.27.3 |
-| MCP Extension | quarkus-mcp-server-http 1.8.1 |
+| Extension MCP | quarkus-mcp-server-http 1.8.1 |
 | Health Checks | SmallRye Health |
-| Container Base | UBI9 OpenJDK 21 Runtime |
-| Container Registry | quay.io |
-| Orchestration | Kubernetes / OpenShift |
+| Imagen Base | UBI9 OpenJDK 21 Runtime |
+| Registry | quay.io |
+| Orquestacion | Kubernetes / OpenShift |
 | Packaging | Helm Chart |

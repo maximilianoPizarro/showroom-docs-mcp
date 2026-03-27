@@ -24,6 +24,8 @@ title: Home
   <img src="https://img.shields.io/badge/license-Apache--2.0-green" alt="License"/>
 </p>
 
+<p align="center"><strong>English</strong> | <a href="es/">Espanol</a></p>
+
 ---
 
 ## What is it?

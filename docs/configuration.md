@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Configuration
+permalink: /configuration/
 ---
 
 # Configuration
@@ -8,6 +9,8 @@ title: Configuration
 <p align="center">
   <img src="assets/images/logo.svg" alt="Logo" width="80"/>
 </p>
+
+<p align="center"><strong>English</strong> | <a href="{{ '/es/configuration/' | relative_url }}">Espanol</a></p>
 
 ## Prerequisites
 

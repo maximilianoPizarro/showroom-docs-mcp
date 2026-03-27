@@ -1,37 +1,37 @@
 ---
 layout: default
 title: API Tools
-permalink: /api-tools/
+permalink: /es/api-tools/
 ---
 
-# MCP Tools API
+# API de herramientas MCP
 
 <p align="center">
-  <img src="assets/images/logo.svg" alt="Logo" width="80"/>
+  <img src="../assets/images/logo.svg" alt="Logo" width="80"/>
 </p>
 
-<p align="center"><strong>English</strong> | <a href="{{ '/es/api-tools/' | relative_url }}">Espanol</a></p>
+<p align="center"><a href="{{ '/api-tools/' | relative_url }}">English</a> | <strong>Espanol</strong></p>
 
-The server exposes 4 tools via Model Context Protocol (MCP).
+El servidor expone 4 herramientas mediante Model Context Protocol (MCP).
 
 ---
 
 ## searchDocs
 
-Search all indexed documentation using keywords. This is the primary tool for answering questions about Red Hat products and the Neuralbank workshop.
+Buscar en toda la documentacion indexada mediante palabras clave. Esta es la herramienta principal para responder preguntas sobre productos Red Hat y el workshop Neuralbank.
 
-**Input:**
+**Entrada:**
 ```json
 {
-  "query": "string - Keywords to search for"
+  "query": "string - Palabras clave para buscar"
 }
 ```
 
-**Output:** Top 5 most relevant documentation sections with relevance score.
+**Salida:** Las 5 secciones mas relevantes de documentacion con puntuacion de relevancia.
 
-**Example Queries:**
+**Consultas de ejemplo:**
 
-| Query | What it finds |
+| Consulta | Que encuentra |
 |-------|---------------|
 | `deploy model openshift ai` | Steps to deploy ML models with OpenShift AI |
 | `developer hub architecture plugins` | Developer Hub architecture, plugin system |
@@ -44,39 +44,39 @@ Search all indexed documentation using keywords. This is the primary tool for an
 | `rag vector database` | RAG implementation with vector databases |
 | `opentelemetry collector instrumentation` | OpenTelemetry setup and instrumentation |
 
-**Coverage:** Neuralbank workshop + 9 Red Hat products (Service Mesh, Connectivity Link, Developer Hub, OLS, Observability, OpenTelemetry, Pipelines, API Management, OpenShift AI).
+**Cobertura:** Workshop Neuralbank + 9 productos Red Hat (Service Mesh, Connectivity Link, Developer Hub, OLS, Observability, OpenTelemetry, Pipelines, API Management, OpenShift AI).
 
 ---
 
 ## getDocSection
 
-Get the full content of a specific documentation file. Supports both exact filenames and topic-based fuzzy matching.
+Obtener el contenido completo de un archivo de documentacion especifico. Soporta tanto nombres exactos como busqueda difusa por tema.
 
-**Input:**
+**Entrada:**
 ```json
 {
   "fileName": "string - Exact filename OR topic keywords"
 }
 ```
 
-**Output:** Full markdown content (truncated at 8000 chars for large documents).
+**Salida:** Contenido markdown completo (truncado a 8000 caracteres en documentos grandes).
 
-**Examples:**
+**Ejemplos:**
 
-| Input | Resolves to |
-|-------|-------------|
-| `22-developer-hub.md` | Exact file match |
-| `developer hub` | Fuzzy match → `22-developer-hub.md` |
-| `service mesh` | Fuzzy match → `20-service-mesh.md` |
-| `openshift ai` | Fuzzy match → `28-openshift-ai.md` |
-| `pipelines` | Fuzzy match → `26-pipelines.md` |
-| `lightspeed` | Fuzzy match → `23-openshift-lightspeed.md` |
-| `connectivity link` | Fuzzy match → `21-connectivity-link.md` |
-| `neuralbank` | Fuzzy match → `01-business-case.md` |
+| Entrada | Se resuelve a |
+|-------|---------------|
+| `22-developer-hub.md` | Coincidencia exacta |
+| `developer hub` | Busqueda difusa → `22-developer-hub.md` |
+| `service mesh` | Busqueda difusa → `20-service-mesh.md` |
+| `openshift ai` | Busqueda difusa → `28-openshift-ai.md` |
+| `pipelines` | Busqueda difusa → `26-pipelines.md` |
+| `lightspeed` | Busqueda difusa → `23-openshift-lightspeed.md` |
+| `connectivity link` | Busqueda difusa → `21-connectivity-link.md` |
+| `neuralbank` | Busqueda difusa → `01-business-case.md` |
 
-**Available Documents:**
+**Documentos disponibles:**
 
-| File | Topic |
+| Archivo | Tema |
 |------|-------|
 | `00-index.md` | Workshop index |
 | `01-business-case.md` | Neuralbank business case |
@@ -108,25 +108,25 @@ Get the full content of a specific documentation file. Supports both exact filen
 
 ## listDocSections
 
-List all available documentation files with their titles.
+Listar todos los archivos de documentacion disponibles con sus titulos.
 
-**Input:** none
+**Entrada:** ninguna
 
-**Output:** Table of contents organized by category (Workshop / Red Hat Products).
+**Salida:** Devuelve tabla de contenidos organizada por categoria (Workshop / Productos Red Hat).
 
 ---
 
 ## getDocSummary
 
-Get a summary of the entire knowledge base including statistics and example questions.
+Obtener un resumen de toda la base de conocimiento, incluyendo estadisticas y preguntas de ejemplo.
 
-**Input:** none
+**Entrada:** ninguna
 
-**Output:** Overview of indexed content, product versions, and suggested queries.
+**Salida:** Resumen del contenido indexado, versiones de productos y consultas sugeridas.
 
 ---
 
-## MCP Endpoint
+## Endpoint MCP
 
 ```
 Streamable HTTP: http://<host>:8080/mcp
@@ -136,11 +136,11 @@ Health:          http://<host>:8080/q/health/ready
 
 ---
 
-## Example Questions for OpenShift Lightspeed
+## Preguntas de ejemplo para OpenShift Lightspeed
 
-Once the MCP server is registered in OLSConfig, you can ask Lightspeed these types of questions:
+Una vez que el servidor MCP este registrado en OLSConfig, puedes hacerle a Lightspeed este tipo de preguntas:
 
-### Red Hat Products
+### Productos Red Hat
 - "How do I install OpenShift Service Mesh 3.3?"
 - "Explain the architecture of Red Hat Developer Hub"
 - "What are the steps to deploy a model with OpenShift AI?"
@@ -151,7 +151,7 @@ Once the MCP server is registered in OLSConfig, you can ask Lightspeed these typ
 - "How do I manage APIs with Red Hat OpenShift API Management?"
 - "What monitoring tools are available in OpenShift Observability?"
 
-### Neuralbank Workshop
+### Workshop Neuralbank
 - "What is the Neuralbank workshop about?"
 - "How do I build an MCP agent with Quarkus?"
 - "Explain the Golden Path template in Developer Hub"
