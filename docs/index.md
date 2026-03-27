@@ -36,7 +36,7 @@ title: Home
 
 - **Intelligent search** by keywords across 3MB+ of indexed documentation
 - **4 MCP Tools** exposed via Streamable HTTP for OLS integration
-- **25 documents** covering the workshop + Red Hat products
+- **35 documents** covering the workshop + Red Hat products + Developer products
 - **Container image** ready for OpenShift deployment
 - **Helm chart** for declarative installation
 
@@ -55,17 +55,108 @@ title: Home
 | API Management 1 | Getting started, Administering |
 | OpenShift AI Cloud Service 1 | Data Science, Model Serving, Llama Stack |
 
-## Quick Start
+## Installation Steps
+
+### Step 1: Add Helm Repository and Install
 
 ```bash
-# Deploy on OpenShift with Helm
-helm install showroom-docs-mcp \
-  oci://quay.io/maximilianopizarro/showroom-docs-mcp-chart \
-  --namespace openshift-lightspeed
+helm repo add showroom-docs-mcp \
+  https://maximilianopizarro.github.io/showroom-docs-mcp/
 
-# Or apply manifests directly
-oc apply -f k8s/deployment.yaml
+helm repo update
+
+helm install showroom-docs-mcp showroom-docs-mcp/showroom-docs-mcp \
+  --namespace openshift-lightspeed \
+  --create-namespace \
+  --set image.pullPolicy=Always
 ```
+
+### Step 2: Verify the Pod is Running
+
+```bash
+oc get pods -n openshift-lightspeed -l app=showroom-docs-mcp
+# Expected: 1/1 Running
+```
+
+### Step 3: Create LLM Credentials (if needed)
+
+```bash
+oc create secret generic ols-llm-credentials \
+  -n openshift-lightspeed \
+  --from-literal=apitoken=<your-api-token>
+```
+
+### Step 4: Configure OLSConfig
+
+```yaml
+apiVersion: ols.openshift.io/v1alpha1
+kind: OLSConfig
+metadata:
+  name: cluster
+spec:
+  featureGates:
+    - MCPServer
+  llm:
+    providers:
+      - credentialsSecretRef:
+          name: ols-llm-credentials
+        models:
+          - name: llama-32-3b-instruct
+            parameters:
+              maxTokensForResponse: 4096
+        name: red_hat_openshift_ai
+        type: rhoai_vllm
+        url: 'http://llama-32-3b-instruct-openai.my-first-model.svc.cluster.local/v1'
+  mcpServers:
+    - name: kubernetes-mcp
+      timeout: 5
+      url: 'http://kubernetes-mcp-server.istio-system.svc.cluster.local:8080/mcp'
+    - name: showroom-docs-mcp
+      timeout: 10
+      url: 'http://showroom-docs-mcp.openshift-lightspeed.svc.cluster.local:8080/mcp'
+  ols:
+    conversationCache:
+      postgres:
+        maxConnections: 2000
+        sharedBuffers: 256MB
+      type: postgres
+    defaultModel: llama-32-3b-instruct
+    defaultProvider: red_hat_openshift_ai
+    deployment:
+      api:
+        replicas: 1
+      console:
+        replicas: 1
+      dataCollector: {}
+      database:
+        replicas: 1
+      llamaStack: {}
+      mcpServer: {}
+    logLevel: INFO
+    userDataCollection: {}
+  olsDataCollector:
+    logLevel: INFO
+```
+
+> **Important**: Use `/mcp` (Streamable HTTP), **not** `/mcp/sse`.
+
+```bash
+oc apply -f cluster-ols.yml
+```
+
+### Step 5: Verify MCP Integration
+
+```bash
+oc logs -n openshift-lightspeed deploy/lightspeed-app-server \
+  -c lightspeed-service-api | grep "tools from MCP"
+
+# Expected:
+# Loaded 4 tools from MCP server 'showroom-docs-mcp'
+```
+
+### Step 6: Test with Lightspeed
+
+Open the OpenShift web console, click the Lightspeed chat icon, and ask any question about the indexed documentation.
 
 ## Screenshots
 

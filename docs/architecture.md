@@ -43,7 +43,7 @@ The following screenshot shows the showroom-docs-mcp deployment in the OpenShift
 │                                          ┌───────────┴───┐  │
 │                                          │  Embedded     │  │
 │                                          │  Documentation│  │
-│                                          │  (25 files)   │  │
+│                                          │  (35 files)   │  │
 │                                          └───────────────┘  │
 └─────────────────────────────────────────────────────────────┘
 ```
@@ -54,7 +54,7 @@ The following screenshot shows the showroom-docs-mcp deployment in the OpenShift
 
 - **Runtime**: Quarkus 3.27.3 with Java 21
 - **Protocol**: MCP via Streamable HTTP (`/mcp`) and SSE (`/mcp/sse`)
-- **Content**: 25 embedded markdown documents (~3MB)
+- **Content**: 35 embedded markdown documents (~3MB)
 - **Port**: 8080
 
 ### Data Flow
