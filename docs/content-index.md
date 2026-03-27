@@ -7,7 +7,7 @@ permalink: /content-index/
 # Content Index
 
 <p align="center">
-  <img src="assets/images/logo.svg" alt="Logo" width="80"/>
+  <img src="{{ '/assets/images/logo.svg' | relative_url }}" alt="Logo" width="80"/>
 </p>
 
 <p align="center"><strong>English</strong> | <a href="{{ '/es/content-index/' | relative_url }}">Espanol</a></p>

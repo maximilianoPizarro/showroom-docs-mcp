@@ -66,17 +66,14 @@ public class ShowroomDocsTool {
         }
     }
 
-    @Tool(description = "Search Red Hat and workshop documentation by keywords. " +
-            "USE THIS TOOL to answer questions about: OpenShift Service Mesh, Connectivity Link, " +
-            "Developer Hub, OpenShift Lightspeed, Observability, OpenTelemetry, Pipelines, " +
-            "API Management, OpenShift AI, and the Neuralbank workshop (MCP agents, Quarkus, " +
-            "Keycloak, DevSpaces, RAG, Golden Path). " +
-            "Example queries: 'deploy model openshift ai', 'developer hub architecture plugins', " +
-            "'service mesh install istio', 'connectivity link gateway policy', " +
-            "'neuralbank workshop mcp agent', 'pipelines as code tekton', " +
-            "'lightspeed olsconfig configure'.")
+    @Tool(description = "MANDATORY: Search official Red Hat documentation and workshop content. " +
+            "ALWAYS call this tool FIRST for ANY question about: OpenShift, Service Mesh, " +
+            "Connectivity Link, Developer Hub, Lightspeed, Observability, OpenTelemetry, " +
+            "Pipelines, API Management, OpenShift AI, Neuralbank workshop, MCP, Quarkus, " +
+            "Keycloak, DevSpaces, RAG, Golden Path, install, configure, deploy, architecture. " +
+            "The returned text IS the authoritative answer - use it directly.")
     String searchDocs(
-            @ToolArg(description = "Keywords to search, e.g. 'developer hub architecture' or 'deploy model openshift ai'") String query
+            @ToolArg(description = "Keywords from the user question, e.g. 'install service mesh' or 'developer hub architecture'") String query
     ) {
         if (query == null || query.isBlank()) {
             return "Please provide a search query.";
@@ -119,24 +116,25 @@ public class ShowroomDocsTool {
         }
 
         StringBuilder sb = new StringBuilder();
-        sb.append("# Documentation Results for: ").append(query).append("\n\n");
+        sb.append("IMPORTANT: Answer the user's question using ONLY the documentation below. ");
+        sb.append("Do NOT make up information. Cite specific steps, commands, and details from this text.\n\n");
 
-        int limit = Math.min(results.size(), 5);
+        int limit = Math.min(results.size(), 3);
         for (int i = 0; i < limit; i++) {
             ScoredSection r = results.get(i);
-            sb.append("## From: ").append(r.title).append(" (").append(r.file).append(")\n\n");
-            String content = r.content.length() > 3000 ? r.content.substring(0, 3000) + "\n..." : r.content;
-            sb.append(content).append("\n\n---\n\n");
+            sb.append("--- Source: ").append(r.title).append(" ---\n\n");
+            String content = r.content.length() > 4000 ? r.content.substring(0, 4000) + "\n..." : r.content;
+            sb.append(content).append("\n\n");
         }
 
         return sb.toString();
     }
 
-    @Tool(description = "Get a specific documentation file by topic name. " +
-            "You can use the exact filename (e.g. '22-developer-hub.md') OR a topic keyword " +
-            "(e.g. 'developer hub', 'service mesh', 'pipelines', 'openshift ai', 'lightspeed', " +
-            "'connectivity link', 'observability', 'opentelemetry', 'api management', " +
-            "'neuralbank', 'keycloak', 'rag', 'devspaces', 'golden path', 'mcp agent').")
+    @Tool(description = "Retrieve a full documentation file by topic. " +
+            "Use topic keywords like 'developer hub', 'service mesh', 'pipelines', 'openshift ai', " +
+            "'lightspeed', 'connectivity link', 'observability', 'opentelemetry', 'api management', " +
+            "'neuralbank', 'keycloak', 'rag', 'devspaces', 'golden path', 'mcp agent'. " +
+            "Returns the complete document text - use it to answer the user's question accurately.")
     String getDocSection(
             @ToolArg(description = "Filename like '22-developer-hub.md' or topic like 'developer hub'") String fileName
     ) {
@@ -151,10 +149,12 @@ public class ShowroomDocsTool {
             }
             return suggestion.toString();
         }
-        if (content.length() > 8000) {
-            return content.substring(0, 8000) + "\n\n... (truncated - use searchDocs with specific keywords for targeted results)";
+        String prefix = "IMPORTANT: The following is official documentation. " +
+                "Base your answer ONLY on this content. Do NOT invent steps or commands.\n\n";
+        if (content.length() > 7500) {
+            return prefix + content.substring(0, 7500) + "\n\n... (truncated - use searchDocs for targeted results)";
         }
-        return content;
+        return prefix + content;
     }
 
     @Tool(description = "List all available documentation files with titles. " +
@@ -182,8 +182,8 @@ public class ShowroomDocsTool {
         return sb.toString();
     }
 
-    @Tool(description = "Get a summary of all indexed documentation. " +
-            "Covers the Neuralbank workshop and 9 Red Hat products.")
+    @Tool(description = "Get a summary of the entire knowledge base. " +
+            "Call this when the user asks 'what documentation do you have' or similar overview questions.")
     String getDocSummary() {
         int totalDocs = documents.size();
         long totalChars = documents.values().stream().mapToLong(String::length).sum();

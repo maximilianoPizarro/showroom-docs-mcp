@@ -7,7 +7,7 @@ permalink: /es/api-tools/
 # API de herramientas MCP
 
 <p align="center">
-  <img src="../assets/images/logo.svg" alt="Logo" width="80"/>
+  <img src="{{ '/assets/images/logo.svg' | relative_url }}" alt="Logo" width="80"/>
 </p>
 
 <p align="center"><a href="{{ '/api-tools/' | relative_url }}">English</a> | <strong>Espanol</strong></p>

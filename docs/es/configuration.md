@@ -7,7 +7,7 @@ permalink: /es/configuration/
 # Configuracion
 
 <p align="center">
-  <img src="../assets/images/logo.svg" alt="Logo" width="80"/>
+  <img src="{{ '/assets/images/logo.svg' | relative_url }}" alt="Logo" width="80"/>
 </p>
 
 <p align="center"><a href="{{ '/configuration/' | relative_url }}">English</a> | <strong>Espanol</strong></p>

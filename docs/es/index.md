@@ -5,7 +5,7 @@ permalink: /es/
 ---
 
 <p align="center">
-  <img src="../assets/images/logo.svg" alt="Showroom Docs MCP" width="200"/>
+  <img src="{{ '/assets/images/logo.svg' | relative_url }}" alt="Showroom Docs MCP" width="200"/>
 </p>
 
 <h1 align="center">Showroom Docs MCP Server</h1>

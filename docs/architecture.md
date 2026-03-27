@@ -7,7 +7,7 @@ permalink: /architecture/
 # Architecture
 
 <p align="center">
-  <img src="assets/images/logo.svg" alt="Logo" width="80"/>
+  <img src="{{ '/assets/images/logo.svg' | relative_url }}" alt="Logo" width="80"/>
 </p>
 
 <p align="center"><strong>English</strong> | <a href="{{ '/es/architecture/' | relative_url }}">Espanol</a></p>
