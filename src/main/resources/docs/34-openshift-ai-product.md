@@ -33,7 +33,63 @@ Included with OpenShift AI (and RHEL AI); runs on OpenShift and RHEL. Uses a **v
 
 ## Getting started
 
-- [Try in Developer Sandbox](https://developers.redhat.com/developer-sandbox) (see product page for current offers)
+### Quick-start: install OpenShift AI operator
+
+```bash
+# Install the operator from OperatorHub
+oc apply -f - <<EOF
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: rhods-operator
+  namespace: redhat-ods-operator
+spec:
+  channel: stable
+  name: rhods-operator
+  source: redhat-operators
+  sourceNamespace: openshift-marketplace
+EOF
+```
+
+### Quick-start: create a Data Science Project and serve a model
+
+```bash
+# Create a data science project
+oc new-project my-ml-project
+
+# Deploy a model using the InferenceService CRD
+oc apply -f - <<EOF
+apiVersion: serving.kserve.io/v1beta1
+kind: InferenceService
+metadata:
+  name: my-model
+  namespace: my-ml-project
+  annotations:
+    serving.kserve.io/deploymentMode: ModelMesh
+spec:
+  predictor:
+    model:
+      modelFormat:
+        name: sklearn
+      storage:
+        key: my-storage
+        path: sklearn/mnist-svm.joblib
+EOF
+
+# Check model readiness
+oc get inferenceservice my-model -n my-ml-project
+```
+
+### Quick-start: launch JupyterHub notebook
+
+1. Open the OpenShift AI dashboard (available via Routes in `redhat-ods-applications` namespace)
+2. Click **Launch application** under JupyterHub
+3. Select a notebook image (e.g., Standard Data Science, PyTorch, TensorFlow)
+4. Choose a container size and click **Start server**
+
+### Links
+
+- [Try in Developer Sandbox](https://developers.redhat.com/developer-sandbox)
 - [Overview](https://developers.redhat.com/products/red-hat-openshift-ai)
 - [Download / sign-up](https://developers.redhat.com/products/red-hat-openshift-ai/download)
 - [Getting started](https://developers.redhat.com/products/red-hat-openshift-ai/getting-started)

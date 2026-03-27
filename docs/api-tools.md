@@ -20,10 +20,6 @@ The server exposes 4 tools via Model Context Protocol (MCP).
 
 Search all indexed documentation using keywords. This is the primary tool for answering questions about Red Hat products and the Neuralbank workshop.
 
-<p align="center">
-  <img src="{{ '/assets/images/lightspeed-search.png' | relative_url }}" alt="searchDocs tool output" width="100%"/>
-</p>
-
 **Input:**
 ```json
 {
@@ -31,7 +27,7 @@ Search all indexed documentation using keywords. This is the primary tool for an
 }
 ```
 
-**Output:** Top 5 most relevant documentation sections with relevance score.
+**Output:** Top 2 most relevant documentation sections (max 4KB each), auto-sanitized and truncated at paragraph boundaries.
 
 **Example Queries:**
 
@@ -116,11 +112,7 @@ List all available documentation files with their titles.
 
 **Input:** none
 
-**Output:** Table of contents organized by category (Workshop / Red Hat Products).
-
-<p align="center">
-  <img src="{{ '/assets/images/lightspeed-doc-index.png' | relative_url }}" alt="listDocSections tool output" width="100%"/>
-</p>
+**Output:** Table of contents organized by category (Workshop / Red Hat Products / Developer Products).
 
 ---
 
@@ -130,11 +122,7 @@ Get a summary of the entire knowledge base including statistics and example ques
 
 **Input:** none
 
-**Output:** Overview of indexed content, product versions, and suggested queries.
-
-<p align="center">
-  <img src="{{ '/assets/images/lightspeed-summary.png' | relative_url }}" alt="getDocSummary tool output" width="100%"/>
-</p>
+**Output:** Overview of indexed content (46 docs), product versions, and suggested queries.
 
 ---
 

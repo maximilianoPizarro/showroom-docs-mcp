@@ -37,9 +37,68 @@ Custom developer portal and interactive API documentation for consumers.
 
 ## Getting started
 
+### Quick-start: install 3scale on OpenShift
+
+```bash
+# Install the 3scale operator from OperatorHub
+oc apply -f - <<EOF
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: 3scale-operator
+  namespace: openshift-operators
+spec:
+  channel: threescale-2.15
+  name: 3scale-operator
+  source: redhat-operators
+  sourceNamespace: openshift-marketplace
+EOF
+
+# Create an APIManager instance
+oc create namespace 3scale
+oc apply -f - <<EOF
+apiVersion: apps.3scale.net/v1alpha1
+kind: APIManager
+metadata:
+  name: apimanager
+  namespace: 3scale
+spec:
+  wildcardDomain: apps.your-cluster.example.com
+  system:
+    fileStorage:
+      persistentVolumeClaim:
+        storageClassName: gp3-csi
+EOF
+```
+
+### Quick-start: create an API product
+
+1. Log in to the 3scale Admin Portal
+2. Navigate to **Products > Create Product**
+3. Define the backend:
+   - Name: `My API`
+   - System name: `my-api`
+   - Backend URL: `http://my-backend-service.my-namespace.svc.cluster.local:8080`
+4. Create an Application Plan (e.g., "Basic" with rate limits)
+5. Promote to Staging, then Production
+
+### Quick-start: configure rate limiting via 3scale CLI
+
+```bash
+# Install 3scale toolbox
+gem install 3scale_toolbox
+
+# Import an API from OpenAPI spec
+3scale import openapi -d https://admin.3scale.example.com \
+  -t YOUR_ACCESS_TOKEN \
+  https://raw.githubusercontent.com/my-org/my-api/main/openapi.yaml
+```
+
+### Links
+
 - [Overview](https://developers.redhat.com/products/3scale)
 - [Getting started](https://developers.redhat.com/products/3scale/getting-started)
-- **Try 3scale** and **3scale GitHub org** links on the product page
+- [3scale GitHub](https://github.com/3scale)
 
 ## Technical details
 

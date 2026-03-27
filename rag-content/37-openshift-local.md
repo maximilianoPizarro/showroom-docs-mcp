@@ -19,12 +19,57 @@ Whatever your language, OpenShift Local hosts your app and mirrors cloud-style K
 
 ## Getting started
 
+### Quick-start: install and run OpenShift Local
+
+```bash
+# Download from developers.redhat.com/products/openshift-local/download
+# After downloading, extract and set up:
+
+# Linux/macOS
+tar xvf crc-linux-amd64.tar.xz
+sudo cp crc-linux-*/crc /usr/local/bin/
+
+# Initial setup (downloads VM image, ~4GB)
+crc setup
+
+# Start the cluster (default: 9GB RAM, 4 CPUs)
+crc start
+
+# Get login credentials
+crc console --credentials
+
+# Login as developer
+eval $(crc oc-env)
+oc login -u developer -p developer https://api.crc.testing:6443
+
+# Open the web console
+crc console
+```
+
+### Quick-start: customize resources
+
+```bash
+# Increase memory and CPUs before starting
+crc config set memory 16384
+crc config set cpus 6
+crc start
+```
+
+### Quick-start: clean up
+
+```bash
+crc stop
+crc delete    # removes the VM
+crc cleanup   # removes system changes from 'crc setup'
+```
+
+### Links
+
 - [Product hub](https://developers.redhat.com/products/openshift-local)
 - [Getting started](https://developers.redhat.com/products/openshift-local/getting-started)
 - [Installation](https://developers.redhat.com/content-gateway/link/3875380)
 - [Release notes (GitHub)](https://github.com/crc-org/crc/releases)
 - [Troubleshooting](https://crc.dev/docs/troubleshooting/)
-- Try **OpenShift in Developer Sandbox** from the overview page for a shared multitenant option
 
 ## Technical details
 

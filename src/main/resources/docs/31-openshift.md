@@ -73,11 +73,67 @@ Explore what’s new in [Red Hat OpenShift 4.21](https://developers.redhat.com/a
 
 ## Getting started
 
+### Quick-start: deploy an app with oc CLI
+
+```bash
+# Login to your cluster
+oc login https://api.your-cluster.example.com:6443 -u developer -p developer
+
+# Create a new project
+oc new-project my-app
+
+# Deploy from source (S2I build)
+oc new-app https://github.com/sclorg/nodejs-ex.git
+
+# Expose the service externally
+oc expose svc/nodejs-ex
+
+# Check the route
+oc get route nodejs-ex
+```
+
+### Quick-start: deploy from container image
+
+```bash
+oc new-app --image=quay.io/my-org/my-image:latest --name=my-service
+oc expose svc/my-service
+```
+
+### Quick-start: GitOps with Argo CD
+
+```bash
+# Install OpenShift GitOps operator (from OperatorHub)
+oc apply -f - <<EOF
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: my-app
+  namespace: openshift-gitops
+spec:
+  destination:
+    namespace: my-app
+    server: https://kubernetes.default.svc
+  source:
+    path: k8s/
+    repoURL: https://github.com/my-org/my-app.git
+    targetRevision: main
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+EOF
+```
+
+### Quick-start: try free (no install)
+
+Use the [Developer Sandbox](https://developers.redhat.com/developer-sandbox) for a free OpenShift cluster with no setup required.
+
+### Links
+
 - [Try Developer Sandbox](https://developers.redhat.com/developer-sandbox)
-- [AWS hands-on experience](https://developers.redhat.com/products/openshift/download) (via product page)
 - [Getting started](https://developers.redhat.com/products/openshift/getting-started)
 - [Download / sign up](https://developers.redhat.com/products/openshift/download)
-- [App platform](https://developers.redhat.com/app-dev-platform)
 - [Architecture & design patterns](https://developers.redhat.com/topics/red-hat-architecture-and-design-patterns)
 
 ### Local and related

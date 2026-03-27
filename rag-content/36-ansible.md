@@ -26,12 +26,79 @@ Hundreds of modules and documented integrations with vendors such as AWS, Azure,
 
 ## Getting started
 
+### Quick-start: install Ansible and run your first playbook
+
+```bash
+# Install Ansible on RHEL/Fedora
+sudo dnf install ansible-core
+
+# Create an inventory file
+cat > inventory.ini <<EOF
+[webservers]
+web1.example.com
+web2.example.com
+
+[dbservers]
+db1.example.com
+EOF
+
+# Create your first playbook
+cat > site.yml <<EOF
+---
+- name: Configure web servers
+  hosts: webservers
+  become: true
+  tasks:
+    - name: Install httpd
+      ansible.builtin.dnf:
+        name: httpd
+        state: present
+
+    - name: Start and enable httpd
+      ansible.builtin.service:
+        name: httpd
+        state: started
+        enabled: true
+
+    - name: Open firewall for HTTP
+      ansible.posix.firewalld:
+        service: http
+        permanent: true
+        state: enabled
+        immediate: true
+EOF
+
+# Run the playbook
+ansible-playbook -i inventory.ini site.yml
+```
+
+### Quick-start: use Ansible collections
+
+```bash
+# Install a collection from Ansible Galaxy
+ansible-galaxy collection install community.general
+
+# Install from Automation Hub (with token)
+ansible-galaxy collection install redhat.openshift --server https://console.redhat.com/api/automation-hub/
+```
+
+### Quick-start: Ansible Navigator (container-based execution)
+
+```bash
+# Install navigator
+pip install ansible-navigator
+
+# Run a playbook inside an execution environment
+ansible-navigator run site.yml -i inventory.ini --mode stdout
+```
+
+### Links
+
 - [Overview](https://developers.redhat.com/products/ansible)
 - [Download](https://developers.redhat.com/products/ansible/download)
 - [Getting started](https://developers.redhat.com/products/ansible/getting-started)
 - [Ansible Lightspeed](https://developers.redhat.com/products/ansible/lightspeed)
 - [Ansible development tools](https://developers.redhat.com/products/ansible/developmenttools)
-- [Ansible plug-ins for RHDH](https://developers.redhat.com/products/ansible/RHDHplugins)
 - [YAML essentials for Ansible](https://developers.redhat.com/learn/ansible/yaml-essentials-ansible)
 
 ## Technical details

@@ -53,12 +53,101 @@ Available with Developer Hub or [Advanced Developer Suite](https://developers.re
 
 ## Getting started
 
+### Quick-start: install Developer Hub on OpenShift
+
+```bash
+# Install the RHDH operator from OperatorHub
+oc apply -f - <<EOF
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: rhdh
+  namespace: openshift-operators
+spec:
+  channel: fast
+  name: rhdh
+  source: redhat-operators
+  sourceNamespace: openshift-marketplace
+EOF
+
+# Create a Backstage instance
+oc create namespace developer-hub
+oc apply -f - <<EOF
+apiVersion: rhdh.redhat.com/v1alpha3
+kind: Backstage
+metadata:
+  name: developer-hub
+  namespace: developer-hub
+spec:
+  application:
+    replicas: 1
+    route:
+      enabled: true
+EOF
+```
+
+### Quick-start: register a component in the catalog
+
+Create a `catalog-info.yaml` in your repo:
+
+```yaml
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: my-quarkus-app
+  description: My Quarkus microservice
+  annotations:
+    backstage.io/techdocs-ref: dir:.
+spec:
+  type: service
+  lifecycle: production
+  owner: team-backend
+```
+
+Then register it via the Developer Hub UI: **Create > Register existing component > paste repo URL**.
+
+### Quick-start: create a Golden Path Template
+
+```yaml
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: quarkus-service
+  title: Quarkus Service
+  description: Create a new Quarkus microservice
+spec:
+  owner: platform-team
+  type: service
+  parameters:
+    - title: Service details
+      properties:
+        name:
+          title: Name
+          type: string
+        description:
+          title: Description
+          type: string
+  steps:
+    - id: fetch
+      name: Fetch template
+      action: fetch:template
+      input:
+        url: ./skeleton
+        values:
+          name: ${{ parameters.name }}
+    - id: publish
+      name: Publish to GitLab
+      action: publish:gitlab
+      input:
+        repoUrl: gitlab.example.com?repo=${{ parameters.name }}
+```
+
+### Links
+
 - [Overview (RHDH hub)](https://developers.redhat.com/products/rhdh)
 - [Getting started](https://developers.redhat.com/products/rhdh/getting-started)
 - [Plug-ins](https://developers.redhat.com/products/rhdh/plugins)
-- [Demos](https://developers.redhat.com/products/rhdh/demos)
 - [Developer Hub vs. Backstage](https://developers.redhat.com/products/rhdh/developer-hub-comparison)
-- [Developer Lightspeed for RHDH](https://developers.redhat.com/products/rhdh/developer-lightspeed)
 
 ## Technical details
 

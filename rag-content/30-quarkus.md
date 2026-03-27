@@ -37,6 +37,53 @@ Quarkus is available through Red Hat entitlements. You can run it locally (inclu
 
 ## Getting started
 
+### Quick-start: install Quarkus CLI and create a project
+
+```bash
+# Install Quarkus CLI via JBang on RHEL/Fedora/macOS
+curl -Ls https://sh.jbang.dev | bash -s - trust add https://repo1.maven.org/maven2/io/quarkus/quarkus-cli/
+curl -Ls https://sh.jbang.dev | bash -s - app install --fresh --force quarkus@quarkusio
+
+# Create a new Quarkus project
+quarkus create app com.example:my-app --extension='resteasy-reactive'
+
+# Run in dev mode (live reload)
+cd my-app
+quarkus dev
+```
+
+### Quick-start: REST endpoint example
+
+```java
+@Path("/hello")
+public class GreetingResource {
+
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    public String hello() {
+        return "Hello from RESTEasy Reactive";
+    }
+}
+```
+
+Access at `http://localhost:8080/hello` after running `quarkus dev`.
+
+### Quick-start: deploy to OpenShift
+
+```bash
+# Add OpenShift extension
+quarkus extension add openshift
+
+# Deploy directly to OpenShift
+quarkus build -Dquarkus.kubernetes.deploy=true
+```
+
+### Quick-start: generate project online
+
+Use the [Quarkus project generator](https://code.quarkus.redhat.com/) to pick extensions, version, and build tool, then download and run locally.
+
+### Links
+
 - [Overview](https://developers.redhat.com/products/quarkus)
 - [Download / install / deploy](https://developers.redhat.com/products/quarkus/download)
 - [Getting started](https://developers.redhat.com/products/quarkus/getting-started)

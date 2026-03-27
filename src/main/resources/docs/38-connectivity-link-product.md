@@ -26,10 +26,95 @@ Connectivity Link attaches policies to gateways for **DNS connectivity**, **auto
 
 ## Getting started
 
+### Quick-start: install Connectivity Link (Kuadrant) on OpenShift
+
+```bash
+# Install the Kuadrant operator
+oc apply -f - <<EOF
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: kuadrant-operator
+  namespace: openshift-operators
+spec:
+  channel: stable
+  name: kuadrant-operator
+  source: redhat-operators
+  sourceNamespace: openshift-marketplace
+EOF
+
+# Create a Kuadrant instance
+oc apply -f - <<EOF
+apiVersion: kuadrant.io/v1beta1
+kind: Kuadrant
+metadata:
+  name: kuadrant
+  namespace: kuadrant-system
+spec: {}
+EOF
+```
+
+### Quick-start: configure a RateLimitPolicy
+
+```yaml
+apiVersion: kuadrant.io/v1
+kind: RateLimitPolicy
+metadata:
+  name: api-rate-limit
+spec:
+  targetRef:
+    group: gateway.networking.k8s.io
+    kind: HTTPRoute
+    name: my-api-route
+  limits:
+    global:
+      rates:
+        - limit: 100
+          window: 1m
+```
+
+### Quick-start: configure a TLSPolicy
+
+```yaml
+apiVersion: kuadrant.io/v1
+kind: TLSPolicy
+metadata:
+  name: api-tls
+spec:
+  targetRef:
+    group: gateway.networking.k8s.io
+    kind: Gateway
+    name: my-gateway
+  issuerRef:
+    name: letsencrypt-production
+    kind: ClusterIssuer
+```
+
+### Quick-start: configure a DNSPolicy
+
+```yaml
+apiVersion: kuadrant.io/v1
+kind: DNSPolicy
+metadata:
+  name: api-dns
+spec:
+  targetRef:
+    group: gateway.networking.k8s.io
+    kind: Gateway
+    name: my-gateway
+  providerRefs:
+    - name: aws-route53-credentials
+  routingStrategy: loadbalanced
+  loadBalancing:
+    geo:
+      defaultGeo: US
+```
+
+### Links
+
 - [Overview](https://developers.redhat.com/products/red-hat-connectivity-link)
 - [Getting started](https://developers.redhat.com/products/red-hat-connectivity-link/getting-started)
-- [See it in action](https://developers.redhat.com/products/red-hat-connectivity-link/overview) (CTA on product page)
-- Additional product and customer content: follow **Take me there** on the [Developer overview](https://developers.redhat.com/products/red-hat-connectivity-link/overview) to redhat.com
+- [See it in action](https://developers.redhat.com/products/red-hat-connectivity-link/overview)
 
 ## Technical details
 

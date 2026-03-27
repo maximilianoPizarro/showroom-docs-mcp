@@ -81,18 +81,6 @@ Anade el servidor showroom-docs-mcp a la seccion `mcpServers`:
 
 > **Importante**: Usa `/mcp` (Streamable HTTP), **no** `/mcp/sse`. El cliente OLS usa solicitudes POST que requieren el endpoint Streamable HTTP. Usar `/mcp/sse` provocara un error `405 Method Not Allowed`.
 
-Puedes anadir servidores MCP adicionales junto a el (p. ej. kubernetes-mcp para consultas de estado del cluster):
-
-```yaml
-  mcpServers:
-    - name: kubernetes-mcp
-      timeout: 5
-      url: 'http://kubernetes-mcp-server.istio-system.svc.cluster.local:8080/mcp'
-    - name: showroom-docs-mcp
-      timeout: 10
-      url: 'http://showroom-docs-mcp.openshift-lightspeed.svc.cluster.local:8080/mcp'
-```
-
 ### Paso 5: Aplicar el OLSConfig completo
 
 Guarda lo siguiente como `cluster-ols.yml` (tambien disponible en el repositorio en [`k8s/cluster-ols.yml`](https://github.com/maximilianoPizarro/showroom-docs-mcp/blob/main/k8s/cluster-ols.yml)):
@@ -112,14 +100,11 @@ spec:
         models:
           - name: llama-32-3b-instruct
             parameters:
-              maxTokensForResponse: 4096
+              maxTokensForResponse: 8192
         name: red_hat_openshift_ai
         type: rhoai_vllm
         url: 'http://llama-32-3b-instruct-openai.my-first-model.svc.cluster.local/v1'
   mcpServers:
-    - name: kubernetes-mcp
-      timeout: 5
-      url: 'http://kubernetes-mcp-server.istio-system.svc.cluster.local:8080/mcp'
     - name: showroom-docs-mcp
       timeout: 10
       url: 'http://showroom-docs-mcp.openshift-lightspeed.svc.cluster.local:8080/mcp'
@@ -163,7 +148,7 @@ Espera a que el nuevo pod de OLS este listo:
 oc get pods -n openshift-lightspeed -l app.kubernetes.io/name=lightspeed-service-api -w
 ```
 
-Comprueba que OLS carga las herramientas de ambos servidores MCP con exito:
+Comprueba que OLS carga las herramientas del servidor MCP con exito:
 
 ```bash
 oc logs -n openshift-lightspeed deploy/lightspeed-app-server \
@@ -174,7 +159,6 @@ Salida esperada:
 
 ```
 Loaded 4 tools from MCP server 'showroom-docs-mcp'
-Loaded 19 tools from MCP server 'kubernetes-mcp'
 ```
 
 Si ves `Failed to get tools from MCP server 'showroom-docs-mcp'`, revisa:

@@ -117,13 +117,7 @@ oc logs -n openshift-lightspeed deploy/lightspeed-app-server \
 
 ## Test
 
-Once deployed, you should see the showroom-docs-mcp pod in the OpenShift topology:
-
-<p align="center">
-  <img src="{{ '/assets/images/topology-overview.png' | relative_url }}" alt="OpenShift Topology with MCP server" width="100%"/>
-</p>
-
-Open the OpenShift Lightspeed chat in the console and try these questions:
+Once deployed, open the OpenShift Lightspeed chat in the console and try these questions:
 
 ### Red Hat Product Questions
 - *"How do I install OpenShift Service Mesh 3.3?"*
@@ -144,14 +138,10 @@ Open the OpenShift Lightspeed chat in the console and try these questions:
 - *"What is RAG and how does it work with vector databases?"*
 - *"How do I use DevSpaces for development?"*
 
-### Example: Lightspeed Using Documentation
+### Architecture Overview
 
 <p align="center">
-  <img src="{{ '/assets/images/topology-chat.png' | relative_url }}" alt="Lightspeed chat using MCP documentation" width="100%"/>
-</p>
-
-<p align="center">
-  <img src="{{ '/assets/images/lightspeed-doc-list.png' | relative_url }}" alt="Lightspeed listing available documentation" width="100%"/>
+  <img src="{{ '/assets/images/architecture-diagram.svg' | relative_url }}" alt="Architecture: OpenShift Lightspeed + MCP" width="100%"/>
 </p>
 
 ## Local Development

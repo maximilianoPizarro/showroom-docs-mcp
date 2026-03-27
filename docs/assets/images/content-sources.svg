@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="'Segoe UI',Arial,sans-serif">
+  <defs>
+    <linearGradient id="bg3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d1117"/>
+      <stop offset="100%" style="stop-color:#161b22"/>
+    </linearGradient>
+    <linearGradient id="c3" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#21262d"/>
+      <stop offset="100%" style="stop-color:#161b22"/>
+    </linearGradient>
+    <filter id="s3"><feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.4"/></filter>
+  </defs>
+  <rect width="900" height="480" fill="url(#bg3)" rx="12"/>
+  <text x="450" y="32" text-anchor="middle" fill="#e94560" font-size="16" font-weight="bold">Knowledge Base  46 Indexed Documents</text>
+  <!-- Workshop section -->
+  <rect x="30" y="50" width="270" height="410" rx="8" fill="url(#c3)" stroke="#4ecca3" stroke-width="1.5" filter="url(#s3)"/>
+  <text x="165" y="75" text-anchor="middle" fill="#4ecca3" font-size="14" font-weight="bold">Workshop Modules (27)</text>
+  <text x="165" y="93" text-anchor="middle" fill="#666" font-size="10">IA Development From Zero To Hero</text>
+  <text x="50" y="118" fill="#aaa" font-size="10">00 Index &amp; Overview</text>
+  <text x="50" y="135" fill="#aaa" font-size="10">01 Business Case (Neuralbank)</text>
+  <text x="50" y="152" fill="#aaa" font-size="10">02 Workshop Overview</text>
+  <text x="50" y="169" fill="#aaa" font-size="10">03 Environment Configuration</text>
+  <text x="50" y="186" fill="#aaa" font-size="10">04 MCP Agents Intro (LlamaStack)</text>
+  <text x="50" y="203" fill="#aaa" font-size="10">05 Golden Path (Developer Hub)</text>
+  <text x="50" y="220" fill="#aaa" font-size="10">06 DevSpaces</text>
+  <text x="50" y="237" fill="#aaa" font-size="10">07 Keycloak User Management</text>
+  <text x="50" y="254" fill="#aaa" font-size="10">08 Build MCP Agent (Quarkus)</text>
+  <text x="50" y="271" fill="#aaa" font-size="10">09 Connectivity Link</text>
+  <text x="50" y="288" fill="#aaa" font-size="10">10 MCP Inspector</text>
+  <text x="50" y="305" fill="#aaa" font-size="10">11 Deploy &amp; Integrate</text>
+  <text x="50" y="322" fill="#aaa" font-size="10">12 OpenTelemetry</text>
+  <text x="50" y="339" fill="#aaa" font-size="10">13-15 RAG (Intro, Vectors, Simple)</text>
+  <text x="50" y="356" fill="#aaa" font-size="10">16 LLM Module</text>
+  <text x="50" y="373" fill="#e94560" font-size="10" font-weight="bold">16a-16g NEW: RAG, Agents, Data Eng.</text>
+  <text x="50" y="390" fill="#aaa" font-size="10">17 LLM Observability</text>
+  <text x="50" y="407" fill="#e94560" font-size="10" font-weight="bold">18 GPU as a Service</text>
+  <text x="50" y="424" fill="#e94560" font-size="10" font-weight="bold">19 Platform Engineering</text>
+  <text x="50" y="441" fill="#666" font-size="9">Source: github.com/maximilianoPizarro</text>
+  <!-- Product docs section -->
+  <rect x="315" y="50" width="270" height="410" rx="8" fill="url(#c3)" stroke="#ff6b6b" stroke-width="1.5" filter="url(#s3)"/>
+  <text x="450" y="75" text-anchor="middle" fill="#ff6b6b" font-size="14" font-weight="bold">Product Docs (9)</text>
+  <text x="450" y="93" text-anchor="middle" fill="#666" font-size="10">docs.redhat.com (PDF ’ sanitized)</text>
+  <text x="335" y="120" fill="#aaa" font-size="11">20 Service Mesh 3.3</text>
+  <text x="335" y="142" fill="#aaa" font-size="11">21 Connectivity Link 1.3</text>
+  <text x="335" y="164" fill="#aaa" font-size="11">22 Developer Hub 1.9</text>
+  <text x="335" y="186" fill="#aaa" font-size="11">23 OpenShift Lightspeed 1.0</text>
+  <text x="335" y="208" fill="#aaa" font-size="11">24 Observability 1</text>
+  <text x="335" y="230" fill="#aaa" font-size="11">25 OpenTelemetry 3.9</text>
+  <text x="335" y="252" fill="#aaa" font-size="11">26 Pipelines 1.21</text>
+  <text x="335" y="274" fill="#aaa" font-size="11">27 API Management 1</text>
+  <text x="335" y="296" fill="#aaa" font-size="11">28 OpenShift AI 1</text>
+  <rect x="335" y="320" width="230" height="55" rx="6" fill="#1a1a2e" stroke="#ff6b6b" stroke-width="1" opacity="0.7"/>
+  <text x="450" y="340" text-anchor="middle" fill="#ff6b6b" font-size="10" font-weight="bold">Auto-sanitized on load:</text>
+  <text x="450" y="355" text-anchor="middle" fill="#888" font-size="9">Page numbers, legal notices,</text>
+  <text x="450" y="368" text-anchor="middle" fill="#888" font-size="9">TOC artifacts, headers removed</text>
+  <!-- Developer products section -->
+  <rect x="600" y="50" width="270" height="410" rx="8" fill="url(#c3)" stroke="#a855f7" stroke-width="1.5" filter="url(#s3)"/>
+  <text x="735" y="75" text-anchor="middle" fill="#a855f7" font-size="14" font-weight="bold">Developer Products (10)</text>
+  <text x="735" y="93" text-anchor="middle" fill="#666" font-size="10">developers.redhat.com</text>
+  <text x="620" y="120" fill="#aaa" font-size="11">30 Quarkus</text>
+  <text x="620" y="142" fill="#aaa" font-size="11">31 OpenShift</text>
+  <text x="620" y="164" fill="#aaa" font-size="11">32 RHEL</text>
+  <text x="620" y="186" fill="#aaa" font-size="11">33 Dev Spaces</text>
+  <text x="620" y="208" fill="#aaa" font-size="11">34 OpenShift AI</text>
+  <text x="620" y="230" fill="#aaa" font-size="11">35 Developer Hub</text>
+  <text x="620" y="252" fill="#aaa" font-size="11">36 Ansible</text>
+  <text x="620" y="274" fill="#aaa" font-size="11">37 OpenShift Local</text>
+  <text x="620" y="296" fill="#aaa" font-size="11">38 Connectivity Link</text>
+  <text x="620" y="318" fill="#aaa" font-size="11">39 3scale API Mgmt</text>
+  <rect x="620" y="340" width="230" height="55" rx="6" fill="#1a1a2e" stroke="#a855f7" stroke-width="1" opacity="0.7"/>
+  <text x="735" y="360" text-anchor="middle" fill="#a855f7" font-size="10" font-weight="bold">Includes quick-start examples:</text>
+  <text x="735" y="375" text-anchor="middle" fill="#888" font-size="9">CLI commands, code snippets,</text>
+  <text x="735" y="388" text-anchor="middle" fill="#888" font-size="9">operator install, YAML samples</text>
+</svg>

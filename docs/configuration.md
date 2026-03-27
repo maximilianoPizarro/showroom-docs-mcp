@@ -81,18 +81,6 @@ Add the showroom-docs-mcp server to the `mcpServers` section:
 
 > **Important**: Use `/mcp` (Streamable HTTP), **not** `/mcp/sse`. The OLS client uses POST requests which require the Streamable HTTP endpoint. Using `/mcp/sse` will result in a `405 Method Not Allowed` error.
 
-You can add additional MCP servers alongside it (e.g. kubernetes-mcp for cluster state queries):
-
-```yaml
-  mcpServers:
-    - name: kubernetes-mcp
-      timeout: 5
-      url: 'http://kubernetes-mcp-server.istio-system.svc.cluster.local:8080/mcp'
-    - name: showroom-docs-mcp
-      timeout: 10
-      url: 'http://showroom-docs-mcp.openshift-lightspeed.svc.cluster.local:8080/mcp'
-```
-
 ### Step 5: Apply the Complete OLSConfig
 
 Save the following as `cluster-ols.yml` (also available in the repo at [`k8s/cluster-ols.yml`](https://github.com/maximilianoPizarro/showroom-docs-mcp/blob/main/k8s/cluster-ols.yml)):
@@ -112,14 +100,11 @@ spec:
         models:
           - name: llama-32-3b-instruct
             parameters:
-              maxTokensForResponse: 4096
+              maxTokensForResponse: 8192
         name: red_hat_openshift_ai
         type: rhoai_vllm
         url: 'http://llama-32-3b-instruct-openai.my-first-model.svc.cluster.local/v1'
   mcpServers:
-    - name: kubernetes-mcp
-      timeout: 5
-      url: 'http://kubernetes-mcp-server.istio-system.svc.cluster.local:8080/mcp'
     - name: showroom-docs-mcp
       timeout: 10
       url: 'http://showroom-docs-mcp.openshift-lightspeed.svc.cluster.local:8080/mcp'
@@ -163,7 +148,7 @@ Wait for the new OLS pod to be ready:
 oc get pods -n openshift-lightspeed -l app.kubernetes.io/name=lightspeed-service-api -w
 ```
 
-Check that OLS successfully loads tools from both MCP servers:
+Check that OLS successfully loads tools from the MCP server:
 
 ```bash
 oc logs -n openshift-lightspeed deploy/lightspeed-app-server \
@@ -174,7 +159,6 @@ Expected output:
 
 ```
 Loaded 4 tools from MCP server 'showroom-docs-mcp'
-Loaded 19 tools from MCP server 'kubernetes-mcp'
 ```
 
 If you see `Failed to get tools from MCP server 'showroom-docs-mcp'`, check:

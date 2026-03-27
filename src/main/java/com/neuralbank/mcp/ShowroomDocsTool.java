@@ -74,8 +74,9 @@ public class ShowroomDocsTool {
         for (String path : DOC_FILES) {
             try (InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream(path)) {
                 if (is != null) {
-                    String content = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8))
+                    String raw = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8))
                             .lines().collect(Collectors.joining("\n"));
+                    String content = sanitizeContent(raw, path);
                     documents.put(path, content);
                     String title = extractTitle(content);
                     fileTitles.put(path, title);
@@ -142,12 +143,12 @@ public class ShowroomDocsTool {
         sb.append("IMPORTANT: Answer the user's question using ONLY the documentation below. ");
         sb.append("Do NOT make up information. Cite specific steps, commands, and details from this text.\n\n");
 
-        int limit = Math.min(results.size(), 3);
-        for (int i = 0; i < limit; i++) {
+        int maxResults = Math.min(results.size(), 2);
+        int maxPerSection = 4000;
+        for (int i = 0; i < maxResults; i++) {
             ScoredSection r = results.get(i);
             sb.append("--- Source: ").append(r.title).append(" ---\n\n");
-            String content = r.content.length() > 4000 ? r.content.substring(0, 4000) + "\n..." : r.content;
-            sb.append(content).append("\n\n");
+            sb.append(truncateAtBoundary(r.content, maxPerSection)).append("\n\n");
         }
 
         return sb.toString();
@@ -174,10 +175,7 @@ public class ShowroomDocsTool {
         }
         String prefix = "IMPORTANT: The following is official documentation. " +
                 "Base your answer ONLY on this content. Do NOT invent steps or commands.\n\n";
-        if (content.length() > 7500) {
-            return prefix + content.substring(0, 7500) + "\n\n... (truncated - use searchDocs for targeted results)";
-        }
-        return prefix + content;
+        return prefix + truncateAtBoundary(content, 8000);
     }
 
     @Tool(description = "List all available documentation files with titles. " +
@@ -325,6 +323,112 @@ public class ShowroomDocsTool {
         }
 
         return null;
+    }
+
+    private String sanitizeContent(String raw, String path) {
+        boolean isPdfSource = path.matches("docs/2[0-9].*\\.md");
+        if (!isPdfSource) {
+            return collapseBlankLines(raw);
+        }
+
+        String[] lines = raw.split("\n");
+        StringBuilder sb = new StringBuilder();
+        boolean inLegalNotice = false;
+        boolean inTableOfContents = false;
+        String productHeader = extractProductHeader(raw);
+
+        for (int i = 0; i < lines.length; i++) {
+            String line = lines[i];
+            String trimmed = line.trim();
+
+            if (trimmed.equals("Legal Notice") || trimmed.equals("Legal notice")) {
+                inLegalNotice = true;
+                continue;
+            }
+            if (inLegalNotice) {
+                if (trimmed.equals("Abstract") || trimmed.startsWith("## ") || trimmed.startsWith("# ")) {
+                    inLegalNotice = false;
+                    if (trimmed.equals("Abstract")) continue;
+                } else {
+                    continue;
+                }
+            }
+
+            if (trimmed.equals("Table of Contents")) {
+                inTableOfContents = true;
+                continue;
+            }
+            if (inTableOfContents) {
+                boolean isContentLine = !trimmed.isEmpty()
+                        && !trimmed.startsWith("## ") && !trimmed.startsWith("### ")
+                        && !trimmed.startsWith("# ")
+                        && !trimmed.matches("^[\\d.]+[\\s.].*$")
+                        && !trimmed.matches("^\\d{1,3}$")
+                        && !trimmed.matches("^[A-Z ]{2,}$")
+                        && trimmed.length() > 40;
+                if (isContentLine) {
+                    inTableOfContents = false;
+                } else {
+                    continue;
+                }
+            }
+
+            if (trimmed.matches("^\\. [. ]+$") || trimmed.matches("^[. ]+$")) {
+                continue;
+            }
+
+            if (trimmed.matches("^\\d{1,3}$")) {
+                continue;
+            }
+
+            if (productHeader != null && trimmed.startsWith(productHeader)
+                    && trimmed.length() < productHeader.length() + 30) {
+                continue;
+            }
+
+            if (trimmed.startsWith("Last Updated:") || trimmed.startsWith("Copyright ©")) {
+                continue;
+            }
+
+            if (trimmed.equals("Source: Official Red Hat Documentation (PDF)")
+                    || trimmed.equals("---")
+                    || trimmed.equals("Abstract")
+                    || trimmed.equals("About")
+                    || trimmed.equals("PREFACE")
+                    || trimmed.equals("MAKING OPEN SOURCE MORE INCLUSIVE")) {
+                continue;
+            }
+
+            sb.append(line).append("\n");
+        }
+
+        return collapseBlankLines(sb.toString());
+    }
+
+    private String extractProductHeader(String content) {
+        for (String line : content.split("\n")) {
+            if (line.startsWith("# ")) {
+                return line.substring(2).trim();
+            }
+        }
+        return null;
+    }
+
+    private String truncateAtBoundary(String text, int maxLen) {
+        if (text.length() <= maxLen) return text;
+
+        int cut = text.lastIndexOf("\n\n", maxLen);
+        if (cut < maxLen / 2) {
+            cut = text.lastIndexOf("\n", maxLen);
+        }
+        if (cut < maxLen / 2) {
+            cut = maxLen;
+        }
+        return text.substring(0, cut).trim();
+    }
+
+    private String collapseBlankLines(String text) {
+        return text.replaceAll("\n{3,}", "\n\n").trim();
     }
 
     private List<String> buildKeywords(String path, String title, String content) {

@@ -23,19 +23,19 @@ permalink: /es/architecture/
 │  │ (Browser) │    │  (Frontend)  │    │                  │  │
 │  └──────────┘    └──────────────┘    └────────┬─────────┘  │
 │                                               │             │
-│                         ┌─────────────────────┼──────┐      │
-│                         │                     │      │      │
-│                         ▼                     ▼      ▼      │
-│                  ┌────────────┐  ┌─────────────┐ ┌───────┐ │
-│                  │  LLM       │  │ kubernetes  │ │showroo│ │
-│                  │  Provider  │  │   -mcp      │ │m-docs │ │
-│                  │ (Llama 3.2)│  │             │ │ -mcp  │ │
-│                  └────────────┘  └─────────────┘ └───┬───┘ │
-│                                                      │      │
+│                    ┌────────────┴─────────────┐      │
+│                    │                          │      │
+│                    ▼                          ▼      │
+│             ┌────────────┐            ┌──────────────┐ │
+│             │  LLM       │            │ showroom-docs│ │
+│             │  Provider  │            │     -mcp     │ │
+│             │ (Llama 3.2)│            └──────┬───────┘ │
+│             └────────────┘                   │        │
+│                                              │        │
 │                                          ┌───────────┴───┐  │
 │                                          │  Embedded     │  │
 │                                          │  Documentation│  │
-│                                          │  (25 files)   │  │
+│                                          │ (46 archivos) │  │
 │                                          └───────────────┘  │
 └─────────────────────────────────────────────────────────────┘
 ```
@@ -46,16 +46,15 @@ permalink: /es/architecture/
 
 - **Runtime**: Quarkus 3.27.3 con Java 21
 - **Protocolo**: MCP via Streamable HTTP (`/mcp`) y SSE (`/mcp/sse`)
-- **Contenido**: 25 documentos markdown embebidos (~2.5MB de PDFs oficiales Red Hat)
+- **Contenido**: 46 documentos markdown embebidos (~2.5MB de PDFs oficiales Red Hat)
 - **Puerto**: 8080
 
 ### Flujo de datos
 
 1. El usuario hace una pregunta en la consola de OLS
 2. OLS API Server recibe la consulta y la envia al LLM
-3. El LLM puede invocar tools de ambos servidores MCP:
-   - `kubernetes-mcp`: para consultas del estado del cluster (pods, servicios, namespaces)
-   - `showroom-docs-mcp`: para consultas de documentacion (productos Red Hat, workshop)
+3. El LLM puede invocar tools del servidor MCP:
+   - `showroom-docs-mcp`: para consultas de documentacion (productos Red Hat, workshop, developer products)
 4. El MCP server busca en los documentos indexados y devuelve secciones relevantes
 5. El LLM genera una respuesta contextualizada usando la documentacion obtenida
 
@@ -76,8 +75,8 @@ permalink: /es/architecture/
 | "Lista toda la documentacion disponible" | `listDocSections` → devuelve indice |
 | "Mostrame los docs de Developer Hub" | `getDocSection` → devuelve doc completo |
 | "Que productos estan indexados?" | `getDocSummary` → devuelve resumen |
-| "Cuantos pods estan corriendo?" | tools de `kubernetes-mcp` |
-| "Que namespaces existen?" | tools de `kubernetes-mcp` |
+| "Como instalo Ansible?" | `searchDocs` → busca docs de developer |
+| "Quick-start para Quarkus?" | `searchDocs` → devuelve comandos CLI |
 
 ## Stack Tecnologico
 

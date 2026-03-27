@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 400" font-family="'Segoe UI',Arial,sans-serif">
+  <defs>
+    <linearGradient id="bg2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f0f23"/>
+      <stop offset="100%" style="stop-color:#1a1a3e"/>
+    </linearGradient>
+    <linearGradient id="c2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#252548"/>
+      <stop offset="100%" style="stop-color:#1a1a38"/>
+    </linearGradient>
+    <filter id="s2"><feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.4"/></filter>
+    <marker id="a1" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#4ecca3"/></marker>
+  </defs>
+  <rect width="900" height="400" fill="url(#bg2)" rx="12"/>
+  <text x="450" y="32" text-anchor="middle" fill="#e94560" font-size="16" font-weight="bold">MCP Tool Selection Flow</text>
+  <!-- Question types -->
+  <rect x="30" y="55" width="250" height="320" rx="8" fill="url(#c2)" stroke="#ffcc00" stroke-width="1" filter="url(#s2)"/>
+  <text x="155" y="78" text-anchor="middle" fill="#ffcc00" font-size="13" font-weight="bold">User Question</text>
+  <text x="50" y="105" fill="#aaa" font-size="11">"How do I install Service Mesh?"</text>
+  <text x="50" y="155" fill="#aaa" font-size="11">"Show me the Quarkus docs"</text>
+  <text x="50" y="205" fill="#aaa" font-size="11">"What docs do you have?"</text>
+  <text x="50" y="255" fill="#aaa" font-size="11">"What products are indexed?"</text>
+  <text x="50" y="305" fill="#aaa" font-size="11">"How to deploy to OpenShift?"</text>
+  <text x="50" y="345" fill="#aaa" font-size="11">"Install Ansible playbooks"</text>
+  <!-- LLM decision -->
+  <rect x="330" y="130" width="140" height="140" rx="70" fill="url(#c2)" stroke="#a855f7" stroke-width="1.5" filter="url(#s2)"/>
+  <text x="400" y="190" text-anchor="middle" fill="#a855f7" font-size="13" font-weight="bold">LLM</text>
+  <text x="400" y="210" text-anchor="middle" fill="#aaa" font-size="10">Tool Selection</text>
+  <text x="400" y="225" text-anchor="middle" fill="#666" font-size="9">Single tool call</text>
+  <!-- Arrows from questions to LLM -->
+  <line x1="280" y1="105" x2="340" y2="170" stroke="#ffcc00" stroke-width="1" opacity="0.5"/>
+  <line x1="280" y1="155" x2="340" y2="185" stroke="#ffcc00" stroke-width="1" opacity="0.5"/>
+  <line x1="280" y1="205" x2="340" y2="200" stroke="#ffcc00" stroke-width="1" opacity="0.5"/>
+  <line x1="280" y1="255" x2="340" y2="215" stroke="#ffcc00" stroke-width="1" opacity="0.5"/>
+  <line x1="280" y1="305" x2="340" y2="230" stroke="#ffcc00" stroke-width="1" opacity="0.5"/>
+  <line x1="280" y1="345" x2="340" y2="245" stroke="#ffcc00" stroke-width="1" opacity="0.5"/>
+  <!-- Tools -->
+  <rect x="540" y="60" width="330" height="70" rx="8" fill="url(#c2)" stroke="#4ecca3" stroke-width="1.5" filter="url(#s2)"/>
+  <text x="560" y="85" fill="#4ecca3" font-size="14" font-weight="bold">searchDocs</text>
+  <text x="560" y="103" fill="#aaa" font-size="10">Keyword search ’ top 2 sections (max 4KB each)</text>
+  <text x="560" y="118" fill="#666" font-size="9">Auto-sanitized: no page numbers, no legal notices</text>
+  <rect x="540" y="145" width="330" height="60" rx="8" fill="url(#c2)" stroke="#38bdf8" stroke-width="1.5" filter="url(#s2)"/>
+  <text x="560" y="170" fill="#38bdf8" font-size="14" font-weight="bold">getDocSection</text>
+  <text x="560" y="190" fill="#aaa" font-size="10">Full doc by topic ’ max 8KB, smart truncation</text>
+  <rect x="540" y="220" width="330" height="60" rx="8" fill="url(#c2)" stroke="#f59e0b" stroke-width="1.5" filter="url(#s2)"/>
+  <text x="560" y="245" fill="#f59e0b" font-size="14" font-weight="bold">listDocSections</text>
+  <text x="560" y="265" fill="#aaa" font-size="10">Table of contents: Workshop + Products + Devs</text>
+  <rect x="540" y="295" width="330" height="60" rx="8" fill="url(#c2)" stroke="#ec4899" stroke-width="1.5" filter="url(#s2)"/>
+  <text x="560" y="320" fill="#ec4899" font-size="14" font-weight="bold">getDocSummary</text>
+  <text x="560" y="340" fill="#aaa" font-size="10">Knowledge base overview + example questions</text>
+  <!-- Arrows from LLM to tools -->
+  <line x1="470" y1="170" x2="535" y2="95" stroke="#4ecca3" stroke-width="1.5" marker-end="url(#a1)"/>
+  <line x1="470" y1="185" x2="535" y2="175" stroke="#4ecca3" stroke-width="1.5" marker-end="url(#a1)"/>
+  <line x1="470" y1="210" x2="535" y2="250" stroke="#4ecca3" stroke-width="1.5" marker-end="url(#a1)"/>
+  <line x1="470" y1="230" x2="535" y2="325" stroke="#4ecca3" stroke-width="1.5" marker-end="url(#a1)"/>
+</svg>

@@ -19,6 +19,9 @@
     <img src="https://img.shields.io/badge/docs-GitHub_Pages-blue?logo=github" alt="Docs"/>
   </a>
   <img src="https://img.shields.io/badge/license-Apache--2.0-green" alt="License"/>
+  <a href="https://artifacthub.io/packages/helm/showroom-docs-mcp/showroom-docs-mcp">
+    <img src="https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/showroom-docs-mcp" alt="Artifact Hub"/>
+  </a>
 </p>
 
 ---
@@ -27,14 +30,9 @@
 
 ## Architecture
 
-```
-  User <-> OLS Console <-> OLS API Server
-                               |
-                 +-------------+-------------+
-                 |             |              |
-           LLM Provider  kubernetes-mcp  showroom-docs-mcp
-           (Llama 3.2)                    (this project)
-```
+<p align="center">
+  <img src="docs/assets/images/architecture-diagram.svg" alt="Architecture" width="800"/>
+</p>
 
 ## MCP Tools
 
@@ -45,20 +43,15 @@
 | `getDocSection` | Get full content of a section (supports fuzzy topic matching) |
 | `getDocSummary` | Knowledge base overview with statistics and example queries |
 
-## Indexed Content (25 documents, ~3MB)
+## Indexed Content (46 documents, ~3MB)
 
-| Source | Topics |
-|--------|--------|
-| Neuralbank Workshop | Business case, MCP agents, Golden Path, DevSpaces, Keycloak, Connectivity Link, MCP Inspector, Deploy, OpenTelemetry, RAG (16 files) |
-| OpenShift Service Mesh 3.3 | About, Installing, Observability, Gateways |
-| Connectivity Link 1.3 | Discover, Install, Configure, Observe |
-| Developer Hub 1.9 | Install, Configure, Auth, MCP Tools |
-| OpenShift Lightspeed 1.0 | Install, Configure, Operate |
-| OpenShift Observability 1 | Overview |
-| OpenTelemetry 3.9 | Install, Collector, Instrumentation |
-| OpenShift Pipelines 1.21 | Install, Pipelines as Code, CI/CD |
-| API Management 1 | Getting started, Administering |
-| OpenShift AI Cloud Service 1 | Data Science, Model Serving, Llama Stack |
+| Source | Docs | Topics |
+|--------|------|--------|
+| Neuralbank Workshop | 27 | Business case, MCP agents, Golden Path, DevSpaces, Keycloak, Connectivity Link, RAG, LLM, Agents, GPU, Platform Eng., Data Eng. |
+| Red Hat Products | 9 | Service Mesh 3.3, Connectivity Link 1.3, Developer Hub 1.9, Lightspeed 1.0, Observability, OpenTelemetry 3.9, Pipelines 1.21, API Mgmt, OpenShift AI |
+| Developer Products | 10 | Quarkus, OpenShift, RHEL, Dev Spaces, OpenShift AI, Developer Hub, Ansible, OpenShift Local, Connectivity Link, 3scale |
+
+**Features**: Auto-sanitized PDF content (no page numbers/legal artifacts), quick-start CLI examples from developers.redhat.com, smart truncation at paragraph boundaries.
 
 ## Quick Start
 

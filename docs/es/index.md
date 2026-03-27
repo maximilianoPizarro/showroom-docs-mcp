@@ -37,7 +37,7 @@ permalink: /es/
 
 - **Busqueda inteligente** por keywords en mas de 2.5 MB de documentacion oficial (PDFs de Red Hat)
 - **4 MCP Tools** expuestos via Streamable HTTP para integracion con OLS
-- **35 documentos** cubriendo el workshop + productos Red Hat + productos Developer
+- **46 documentos** cubriendo el workshop + productos Red Hat + productos Developer
 - **Imagen de contenedor** lista para deploy en OpenShift
 - **Helm chart** para instalacion declarativa
 
@@ -104,14 +104,11 @@ spec:
         models:
           - name: llama-32-3b-instruct
             parameters:
-              maxTokensForResponse: 4096
+              maxTokensForResponse: 8192
         name: red_hat_openshift_ai
         type: rhoai_vllm
         url: 'http://llama-32-3b-instruct-openai.my-first-model.svc.cluster.local/v1'
   mcpServers:
-    - name: kubernetes-mcp
-      timeout: 5
-      url: 'http://kubernetes-mcp-server.istio-system.svc.cluster.local:8080/mcp'
     - name: showroom-docs-mcp
       timeout: 10
       url: 'http://showroom-docs-mcp.openshift-lightspeed.svc.cluster.local:8080/mcp'

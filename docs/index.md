@@ -36,24 +36,25 @@ title: Home
 
 - **Intelligent search** by keywords across 3MB+ of indexed documentation
 - **4 MCP Tools** exposed via Streamable HTTP for OLS integration
-- **35 documents** covering the workshop + Red Hat products + Developer products
+- **46 documents** covering the workshop + Red Hat products + Developer products
+- **Auto-sanitized** PDF content: page numbers, legal notices, and artifacts removed
+- **Quick-start examples** from developers.redhat.com with CLI commands and code
+- **Smart truncation** at paragraph boundaries to avoid cut responses
 - **Container image** ready for OpenShift deployment
 - **Helm chart** for declarative installation
+- [![Artifact Hub](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/showroom-docs-mcp)](https://artifacthub.io/packages/helm/showroom-docs-mcp/showroom-docs-mcp)
 
 ## Indexed Documentation
 
-| Source | Content |
-|--------|---------|
-| Neuralbank Workshop | Business case, MCP agents, Golden Path, DevSpaces, Keycloak, Connectivity Link, MCP Inspector, Deploy, OpenTelemetry, RAG |
-| OpenShift Service Mesh 3.3 | About, Installing, Observability, Gateways, Updating |
-| Connectivity Link 1.3 | Discover, Install, Configure, Observe |
-| Developer Hub 1.9 | Install, Configure, Auth, GitHub, MCP Tools |
-| OpenShift Lightspeed 1.0 | Install, Configure, Operate, Troubleshoot |
-| OpenShift Observability 1 | Overview hub |
-| OpenTelemetry 3.9 | Install, Collector, Instrumentation |
-| OpenShift Pipelines 1.21 | Install, Pipelines as Code, CI/CD |
-| API Management 1 | Getting started, Administering |
-| OpenShift AI Cloud Service 1 | Data Science, Model Serving, Llama Stack |
+<p align="center">
+  <img src="{{ '/assets/images/content-sources.svg' | relative_url }}" alt="Knowledge base: 46 indexed documents" width="100%"/>
+</p>
+
+| Source | Documents | Content |
+|--------|-----------|---------|
+| Neuralbank Workshop | 27 | Business case, MCP agents, Golden Path, DevSpaces, Keycloak, Connectivity Link, RAG, LLM, Agents, GPU, Platform Eng., Data Eng. |
+| Red Hat Products (docs.redhat.com) | 9 | Service Mesh 3.3, Connectivity Link 1.3, Developer Hub 1.9, Lightspeed 1.0, Observability, OpenTelemetry 3.9, Pipelines 1.21, API Mgmt, OpenShift AI |
+| Developer Products (developers.redhat.com) | 10 | Quarkus, OpenShift, RHEL, Dev Spaces, OpenShift AI, Developer Hub, Ansible, OpenShift Local, Connectivity Link, 3scale |
 
 ## Installation Steps
 
@@ -103,14 +104,11 @@ spec:
         models:
           - name: llama-32-3b-instruct
             parameters:
-              maxTokensForResponse: 4096
+              maxTokensForResponse: 8192
         name: red_hat_openshift_ai
         type: rhoai_vllm
         url: 'http://llama-32-3b-instruct-openai.my-first-model.svc.cluster.local/v1'
   mcpServers:
-    - name: kubernetes-mcp
-      timeout: 5
-      url: 'http://kubernetes-mcp-server.istio-system.svc.cluster.local:8080/mcp'
     - name: showroom-docs-mcp
       timeout: 10
       url: 'http://showroom-docs-mcp.openshift-lightspeed.svc.cluster.local:8080/mcp'
@@ -158,24 +156,16 @@ oc logs -n openshift-lightspeed deploy/lightspeed-app-server \
 
 Open the OpenShift web console, click the Lightspeed chat icon, and ask any question about the indexed documentation.
 
-## Screenshots
-
-### OpenShift Topology with MCP Server Deployed
+## Architecture
 
 <p align="center">
-  <img src="{{ '/assets/images/topology-overview.png' | relative_url }}" alt="OpenShift Topology showing showroom-docs-mcp deployment" width="100%"/>
+  <img src="{{ '/assets/images/architecture-diagram.svg' | relative_url }}" alt="Architecture: OpenShift Lightspeed + MCP" width="100%"/>
 </p>
 
-### Lightspeed Chat Using Documentation Tools
+## How It Works
 
 <p align="center">
-  <img src="{{ '/assets/images/topology-chat.png' | relative_url }}" alt="Lightspeed chat answering questions from MCP documentation" width="100%"/>
-</p>
-
-### MCP Tool Output - Knowledge Base Summary
-
-<p align="center">
-  <img src="{{ '/assets/images/lightspeed-summary.png' | relative_url }}" alt="getDocSummary tool output in Lightspeed" width="100%"/>
+  <img src="{{ '/assets/images/mcp-tools-flow.svg' | relative_url }}" alt="MCP Tool Selection Flow" width="100%"/>
 </p>
 
 ## Example Questions for Lightspeed

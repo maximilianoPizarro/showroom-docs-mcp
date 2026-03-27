@@ -12,7 +12,13 @@ permalink: /es/content-index/
 
 <p align="center"><a href="{{ '/content-index/' | relative_url }}">English</a> | <strong>Espanol</strong></p>
 
-## Workshop: IA Development From Zero To Hero
+## Fuentes de contenido
+
+<p align="center">
+  <img src="{{ '/assets/images/content-sources.svg' | relative_url }}" alt="Base de conocimiento: 46 documentos indexados" width="100%"/>
+</p>
+
+## Workshop: IA Development From Zero To Hero (27 docs)
 
 | # | Archivo | Tema | Fuente |
 |---|---------|------|--------|
@@ -32,8 +38,13 @@ permalink: /es/content-index/
 | 13 | `13-rag-intro.md` | Introduccion a RAG | GitHub |
 | 14 | `14-vector-databases.md` | Bases de datos vectoriales | GitHub |
 | 15 | `15-simple-rag.md` | Implementacion RAG simple | GitHub |
+| 16 | `16-llm-module.md` | Modulo LLM | GitHub |
+| 16a-g | `16a-16g-*.md` | RAG, Agentes, Data Engineering (7 modulos) | GitHub |
+| 17 | `17-llm-observability.md` | Observabilidad LLM | GitHub |
+| 18 | `18-gpuaas.md` | GPU como Servicio | GitHub |
+| 19 | `19-platform.md` | Ingenieria de plataforma | GitHub |
 
-## Documentacion de Productos Red Hat
+## Documentacion de Productos Red Hat (9 docs)
 
 | # | Archivo | Producto | Version | Fuente |
 |---|---------|----------|---------|--------|
@@ -46,6 +57,21 @@ permalink: /es/content-index/
 | 26 | `26-pipelines.md` | OpenShift Pipelines | 1.21 | [docs.redhat.com](https://docs.redhat.com/en/documentation/red_hat_openshift_pipelines/1.21) |
 | 27 | `27-api-management.md` | API Management | 1 | [docs.redhat.com](https://docs.redhat.com/en/documentation/red_hat_openshift_api_management/1) |
 | 28 | `28-openshift-ai.md` | OpenShift AI Cloud Service | 1 | [docs.redhat.com](https://docs.redhat.com/en/documentation/red_hat_openshift_ai_cloud_service/1) |
+
+## Productos Developer Red Hat (10 docs)
+
+| # | Archivo | Producto | Fuente |
+|---|---------|----------|--------|
+| 30 | `30-quarkus.md` | Quarkus (con ejemplos CLI) | [developers.redhat.com](https://developers.redhat.com/products/quarkus/overview) |
+| 31 | `31-openshift.md` | OpenShift (con ejemplos oc) | [developers.redhat.com](https://developers.redhat.com/products/openshift/overview) |
+| 32 | `32-rhel.md` | RHEL (con Podman, dev tools) | [developers.redhat.com](https://developers.redhat.com/products/rhel/overview) |
+| 33 | `33-devspaces-product.md` | Dev Spaces (con devfile) | [developers.redhat.com](https://developers.redhat.com/products/openshift-dev-spaces/overview) |
+| 34 | `34-openshift-ai-product.md` | OpenShift AI (con InferenceService) | [developers.redhat.com](https://developers.redhat.com/products/red-hat-openshift-ai/overview) |
+| 35 | `35-developer-hub-product.md` | Developer Hub (con templates) | [developers.redhat.com](https://developers.redhat.com/products/developer-hub/overview) |
+| 36 | `36-ansible.md` | Ansible (con playbooks) | [developers.redhat.com](https://developers.redhat.com/products/ansible/overview) |
+| 37 | `37-openshift-local.md` | OpenShift Local (con crc CLI) | [developers.redhat.com](https://developers.redhat.com/products/openshift-local/overview) |
+| 38 | `38-connectivity-link-product.md` | Connectivity Link (con Kuadrant) | [developers.redhat.com](https://developers.redhat.com/products/red-hat-connectivity-link/overview) |
+| 39 | `39-3scale.md` | 3scale API Management | [developers.redhat.com](https://developers.redhat.com/products/3scale/overview) |
 
 ## Repositorios clave
 

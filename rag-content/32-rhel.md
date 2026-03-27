@@ -54,6 +54,46 @@ You can also **build Linux apps on Windows** using RHEL on WSL.
 
 ## Getting started
 
+### Quick-start: set up a RHEL development environment
+
+```bash
+# Register your system
+sudo subscription-manager register --username=your-rh-login
+
+# Enable CodeReady Linux Builder (developer tools)
+sudo subscription-manager repos --enable codeready-builder-for-rhel-9-x86_64-rpms
+
+# Install development tools
+sudo dnf group install "Development Tools"
+sudo dnf install gcc make cmake python3-devel nodejs java-17-openjdk-devel
+```
+
+### Quick-start: run containers with Podman
+
+```bash
+# Pull and run a container (no daemon required)
+podman run -d --name my-web -p 8080:8080 registry.access.redhat.com/ubi9/httpd-24
+
+# Build a container from Dockerfile
+podman build -t my-app:latest .
+
+# Push to a registry
+podman login quay.io
+podman push my-app:latest quay.io/my-org/my-app:latest
+```
+
+### Quick-start: image mode (bootc) for RHEL 10
+
+```bash
+# Build a bootable container image
+podman build -t my-rhel-image:latest -f Containerfile.bootc .
+
+# Deploy with podman or push to registry for fleet deployment
+podman push my-rhel-image:latest quay.io/my-org/my-rhel-image:latest
+```
+
+### Links
+
 - [Download RHEL at no cost](https://developers.redhat.com/products/rhel/download)
 - [Get started](https://developers.redhat.com/products/rhel/getting-started)
 - [RHEL for business developers](https://developers.redhat.com/products/rhel/business)

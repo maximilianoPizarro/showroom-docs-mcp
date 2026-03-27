@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" font-family="'Segoe UI',Arial,sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="100%" style="stop-color:#16213e"/>
+    </linearGradient>
+    <linearGradient id="card" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#2a2a4a"/>
+      <stop offset="100%" style="stop-color:#1e1e3a"/>
+    </linearGradient>
+    <filter id="shadow"><feDropShadow dx="2" dy="2" stdDeviation="3" flood-opacity="0.3"/></filter>
+  </defs>
+  <rect width="900" height="520" fill="url(#bg)" rx="12"/>
+  <text x="450" y="35" text-anchor="middle" fill="#e94560" font-size="18" font-weight="bold">OpenShift Lightspeed + MCP Architecture</text>
+  <!-- Cluster border -->
+  <rect x="30" y="50" width="840" height="450" rx="10" fill="none" stroke="#e94560" stroke-width="1.5" stroke-dasharray="8,4" opacity="0.5"/>
+  <text x="50" y="72" fill="#e94560" font-size="12" opacity="0.7">OpenShift Cluster  namespace: openshift-lightspeed</text>
+  <!-- User -->
+  <rect x="60" y="100" width="130" height="60" rx="8" fill="url(#card)" stroke="#4ecca3" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="125" y="125" text-anchor="middle" fill="#4ecca3" font-size="13" font-weight="bold">User</text>
+  <text x="125" y="145" text-anchor="middle" fill="#aaa" font-size="11">(Browser)</text>
+  <!-- OLS Console -->
+  <rect x="260" y="100" width="150" height="60" rx="8" fill="url(#card)" stroke="#ffcc00" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="335" y="125" text-anchor="middle" fill="#ffcc00" font-size="13" font-weight="bold">OLS Console</text>
+  <text x="335" y="145" text-anchor="middle" fill="#aaa" font-size="11">Frontend Plugin</text>
+  <!-- OLS API -->
+  <rect x="490" y="100" width="170" height="60" rx="8" fill="url(#card)" stroke="#ff6b6b" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="575" y="125" text-anchor="middle" fill="#ff6b6b" font-size="13" font-weight="bold">OLS API Server</text>
+  <text x="575" y="145" text-anchor="middle" fill="#aaa" font-size="11">Query + Tool Calling</text>
+  <!-- Arrows top row -->
+  <line x1="190" y1="130" x2="255" y2="130" stroke="#4ecca3" stroke-width="2" marker-end="url(#arrowG)"/>
+  <line x1="410" y1="130" x2="485" y2="130" stroke="#ffcc00" stroke-width="2" marker-end="url(#arrowY)"/>
+  <defs>
+    <marker id="arrowG" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#4ecca3"/></marker>
+    <marker id="arrowY" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#ffcc00"/></marker>
+    <marker id="arrowR" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#ff6b6b"/></marker>
+    <marker id="arrowP" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#a855f7"/></marker>
+  </defs>
+  <!-- Vertical lines from OLS API -->
+  <line x1="520" y1="165" x2="520" y2="230" stroke="#ff6b6b" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <line x1="630" y1="165" x2="630" y2="230" stroke="#ff6b6b" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <!-- LLM Provider -->
+  <rect x="430" y="235" width="170" height="70" rx="8" fill="url(#card)" stroke="#a855f7" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="515" y="260" text-anchor="middle" fill="#a855f7" font-size="13" font-weight="bold">LLM Provider</text>
+  <text x="515" y="278" text-anchor="middle" fill="#aaa" font-size="11">Llama 3.2 3B Instruct</text>
+  <text x="515" y="295" text-anchor="middle" fill="#666" font-size="10">via RHOAI vLLM</text>
+  <!-- Showroom Docs MCP -->
+  <rect x="640" y="235" width="200" height="70" rx="8" fill="url(#card)" stroke="#4ecca3" stroke-width="2" filter="url(#shadow)"/>
+  <text x="740" y="258" text-anchor="middle" fill="#4ecca3" font-size="13" font-weight="bold">showroom-docs-mcp</text>
+  <text x="740" y="278" text-anchor="middle" fill="#aaa" font-size="11">Quarkus MCP Server</text>
+  <text x="740" y="295" text-anchor="middle" fill="#666" font-size="10">Streamable HTTP /mcp</text>
+  <!-- Arrow to MCP -->
+  <line x1="660" y1="165" x2="740" y2="230" stroke="#4ecca3" stroke-width="1.5" marker-end="url(#arrowG)"/>
+  <!-- Docs storage -->
+  <rect x="640" y="340" width="200" height="90" rx="8" fill="url(#card)" stroke="#38bdf8" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="740" y="363" text-anchor="middle" fill="#38bdf8" font-size="12" font-weight="bold">Indexed Documentation</text>
+  <text x="740" y="383" text-anchor="middle" fill="#aaa" font-size="11">46 markdown files</text>
+  <text x="740" y="400" text-anchor="middle" fill="#888" font-size="10">Workshop + 9 RH Products</text>
+  <text x="740" y="417" text-anchor="middle" fill="#888" font-size="10">+ 10 Developer Products</text>
+  <line x1="740" y1="305" x2="740" y2="335" stroke="#38bdf8" stroke-width="1.5" marker-end="url(#arrowG)"/>
+  <!-- Tools list -->
+  <rect x="60" y="235" width="340" height="140" rx="8" fill="url(#card)" stroke="#ffcc00" stroke-width="1" filter="url(#shadow)"/>
+  <text x="230" y="260" text-anchor="middle" fill="#ffcc00" font-size="13" font-weight="bold">MCP Tools (4)</text>
+  <text x="80" y="285" fill="#4ecca3" font-size="12">searchDocs</text>
+  <text x="200" y="285" fill="#aaa" font-size="11">Keyword search across all docs</text>
+  <text x="80" y="310" fill="#4ecca3" font-size="12">getDocSection</text>
+  <text x="200" y="310" fill="#aaa" font-size="11">Full document by topic</text>
+  <text x="80" y="335" fill="#4ecca3" font-size="12">listDocSections</text>
+  <text x="200" y="335" fill="#aaa" font-size="11">Table of contents index</text>
+  <text x="80" y="360" fill="#4ecca3" font-size="12">getDocSummary</text>
+  <text x="200" y="360" fill="#aaa" font-size="11">Knowledge base overview</text>
+  <!-- Data flow -->
+  <rect x="60" y="410" width="540" height="70" rx="8" fill="url(#card)" stroke="#666" stroke-width="1" filter="url(#shadow)"/>
+  <text x="330" y="433" text-anchor="middle" fill="#e94560" font-size="12" font-weight="bold">Data Flow</text>
+  <text x="330" y="453" text-anchor="middle" fill="#aaa" font-size="11">User ’ OLS Console ’ OLS API ’ LLM ” MCP Tools ’ Sanitized Docs ’ LLM ’ Response</text>
+  <text x="330" y="470" text-anchor="middle" fill="#666" font-size="10">Content auto-sanitized: PDF artifacts removed, smart truncation at paragraph boundaries</text>
+</svg>

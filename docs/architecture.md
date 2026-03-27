@@ -12,60 +12,31 @@ permalink: /architecture/
 
 <p align="center"><strong>English</strong> | <a href="{{ '/es/architecture/' | relative_url }}">Espanol</a></p>
 
-## OpenShift Topology
-
-The following screenshot shows the showroom-docs-mcp deployment in the OpenShift topology view, alongside the Lightspeed components:
+## Architecture Overview
 
 <p align="center">
-  <img src="{{ '/assets/images/topology-overview.png' | relative_url }}" alt="OpenShift Topology showing showroom-docs-mcp deployment" width="100%"/>
+  <img src="{{ '/assets/images/architecture-diagram.svg' | relative_url }}" alt="Architecture: OpenShift Lightspeed + MCP" width="100%"/>
 </p>
-
-## Overview Diagram
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│                    OpenShift Cluster                         │
-│                                                             │
-│  ┌──────────┐    ┌──────────────┐    ┌──────────────────┐  │
-│  │   User    │───▶│ OLS Console  │───▶│  OLS API Server  │  │
-│  │ (Browser) │    │  (Frontend)  │    │                  │  │
-│  └──────────┘    └──────────────┘    └────────┬─────────┘  │
-│                                               │             │
-│                         ┌─────────────────────┼──────┐      │
-│                         │                     │      │      │
-│                         ▼                     ▼      ▼      │
-│                  ┌────────────┐  ┌─────────────┐ ┌───────┐ │
-│                  │  LLM       │  │ kubernetes  │ │showroo│ │
-│                  │  Provider  │  │   -mcp      │ │m-docs │ │
-│                  │ (Llama 3.2)│  │             │ │ -mcp  │ │
-│                  └────────────┘  └─────────────┘ └───┬───┘ │
-│                                                      │      │
-│                                          ┌───────────┴───┐  │
-│                                          │  Embedded     │  │
-│                                          │  Documentation│  │
-│                                          │  (35 files)   │  │
-│                                          └───────────────┘  │
-└─────────────────────────────────────────────────────────────┘
-```
 
 ## Components
 
 ### Showroom Docs MCP Server
 
 - **Runtime**: Quarkus 3.27.3 with Java 21
-- **Protocol**: MCP via Streamable HTTP (`/mcp`) and SSE (`/mcp/sse`)
-- **Content**: 35 embedded markdown documents (~3MB)
+- **Protocol**: MCP via Streamable HTTP (`/mcp`)
+- **Content**: 46 embedded markdown documents (~3MB), auto-sanitized on load
 - **Port**: 8080
+- **Sanitization**: PDF artifacts (page numbers, legal notices, TOC) removed automatically
+- **Smart truncation**: Content cut at paragraph boundaries, no visible truncation messages
 
 ### Data Flow
 
 1. The user asks a question in the OLS console
 2. OLS API Server receives the query and sends it to the LLM
-3. The LLM can invoke tools from both MCP servers:
-   - `kubernetes-mcp`: for cluster state queries (pods, services, namespaces)
-   - `showroom-docs-mcp`: for documentation queries (Red Hat products, workshop)
-4. The MCP server searches indexed documents and returns relevant sections
-5. The LLM generates a contextualized response using the retrieved documentation
+3. The LLM invokes `showroom-docs-mcp` tools for documentation queries
+4. The MCP server searches 46 sanitized documents and returns relevant sections
+5. Content is auto-sanitized (PDF artifacts removed) and smart-truncated at paragraph boundaries
+6. The LLM generates a contextualized response using the retrieved documentation
 
 ### MCP Tools
 
@@ -86,33 +57,19 @@ The LLM decides which tools to call based on the question:
 | "List all available documentation" | `listDocSections` → returns index |
 | "Show me the Developer Hub docs" | `getDocSection` → returns full doc |
 | "What products are indexed?" | `getDocSummary` → returns overview |
-| "How many pods are running?" | `kubernetes-mcp` tools |
-| "What namespaces exist?" | `kubernetes-mcp` tools |
+| "How do I install Ansible?" | `searchDocs` → searches developer docs |
+| "Quick-start for Quarkus?" | `searchDocs` → returns CLI commands and code |
 
-## Tool Output Examples
-
-### searchDocs - Searching Documentation
+## Tool Selection Flow
 
 <p align="center">
-  <img src="{{ '/assets/images/lightspeed-search.png' | relative_url }}" alt="searchDocs tool output in Lightspeed" width="100%"/>
+  <img src="{{ '/assets/images/mcp-tools-flow.svg' | relative_url }}" alt="MCP Tool Selection Flow" width="100%"/>
 </p>
 
-### listDocSections - Documentation Index
+## Content Sources
 
 <p align="center">
-  <img src="{{ '/assets/images/lightspeed-doc-index.png' | relative_url }}" alt="listDocSections tool output in Lightspeed" width="100%"/>
-</p>
-
-### getDocSummary - Knowledge Base Summary
-
-<p align="center">
-  <img src="{{ '/assets/images/lightspeed-summary.png' | relative_url }}" alt="getDocSummary tool output in Lightspeed" width="100%"/>
-</p>
-
-### Lightspeed Chat Using getDocSection
-
-<p align="center">
-  <img src="{{ '/assets/images/topology-chat.png' | relative_url }}" alt="Lightspeed answering questions using documentation" width="100%"/>
+  <img src="{{ '/assets/images/content-sources.svg' | relative_url }}" alt="Knowledge Base: 46 Indexed Documents" width="100%"/>
 </p>
 
 ## Official Red Hat Documentation Links
