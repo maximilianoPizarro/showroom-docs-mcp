@@ -3,7 +3,7 @@ replicaCount: 1
 image:
   repository: quay.io/maximilianopizarro/showroom-docs-mcp
   tag: latest
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
 
 nameOverride: ""
 fullnameOverride: ""
