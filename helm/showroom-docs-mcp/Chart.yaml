@@ -1,0 +1,46 @@
+apiVersion: v2
+name: showroom-docs-mcp
+description: >-
+  Quarkus MCP Server that indexes Red Hat documentation and the
+  "IA Development From Zero To Hero" workshop for OpenShift Lightspeed RAG.
+type: application
+version: 1.0.0
+appVersion: "1.0.0"
+kubeVersion: ">=1.25.0-0"
+home: https://maximilianopizarro.github.io/showroom-docs-mcp
+icon: https://raw.githubusercontent.com/maximilianoPizarro/showroom-docs-mcp/main/docs/assets/images/logo.svg
+sources:
+  - https://github.com/maximilianoPizarro/showroom-docs-mcp
+maintainers:
+  - name: maximilianopizarro
+    url: https://github.com/maximilianoPizarro
+keywords:
+  - mcp
+  - openshift
+  - lightspeed
+  - rag
+  - quarkus
+  - ai
+  - documentation
+  - red-hat
+annotations:
+  artifacthub.io/license: Apache-2.0
+  artifacthub.io/category: ai-machine-learning
+  artifacthub.io/links: |
+    - name: Quay.io Image
+      url: https://quay.io/repository/maximilianopizarro/showroom-docs-mcp
+    - name: Workshop Source
+      url: https://github.com/maximilianoPizarro/rhoai-roadshow-from-zero-to-hero
+  artifacthub.io/images: |
+    - name: showroom-docs-mcp
+      image: quay.io/maximilianopizarro/showroom-docs-mcp:latest
+  artifacthub.io/operator: "false"
+  artifacthub.io/containsSecurityUpdates: "false"
+  artifacthub.io/prerelease: "false"
+  artifacthub.io/changes: |
+    - kind: added
+      description: Initial release with 25 indexed documentation files
+    - kind: added
+      description: MCP tools for search, list, get, and summary
+    - kind: added
+      description: Red Hat docs for Service Mesh, Connectivity Link, Developer Hub, OLS, Observability, OpenTelemetry, Pipelines, API Management, OpenShift AI

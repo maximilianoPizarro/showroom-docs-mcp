@@ -1,0 +1,22 @@
+🔍 Showroom Docs MCP Server deployed!
+
+1. Check the deployment:
+   kubectl get pods -n {{ .Values.namespace }} -l app={{ include "showroom-docs-mcp.fullname" . }}
+
+2. MCP endpoint:
+   http://{{ include "showroom-docs-mcp.fullname" . }}.{{ .Values.namespace }}.svc.cluster.local:{{ .Values.service.port }}/mcp/sse
+
+3. Add to OLSConfig:
+
+   mcpServers:
+     - name: {{ .Values.olsConfig.mcpServerName }}
+       timeout: {{ .Values.olsConfig.mcpServerTimeout }}
+       url: 'http://{{ include "showroom-docs-mcp.fullname" . }}.{{ .Values.namespace }}.svc.cluster.local:{{ .Values.service.port }}/mcp/sse'
+
+4. Available MCP Tools:
+   - searchWorkshopDocs: Search documentation by keywords
+   - listWorkshopSections: List all available sections
+   - getWorkshopSection: Get full content of a section
+   - getWorkshopSummary: Get overview summary
+
+Documentation: https://maximilianopizarro.github.io/showroom-docs-mcp

@@ -1,0 +1,17 @@
+target/
+*.tgz
+.idea/
+*.iml
+.settings/
+.project
+.classpath
+.vscode/
+*.class
+*.jar
+!.mvn/wrapper/maven-wrapper.jar
+.DS_Store
+Thumbs.db
+_site/
+.jekyll-cache/
+.sass-cache/
+Gemfile.lock
