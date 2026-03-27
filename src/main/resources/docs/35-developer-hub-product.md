@@ -1,0 +1,65 @@
+# Red Hat Developer Hub
+
+_Source: [developers.redhat.com](https://developers.redhat.com/products/developer-hub/overview)_  
+_Note: The path `https://developers.redhat.com/products/developerhub/overview` returned 404; this page reflects the current product URL above._
+
+## Overview
+
+Red Hat Developer Hub is an enterprise **internal developer portal** based on **Backstage**. It improves onboarding, streamlines workflows, and scales innovation through a centralized, self-service experience—unifying tools, documentation, and practices while meeting security and compliance needs.
+
+Start with a **no-cost trial** from the product page.
+
+## Features
+
+### Unified developer experience
+
+- Faster developer and application onboarding
+- Streamlined development workflows
+- Innovation at scale with governance
+
+### Turnkey portal
+
+Enterprise-supported portal vs. DIY Backstage maintenance:
+
+- 24/7 enterprise support
+- Built-in enterprise portal capabilities  
+  Demo: [Turnkey internal developer portal](https://developers.redhat.com/demos/turnkey-internal-developer-portal)
+
+### Enterprise security
+
+- No-code enterprise **RBAC**
+- **Audit logging** for compliance
+- Self-service with guardrails  
+  Demo: [Enterprise-grade security](https://developers.redhat.com/demos/enterprise-grade-security)
+
+### Extensibility
+
+- **Dynamic plug-ins** — add capabilities without heavy custom code
+- Large plug-in ecosystem with verified compatibility per release  
+  Demo: [Simplified extensibility](https://developers.redhat.com/demos/simplified-extensibility)
+
+### Developer Lightspeed (AI assistant)
+
+**Developer Lightspeed for Red Hat Developer Hub** helps troubleshoot apps, design features, draft tests and docs, and search less across documentation. You can bring your own LLM for cost, performance, and privacy.
+
+Available with Developer Hub or [Advanced Developer Suite](https://developers.redhat.com/products/advanced-developer-suite); currently in **Developer preview**.
+
+### Key product capabilities
+
+- **Support** — Timely patches, expert help, knowledge base
+- **Deployment** — On-premises (including air-gapped) or managed Kubernetes (EKS, AKS, GKE); single deployment environment per organization
+- **Red Hat integrations** — OpenShift, Ansible Automation Platform, OpenShift GitOps, OpenShift Pipelines, OpenShift Dev Spaces, Red Hat AI, Quay, cost management, and more
+- **Out-of-the-box enterprise** — RBAC, audit logging, multi-cloud scale, adoption analytics, workflow orchestration, verified plug-in catalog, dynamic plug-in management, bulk import, curated templates
+
+## Getting started
+
+- [Overview (RHDH hub)](https://developers.redhat.com/products/rhdh)
+- [Getting started](https://developers.redhat.com/products/rhdh/getting-started)
+- [Plug-ins](https://developers.redhat.com/products/rhdh/plugins)
+- [Demos](https://developers.redhat.com/products/rhdh/demos)
+- [Developer Hub vs. Backstage](https://developers.redhat.com/products/rhdh/developer-hub-comparison)
+- [Developer Lightspeed for RHDH](https://developers.redhat.com/products/rhdh/developer-lightspeed)
+
+## Technical details
+
+Developer Hub combines **Backstage** community innovation with Red Hat enterprise hardening, support, and integrations for platform teams standardizing developer experience across the organization.

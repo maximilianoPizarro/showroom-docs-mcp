@@ -45,7 +45,17 @@ public class ShowroomDocsTool {
         "docs/25-opentelemetry.md",
         "docs/26-pipelines.md",
         "docs/27-api-management.md",
-        "docs/28-openshift-ai.md"
+        "docs/28-openshift-ai.md",
+        "docs/30-quarkus.md",
+        "docs/31-openshift.md",
+        "docs/32-rhel.md",
+        "docs/33-devspaces-product.md",
+        "docs/34-openshift-ai-product.md",
+        "docs/35-developer-hub-product.md",
+        "docs/36-ansible.md",
+        "docs/37-openshift-local.md",
+        "docs/38-connectivity-link-product.md",
+        "docs/39-3scale.md"
     };
 
     @PostConstruct
@@ -70,7 +80,8 @@ public class ShowroomDocsTool {
             "ALWAYS call this tool FIRST for ANY question about: OpenShift, Service Mesh, " +
             "Connectivity Link, Developer Hub, Lightspeed, Observability, OpenTelemetry, " +
             "Pipelines, API Management, OpenShift AI, Neuralbank workshop, MCP, Quarkus, " +
-            "Keycloak, DevSpaces, RAG, Golden Path, install, configure, deploy, architecture. " +
+            "Keycloak, DevSpaces, RAG, Golden Path, RHEL, Ansible, OpenShift Local, 3scale, " +
+            "install, configure, deploy, architecture, getting started. " +
             "The returned text IS the authoritative answer - use it directly.")
     String searchDocs(
             @ToolArg(description = "Keywords from the user question, e.g. 'install service mesh' or 'developer hub architecture'") String query
@@ -198,7 +209,7 @@ public class ShowroomDocsTool {
                 Technologies: OpenShift AI, MCP, LlamaStack, DevSpaces, Developer Hub, Quarkus,
                 Keycloak, Connectivity Link, OpenTelemetry, GitLab, ArgoCD.
 
-                ## Red Hat Product Documentation (Official)
+                ## Red Hat Product Documentation (Official - docs.redhat.com)
                 | Product | Version | Key Topics |
                 |---------|---------|------------|
                 | OpenShift Service Mesh | 3.3 | Istio, gateways, traffic management, observability |
@@ -210,6 +221,20 @@ public class ShowroomDocsTool {
                 | OpenShift Pipelines | 1.21 | Tekton, Pipelines as Code, CI/CD, tasks |
                 | API Management | 1 | 3scale, API products, rate limits, developer portal |
                 | OpenShift AI Cloud Service | 1 | Model serving, data science projects, Llama Stack |
+
+                ## Red Hat Developer Products (developers.redhat.com)
+                | Product | Key Topics |
+                |---------|------------|
+                | Quarkus | Kubernetes-native Java, supersonic subatomic, cloud-native |
+                | OpenShift | Hybrid cloud Kubernetes platform, containers, CI/CD |
+                | RHEL | Enterprise Linux, stability, security, edge |
+                | OpenShift Dev Spaces | Cloud IDE, Kubernetes workspaces, Eclipse Che |
+                | OpenShift AI | ML model serving, data science, AI platform |
+                | Developer Hub | Developer portal, Backstage, software catalog |
+                | Ansible | Automation, playbooks, infrastructure as code |
+                | OpenShift Local | Local development, CRC, laptop Kubernetes |
+                | Connectivity Link | API gateway, Kubernetes services, Kuadrant |
+                | 3scale API Management | API products, rate limits, developer portal |
 
                 ## Statistics
                 - Total documents: """ + totalDocs + """

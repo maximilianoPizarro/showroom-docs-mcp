@@ -12,7 +12,7 @@ spec:
         models:
           - name: llama-32-3b-instruct
             parameters:
-              maxTokensForResponse: 2048
+              maxTokensForResponse: 4096
         name: red_hat_openshift_ai
         type: rhoai_vllm
         url: 'http://llama-32-3b-instruct-openai.my-first-model.svc.cluster.local/v1'
