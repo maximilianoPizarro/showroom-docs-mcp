@@ -3,15 +3,15 @@ layout: default
 title: Configuration
 ---
 
-# Configuracion
+# Configuration
 
 <p align="center">
   <img src="assets/images/logo.svg" alt="Logo" width="80"/>
 </p>
 
-## OLSConfig completo
+## Complete OLSConfig
 
-Este es el `OLSConfig` completo con el MCP server integrado:
+This is the full `OLSConfig` with both MCP servers integrated:
 
 ```yaml
 apiVersion: ols.openshift.io/v1alpha1
@@ -38,7 +38,7 @@ spec:
       url: 'http://kubernetes-mcp-server.istio-system.svc.cluster.local:8080/mcp'
     - name: showroom-docs-mcp
       timeout: 10
-      url: 'http://showroom-docs-mcp.openshift-lightspeed.svc.cluster.local:8080/mcp/sse'
+      url: 'http://showroom-docs-mcp.openshift-lightspeed.svc.cluster.local:8080/mcp'
   ols:
     conversationCache:
       postgres:
@@ -47,10 +47,6 @@ spec:
       type: postgres
     defaultModel: llama-32-3b-instruct
     defaultProvider: red_hat_openshift_ai
-    rag:
-      - image: image-registry.openshift-image-registry.svc:5000/openshift-lightspeed/showroom-docs-rag:latest
-        indexID: showroom_docs_index
-        indexPath: /rag/vector_db
     deployment:
       api:
         replicas: 1
@@ -67,26 +63,26 @@ spec:
     logLevel: INFO
 ```
 
-## Configuracion del MCP Server
+> **Important**: Use `/mcp` (Streamable HTTP) for the showroom-docs-mcp URL, not `/mcp/sse`. The OLS client uses POST requests which require the Streamable HTTP endpoint.
+
+## MCP Server Configuration
 
 ### application.properties
 
 ```properties
 quarkus.http.port=8080
 quarkus.http.host=0.0.0.0
-quarkus.mcp-server.server-info.name=showroom-docs-mcp
-quarkus.mcp-server.server-info.version=1.0.0
 quarkus.log.level=INFO
 quarkus.log.category."com.neuralbank".level=DEBUG
 ```
 
-### Variables de entorno
+### Environment Variables
 
-| Variable | Default | Descripcion |
+| Variable | Default | Description |
 |----------|---------|-------------|
-| `QUARKUS_HTTP_PORT` | `8080` | Puerto del servidor |
-| `QUARKUS_LOG_LEVEL` | `INFO` | Nivel de log |
-| `JAVA_OPTS_APPEND` | `-Dquarkus.http.host=0.0.0.0` | Opciones JVM adicionales |
+| `QUARKUS_HTTP_PORT` | `8080` | Server port |
+| `QUARKUS_LOG_LEVEL` | `INFO` | Log level |
+| `JAVA_OPTS_APPEND` | `-Dquarkus.http.host=0.0.0.0` | Additional JVM options |
 
 ## Helm Chart Values
 
@@ -96,7 +92,7 @@ replicaCount: 1
 image:
   repository: quay.io/maximilianopizarro/showroom-docs-mcp
   tag: latest
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
 
 service:
   type: ClusterIP
@@ -113,9 +109,27 @@ resources:
 namespace: openshift-lightspeed
 ```
 
-## Opcion RAG (BYO Knowledge)
+## Verifying MCP Connection
 
-Si prefieres RAG nativo en vez de MCP, usa los archivos markdown en `rag-content/`:
+After applying the OLSConfig, check that OLS can connect to the MCP server:
+
+```bash
+# Check OLS logs for successful tool loading
+oc logs -n openshift-lightspeed deploy/lightspeed-app-server \
+  -c lightspeed-service-api | grep "tools from MCP"
+```
+
+You should see:
+```
+Loaded 4 tools from MCP server 'showroom-docs-mcp'
+Loaded 19 tools from MCP server 'kubernetes-mcp'
+```
+
+If you see `405 Method Not Allowed`, make sure the URL uses `/mcp` (not `/mcp/sse`).
+
+## RAG Option (BYO Knowledge)
+
+If you prefer native RAG instead of MCP, use the markdown files in `rag-content/`:
 
 ```bash
 podman run -it --rm --device=/dev/fuse \
@@ -125,4 +139,4 @@ podman run -it --rm --device=/dev/fuse \
   registry.redhat.io/openshift-lightspeed-tech-preview/lightspeed-rag-tool-rhel9:latest
 ```
 
-Referencia: [Bring your own knowledge to OpenShift Lightspeed](https://redhat.com/en/blog/bring-your-own-knowledge-openshift-lightspeed)
+Reference: [Bring your own knowledge to OpenShift Lightspeed](https://redhat.com/en/blog/bring-your-own-knowledge-openshift-lightspeed)

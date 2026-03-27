@@ -9,84 +9,88 @@ title: API Tools
   <img src="assets/images/logo.svg" alt="Logo" width="80"/>
 </p>
 
-El servidor expone 4 herramientas via Model Context Protocol (MCP).
+The server exposes 4 tools via Model Context Protocol (MCP).
 
 ---
 
-## searchWorkshopDocs
+## searchDocs
 
-Busca en toda la documentacion indexada usando keywords.
+Search all indexed documentation using keywords. This is the primary tool for answering questions about Red Hat products and the Neuralbank workshop.
 
 **Input:**
 ```json
 {
-  "query": "string - Palabras clave para buscar"
+  "query": "string - Keywords to search for"
 }
 ```
 
-**Output:** Las 5 secciones mas relevantes con su score de relevancia.
+**Output:** Top 5 most relevant documentation sections with relevance score.
 
-**Ejemplo:**
-```
-query: "connectivity link gateway policy"
-```
+**Example Queries:**
 
-**Cobertura:** Workshop Neuralbank + 9 productos Red Hat (Service Mesh, Connectivity Link, Developer Hub, OLS, Observability, OpenTelemetry, Pipelines, API Management, OpenShift AI).
+| Query | What it finds |
+|-------|---------------|
+| `deploy model openshift ai` | Steps to deploy ML models with OpenShift AI |
+| `developer hub architecture plugins` | Developer Hub architecture, plugin system |
+| `service mesh install istio` | Service Mesh 3.3 installation guide |
+| `connectivity link gateway policy` | Gateway and DNS policies in Connectivity Link |
+| `pipelines as code tekton` | Tekton Pipelines as Code configuration |
+| `lightspeed olsconfig configure` | OLSConfig API reference and setup |
+| `neuralbank workshop mcp agent` | Neuralbank workshop MCP agent building |
+| `keycloak user management` | Keycloak identity and user management |
+| `rag vector database` | RAG implementation with vector databases |
+| `opentelemetry collector instrumentation` | OpenTelemetry setup and instrumentation |
 
----
-
-## listWorkshopSections
-
-Lista todas las secciones de documentacion disponibles.
-
-**Input:** ninguno
-
-**Output:** Tabla de contenidos con nombre de archivo y titulo de cada seccion.
-
-**Ejemplo de respuesta:**
-```
-- 00-index.md: IA Development From Zero To Hero
-- 01-business-case.md: Neuralbank Business Case
-- 20-service-mesh.md: Red Hat OpenShift Service Mesh 3.3
-- 22-developer-hub.md: Red Hat Developer Hub 1.9
-...
-```
+**Coverage:** Neuralbank workshop + 9 Red Hat products (Service Mesh, Connectivity Link, Developer Hub, OLS, Observability, OpenTelemetry, Pipelines, API Management, OpenShift AI).
 
 ---
 
-## getWorkshopSection
+## getDocSection
 
-Obtiene el contenido completo de una seccion especifica.
+Get the full content of a specific documentation file. Supports both exact filenames and topic-based fuzzy matching.
 
 **Input:**
 ```json
 {
-  "fileName": "string - Nombre del archivo, ej: '08-build-mcp-agent.md'"
+  "fileName": "string - Exact filename OR topic keywords"
 }
 ```
 
-**Output:** Contenido markdown completo (truncado a 8000 chars si es muy largo).
+**Output:** Full markdown content (truncated at 8000 chars for large documents).
 
-**Archivos disponibles:**
+**Examples:**
 
-| Archivo | Tema |
-|---------|------|
-| `00-index.md` | Indice general del workshop |
-| `01-business-case.md` | Caso de negocio Neuralbank |
-| `02-workshop-overview.md` | Vision general |
-| `03-configure-environment.md` | Configuracion del entorno |
-| `04-agents-intro.md` | Intro a agentes MCP |
-| `05-golden-path.md` | Golden Path con Developer Hub |
+| Input | Resolves to |
+|-------|-------------|
+| `22-developer-hub.md` | Exact file match |
+| `developer hub` | Fuzzy match → `22-developer-hub.md` |
+| `service mesh` | Fuzzy match → `20-service-mesh.md` |
+| `openshift ai` | Fuzzy match → `28-openshift-ai.md` |
+| `pipelines` | Fuzzy match → `26-pipelines.md` |
+| `lightspeed` | Fuzzy match → `23-openshift-lightspeed.md` |
+| `connectivity link` | Fuzzy match → `21-connectivity-link.md` |
+| `neuralbank` | Fuzzy match → `01-business-case.md` |
+
+**Available Documents:**
+
+| File | Topic |
+|------|-------|
+| `00-index.md` | Workshop index |
+| `01-business-case.md` | Neuralbank business case |
+| `02-workshop-overview.md` | Workshop overview |
+| `03-configure-environment.md` | Environment configuration |
+| `04-agents-intro.md` | Introduction to MCP agents |
+| `05-golden-path.md` | Golden Path with Developer Hub |
 | `06-devspaces.md` | Red Hat DevSpaces |
-| `07-keycloak-user-management.md` | Keycloak |
-| `08-build-mcp-agent.md` | Build del MCP Agent |
-| `09-connectivity-link.md` | Connectivity Link |
+| `07-keycloak-user-management.md` | Keycloak user management |
+| `08-build-mcp-agent.md` | Building the MCP Agent |
+| `09-connectivity-link.md` | Connectivity Link (workshop) |
 | `10-mcp-inspector.md` | MCP Inspector |
-| `11-deploy-integrate.md` | Deploy e integracion |
-| `12-opentelemetry.md` | OpenTelemetry |
-| `13-rag-intro.md` | Intro a RAG |
-| `14-vector-databases.md` | Bases de datos vectoriales |
-| `15-simple-rag.md` | RAG simple |
+| `11-deploy-integrate.md` | Deploy and integrate |
+| `12-opentelemetry.md` | OpenTelemetry (workshop) |
+| `13-rag-intro.md` | Introduction to RAG |
+| `14-vector-databases.md` | Vector databases |
+| `15-simple-rag.md` | Simple RAG implementation |
 | `20-service-mesh.md` | OpenShift Service Mesh 3.3 |
 | `21-connectivity-link.md` | Connectivity Link 1.3 |
 | `22-developer-hub.md` | Developer Hub 1.9 |
@@ -99,19 +103,56 @@ Obtiene el contenido completo de una seccion especifica.
 
 ---
 
-## getWorkshopSummary
+## listDocSections
 
-Retorna un resumen ejecutivo de toda la documentacion indexada.
+List all available documentation files with their titles.
 
-**Input:** ninguno
+**Input:** none
 
-**Output:** Resumen del workshop, productos Red Hat cubiertos, repositorios clave, y sugerencias de busqueda.
+**Output:** Table of contents organized by category (Workshop / Red Hat Products).
 
 ---
 
-## Endpoint MCP
+## getDocSummary
+
+Get a summary of the entire knowledge base including statistics and example questions.
+
+**Input:** none
+
+**Output:** Overview of indexed content, product versions, and suggested queries.
+
+---
+
+## MCP Endpoint
 
 ```
-SSE: http://<host>:8080/mcp/sse
-Health: http://<host>:8080/q/health/ready
+Streamable HTTP: http://<host>:8080/mcp
+SSE:             http://<host>:8080/mcp/sse
+Health:          http://<host>:8080/q/health/ready
 ```
+
+---
+
+## Example Questions for OpenShift Lightspeed
+
+Once the MCP server is registered in OLSConfig, you can ask Lightspeed these types of questions:
+
+### Red Hat Products
+- "How do I install OpenShift Service Mesh 3.3?"
+- "Explain the architecture of Red Hat Developer Hub"
+- "What are the steps to deploy a model with OpenShift AI?"
+- "How do I configure Connectivity Link gateway policies?"
+- "How do I set up OpenTelemetry collectors for distributed tracing?"
+- "What is OpenShift Lightspeed and how do I configure OLSConfig?"
+- "How do I create a Tekton pipeline with Pipelines as Code?"
+- "How do I manage APIs with Red Hat OpenShift API Management?"
+- "What monitoring tools are available in OpenShift Observability?"
+
+### Neuralbank Workshop
+- "What is the Neuralbank workshop about?"
+- "How do I build an MCP agent with Quarkus?"
+- "Explain the Golden Path template in Developer Hub"
+- "How is Keycloak used for user management in the workshop?"
+- "What is RAG and how does it work with vector databases?"
+- "How do I use DevSpaces for development?"
+- "How do I deploy and integrate the MCP agent?"

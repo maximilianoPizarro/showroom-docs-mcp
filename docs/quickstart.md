@@ -9,34 +9,37 @@ title: Quick Start
   <img src="assets/images/logo.svg" alt="Logo" width="80"/>
 </p>
 
-## Prerequisitos
+## Prerequisites
 
-- OpenShift cluster con OLS (OpenShift Lightspeed) instalado
-- `oc` CLI autenticado al cluster
-- `helm` CLI (opcional, para instalacion via Helm)
+- OpenShift cluster with OLS (OpenShift Lightspeed) installed
+- `oc` CLI authenticated to the cluster
+- `helm` CLI (optional, for Helm-based installation)
 
-## Opcion 1: Helm Chart (recomendado)
+## Option 1: Helm Chart (recommended)
 
 ```bash
-helm install showroom-docs-mcp \
-  oci://quay.io/maximilianopizarro/showroom-docs-mcp-chart \
-  --namespace openshift-lightspeed
+helm repo add showroom-docs-mcp \
+  https://maximilianopizarro.github.io/showroom-docs-mcp/
+
+helm install showroom-docs-mcp showroom-docs-mcp/showroom-docs-mcp \
+  --namespace openshift-lightspeed \
+  --set image.pullPolicy=Always
 ```
 
-## Opcion 2: Manifiestos directos
+## Option 2: Direct Manifests
 
 ```bash
-# Clonar el repositorio
+# Clone the repository
 git clone https://github.com/maximilianoPizarro/showroom-docs-mcp.git
 cd showroom-docs-mcp
 
-# Aplicar manifiestos
+# Apply manifests
 oc apply -f k8s/deployment.yaml
 ```
 
-## Configurar OLSConfig
+## Configure OLSConfig
 
-Agregar el MCP server al `OLSConfig`:
+Add the MCP server to your `OLSConfig`. Note: use `/mcp` (Streamable HTTP), not `/mcp/sse`:
 
 ```yaml
 apiVersion: ols.openshift.io/v1alpha1
@@ -44,49 +47,70 @@ kind: OLSConfig
 metadata:
   name: cluster
 spec:
+  featureGates:
+    - MCPServer
   mcpServers:
     - name: showroom-docs-mcp
       timeout: 10
-      url: 'http://showroom-docs-mcp.openshift-lightspeed.svc.cluster.local:8080/mcp/sse'
+      url: 'http://showroom-docs-mcp.openshift-lightspeed.svc.cluster.local:8080/mcp'
 ```
 
-Aplicar:
+Apply:
 
 ```bash
 oc apply -f cluster-ols.yml
 ```
 
-El OLS operator reiniciara los pods automaticamente.
+The OLS operator will automatically restart pods with the new configuration.
 
-## Verificar
+## Verify
 
 ```bash
-# Verificar que el pod esta corriendo
+# Check that the pod is running
 oc get pods -n openshift-lightspeed -l app=showroom-docs-mcp
 
-# Verificar health
+# Verify health
 oc exec -n openshift-lightspeed deploy/showroom-docs-mcp -- \
   curl -s http://localhost:8080/q/health/ready
 
-# Ver logs
-oc logs -n openshift-lightspeed -l app=showroom-docs-mcp -f
+# Check logs (should show no errors)
+oc logs -n openshift-lightspeed -l app=showroom-docs-mcp
+
+# Verify MCP tools are loaded by OLS
+oc logs -n openshift-lightspeed deploy/lightspeed-app-server \
+  -c lightspeed-service-api | grep "showroom-docs-mcp"
 ```
 
-## Probar
+## Test
 
-Abre la consola de OpenShift Lightspeed y pregunta:
+Open the OpenShift Lightspeed chat in the console and try these questions:
 
-- *"Que es Neuralbank y cual es el caso de uso?"*
-- *"Como configuro el MCP Agent con Quarkus?"*
-- *"Como instalo OpenShift Service Mesh?"*
-- *"Que es Connectivity Link y como se configura?"*
-- *"Como funciona Pipelines as Code?"*
+### Red Hat Product Questions
+- *"How do I install OpenShift Service Mesh 3.3?"*
+- *"Explain the architecture of Red Hat Developer Hub"*
+- *"What are the steps to deploy a model with OpenShift AI?"*
+- *"How do I configure Connectivity Link gateway policies?"*
+- *"How do I set up OpenTelemetry collectors for distributed tracing?"*
+- *"How does OpenShift Lightspeed OLSConfig work?"*
+- *"How do I create a Tekton pipeline with Pipelines as Code?"*
+- *"How do I manage APIs with Red Hat OpenShift API Management?"*
+- *"What monitoring tools are available in OpenShift Observability?"*
 
-## Desarrollo local
+### Neuralbank Workshop Questions
+- *"What is the Neuralbank workshop about?"*
+- *"How do I build an MCP agent with Quarkus?"*
+- *"Explain the Golden Path template in Developer Hub"*
+- *"How is Keycloak used for user management in the workshop?"*
+- *"What is RAG and how does it work with vector databases?"*
+- *"How do I use DevSpaces for development?"*
+
+## Local Development
 
 ```bash
 cd showroom-docs-mcp
 ./mvnw quarkus:dev
 
-# MCP disponible en http://localhost:8080/mcp/sse
+# MCP available at http://localhost:8080/mcp
+# SSE transport at http://localhost:8080/mcp/sse
+# Health at http://localhost:8080/q/health/ready
 ```
