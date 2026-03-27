@@ -30,7 +30,9 @@ title: Home
 
 ## What is it?
 
-**Showroom Docs MCP Server** is a [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) server built with [Quarkus](https://quarkus.io/) that indexes and exposes documentation from the **"IA Development From Zero To Hero"** workshop (Neuralbank) along with official documentation from **9 Red Hat products**, enabling [OpenShift Lightspeed](https://docs.redhat.com/en/documentation/red_hat_openshift_lightspeed/1.0) to answer questions based on that context.
+**Showroom Docs MCP Server** is a [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) server built with [Quarkus](https://quarkus.io/) that indexes and exposes documentation from the **"IA Development From Zero To Hero"** workshop (Neuralbank) along with a **partial snapshot** of official documentation from **9 Red Hat products**, enabling [OpenShift Lightspeed](https://docs.redhat.com/en/documentation/red_hat_openshift_lightspeed/1.0) to answer questions based on that context.
+
+> **Note:** The Red Hat product documentation included is a **partial extract** and may not reflect the latest updates. Red Hat publishes updates to its official documentation on a regular basis. Always refer to [docs.redhat.com](https://docs.redhat.com/) for the most current and complete information.
 
 ## Features
 
@@ -53,8 +55,10 @@ title: Home
 | Source | Documents | Content |
 |--------|-----------|---------|
 | Neuralbank Workshop | 27 | Business case, MCP agents, Golden Path, DevSpaces, Keycloak, Connectivity Link, RAG, LLM, Agents, GPU, Platform Eng., Data Eng. |
-| Red Hat Products (docs.redhat.com) | 9 | Service Mesh 3.3, Connectivity Link 1.3, Developer Hub 1.9, Lightspeed 1.0, Observability, OpenTelemetry 3.9, Pipelines 1.21, API Mgmt, OpenShift AI |
+| Red Hat Products (docs.redhat.com) | 9 | Service Mesh 3.3, Connectivity Link 1.3, Developer Hub 1.9, Lightspeed 1.0, Observability, OpenTelemetry 3.9, Pipelines 1.21, API Mgmt, OpenShift AI *(partial extract)* |
 | Developer Products (developers.redhat.com) | 10 | Quarkus, OpenShift, RHEL, Dev Spaces, OpenShift AI, Developer Hub, Ansible, OpenShift Local, Connectivity Link, 3scale |
+
+> **Disclaimer:** The product documentation is a partial snapshot included for contextual assistance. Red Hat official documentation is updated frequently. For the latest and most complete information, visit [docs.redhat.com](https://docs.redhat.com/) and [developers.redhat.com](https://developers.redhat.com/).
 
 ## Installation Steps
 
@@ -183,6 +187,8 @@ Once deployed, open the OpenShift Lightspeed chat and ask:
 - *"What is RAG and how does it work with vector databases?"*
 
 ## Official Red Hat Documentation
+
+> The versions listed below reflect the documentation snapshot included in this server. Visit each link for the latest official content — Red Hat updates its documentation regularly.
 
 | Product | Version | Documentation |
 |---------|---------|---------------|

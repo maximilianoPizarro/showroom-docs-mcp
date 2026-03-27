@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 400" font-family="'Segoe UI',Arial,sans-serif">
   <defs>
     <linearGradient id="bg2" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -37,11 +38,11 @@
   <!-- Tools -->
   <rect x="540" y="60" width="330" height="70" rx="8" fill="url(#c2)" stroke="#4ecca3" stroke-width="1.5" filter="url(#s2)"/>
   <text x="560" y="85" fill="#4ecca3" font-size="14" font-weight="bold">searchDocs</text>
-  <text x="560" y="103" fill="#aaa" font-size="10">Keyword search ’ top 2 sections (max 4KB each)</text>
+  <text x="560" y="103" fill="#aaa" font-size="10">Keyword search â†’ top 2 sections (max 4KB each)</text>
   <text x="560" y="118" fill="#666" font-size="9">Auto-sanitized: no page numbers, no legal notices</text>
   <rect x="540" y="145" width="330" height="60" rx="8" fill="url(#c2)" stroke="#38bdf8" stroke-width="1.5" filter="url(#s2)"/>
   <text x="560" y="170" fill="#38bdf8" font-size="14" font-weight="bold">getDocSection</text>
-  <text x="560" y="190" fill="#aaa" font-size="10">Full doc by topic ’ max 8KB, smart truncation</text>
+  <text x="560" y="190" fill="#aaa" font-size="10">Full doc by topic â†’ max 8KB, smart truncation</text>
   <rect x="540" y="220" width="330" height="60" rx="8" fill="url(#c2)" stroke="#f59e0b" stroke-width="1.5" filter="url(#s2)"/>
   <text x="560" y="245" fill="#f59e0b" font-size="14" font-weight="bold">listDocSections</text>
   <text x="560" y="265" fill="#aaa" font-size="10">Table of contents: Workshop + Products + Devs</text>

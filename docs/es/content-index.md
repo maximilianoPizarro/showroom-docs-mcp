@@ -46,6 +46,8 @@ permalink: /es/content-index/
 
 ## Documentacion de Productos Red Hat (9 docs)
 
+> **Nota:** El contenido a continuacion es un **extracto parcial** de la documentacion oficial de cada producto, incluido como asistencia contextual. Red Hat publica actualizaciones de forma frecuente. Consulte siempre [docs.redhat.com](https://docs.redhat.com/) para la informacion mas actual y completa.
+
 | # | Archivo | Producto | Version | Fuente |
 |---|---------|----------|---------|--------|
 | 20 | `20-service-mesh.md` | OpenShift Service Mesh | 3.3 | [docs.redhat.com](https://docs.redhat.com/en/documentation/red_hat_openshift_service_mesh/3.3) |

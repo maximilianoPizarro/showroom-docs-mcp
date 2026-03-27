@@ -31,7 +31,9 @@ permalink: /es/
 
 ## Que es?
 
-**Showroom Docs MCP Server** es un servidor [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) construido con [Quarkus](https://quarkus.io/) que indexa y expone documentacion del workshop **"IA Development From Zero To Hero"** (Neuralbank) junto con documentacion oficial de **9 productos Red Hat**, permitiendo que [OpenShift Lightspeed](https://docs.redhat.com/en/documentation/red_hat_openshift_lightspeed/1.0) responda preguntas basadas en ese contexto.
+**Showroom Docs MCP Server** es un servidor [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) construido con [Quarkus](https://quarkus.io/) que indexa y expone documentacion del workshop **"IA Development From Zero To Hero"** (Neuralbank) junto con un **extracto parcial** de documentacion oficial de **9 productos Red Hat**, permitiendo que [OpenShift Lightspeed](https://docs.redhat.com/en/documentation/red_hat_openshift_lightspeed/1.0) responda preguntas basadas en ese contexto.
+
+> **Nota:** La documentacion de productos Red Hat incluida es un **extracto parcial** y puede no reflejar las ultimas actualizaciones. Red Hat publica actualizaciones de su documentacion oficial de forma frecuente. Consulte siempre [docs.redhat.com](https://docs.redhat.com/) para la informacion mas actual y completa.
 
 ## Caracteristicas
 
