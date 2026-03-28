@@ -6,8 +6,8 @@ description: >-
   Provides 46 indexed documents covering 27 workshop modules, 9 Red Hat product
   docs (auto-sanitized from PDF), and 10 developer products with quick-start examples.
 type: application
-version: 1.5.0
-appVersion: "1.5.0"
+version: 1.6.0
+appVersion: "1.6.0"
 kubeVersion: ">=1.25.0-0"
 home: https://maximilianopizarro.github.io/showroom-docs-mcp
 icon: https://raw.githubusercontent.com/maximilianoPizarro/showroom-docs-mcp/main/docs/assets/images/logo.svg
@@ -36,7 +36,6 @@ keywords:
 annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/category: ai-machine-learning
-  artifacthub.io/signKey: ""
   artifacthub.io/operator: "false"
   artifacthub.io/containsSecurityUpdates: "false"
   artifacthub.io/prerelease: "false"
@@ -78,5 +77,3 @@ annotations:
       description: "artifacthub-repo.yml included in Jekyll config for Artifact Hub compatibility"
     - kind: fixed
       description: "README.md included in chart package for Artifact Hub display"
-  artifacthub.io/crds: ""
-  artifacthub.io/crdsExamples: ""

@@ -13,8 +13,6 @@ entries:
         - kind: fixed
           description: "README.md included in chart package for Artifact Hub display"
       artifacthub.io/containsSecurityUpdates: "false"
-      artifacthub.io/crds: ""
-      artifacthub.io/crdsExamples: ""
       artifacthub.io/images: |
         - name: showroom-docs-mcp
           image: quay.io/maximilianopizarro/showroom-docs-mcp:latest
@@ -47,15 +45,14 @@ entries:
           url: https://raw.githubusercontent.com/maximilianoPizarro/showroom-docs-mcp/main/docs/assets/images/lightspeed-doc-index.png
         - title: Available Documentation Listing
           url: https://raw.githubusercontent.com/maximilianoPizarro/showroom-docs-mcp/main/docs/assets/images/lightspeed-doc-list.png
-      artifacthub.io/signKey: ""
     apiVersion: v2
-    appVersion: 1.5.0
-    created: "2026-03-28T14:21:29.9373384-03:00"
+    appVersion: 1.6.0
+    created: "2026-03-28T14:40:08.6233422-03:00"
     description: Quarkus MCP Server that indexes Red Hat documentation and the "IA
       Development From Zero To Hero" workshop for OpenShift Lightspeed RAG. Provides
       46 indexed documents covering 27 workshop modules, 9 Red Hat product docs (auto-sanitized
       from PDF), and 10 developer products with quick-start examples.
-    digest: e22dc9055fa94f22c2f9fd2f9fda96debad239a9f0097f5bf00e57f4feceee3a
+    digest: 9bd033e1daf03ba1d47225721de047d87aac41463f259a5fab6a4ae1063749ba
     home: https://maximilianopizarro.github.io/showroom-docs-mcp
     icon: https://raw.githubusercontent.com/maximilianoPizarro/showroom-docs-mcp/main/docs/assets/images/logo.svg
     keywords:
@@ -84,8 +81,8 @@ entries:
     - https://github.com/maximilianoPizarro/showroom-docs-mcp
     type: application
     urls:
-    - https://maximilianopizarro.github.io/showroom-docs-mcp/showroom-docs-mcp-1.5.0.tgz
-    version: 1.5.0
+    - https://maximilianopizarro.github.io/showroom-docs-mcp/showroom-docs-mcp-1.6.0.tgz
+    version: 1.6.0
   - annotations:
       artifacthub.io/category: ai-machine-learning
       artifacthub.io/changes: |
@@ -109,7 +106,7 @@ entries:
       artifacthub.io/prerelease: "false"
     apiVersion: v2
     appVersion: 1.0.0
-    created: "2026-03-28T14:21:29.9363384-03:00"
+    created: "2026-03-28T14:40:08.6223056-03:00"
     description: Quarkus MCP Server that indexes Red Hat documentation and the "IA
       Development From Zero To Hero" workshop for OpenShift Lightspeed RAG.
     digest: f2b95bb51eb5c6a01891fe71793ce7462d5739e85bd1eb67a41c46871d60bc8c
@@ -135,4 +132,4 @@ entries:
     urls:
     - https://maximilianopizarro.github.io/showroom-docs-mcp/showroom-docs-mcp-1.0.0.tgz
     version: 1.0.0
-generated: "2026-03-28T14:21:29.9343385-03:00"
+generated: "2026-03-28T14:40:08.6217857-03:00"
