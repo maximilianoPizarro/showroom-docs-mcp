@@ -241,7 +241,7 @@
             },
             "tag": {
               "type": "string",
-              "default": "main-stable",
+              "default": "v1.82.3-stable",
               "description": "LiteLLM image tag"
             }
           }

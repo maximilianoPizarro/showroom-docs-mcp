@@ -38,6 +38,10 @@ spec:
               value: {{ .Values.litellm.masterKey | quote }}
             - name: GRANITE_API_KEY
               value: {{ .Values.litellm.granite.apiKey | quote }}
+            - name: SSL_VERIFY
+              value: "False"
+            - name: LITELLM_SSL_VERIFY
+              value: "False"
           volumeMounts:
             - name: config
               mountPath: /app/config.yaml
