@@ -1,14 +1,14 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "showroom-mcp.fullname" . }}
+  name: {{ include "showroom-docs-mcp.fullname" . }}
   namespace: {{ .Values.namespace }}
   labels:
-    {{- include "showroom-mcp.labels" . | nindent 4 }}
+    {{- include "showroom-docs-mcp.labels" . | nindent 4 }}
 spec:
   type: {{ .Values.service.type }}
   selector:
-    {{- include "showroom-mcp.selectorLabels" . | nindent 4 }}
+    {{- include "showroom-docs-mcp.selectorLabels" . | nindent 4 }}
   ports:
     - port: {{ .Values.service.port }}
       targetPort: {{ .Values.service.port }}

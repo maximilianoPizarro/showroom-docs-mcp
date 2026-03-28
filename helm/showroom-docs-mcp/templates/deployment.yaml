@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "showroom-mcp.fullname" . }}
+  name: {{ include "showroom-docs-mcp.fullname" . }}
   namespace: {{ .Values.namespace }}
   labels:
-    {{- include "showroom-mcp.labels" . | nindent 4 }}
+    {{- include "showroom-docs-mcp.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      {{- include "showroom-mcp.selectorLabels" . | nindent 6 }}
+      {{- include "showroom-docs-mcp.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        {{- include "showroom-mcp.selectorLabels" . | nindent 8 }}
+        {{- include "showroom-docs-mcp.selectorLabels" . | nindent 8 }}
     spec:
       containers:
         - name: {{ .Chart.Name }}

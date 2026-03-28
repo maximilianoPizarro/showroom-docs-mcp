@@ -40,7 +40,28 @@ nodeSelector: {}
 tolerations: []
 affinity: {}
 
+inspector:
+  enabled: false
+  image:
+    repository: mcpuse/inspector
+    tag: latest
+    pullPolicy: IfNotPresent
+  service:
+    type: ClusterIP
+    port: 6274
+  route:
+    enabled: true
+    tls:
+      termination: edge
+  resources:
+    requests:
+      cpu: 50m
+      memory: 128Mi
+    limits:
+      cpu: 200m
+      memory: 256Mi
+
 olsConfig:
   enabled: false
-  mcpServerName: showroom-mcp
+  mcpServerName: showroom-docs-mcp
   mcpServerTimeout: 10

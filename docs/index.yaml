@@ -1,17 +1,15 @@
 apiVersion: v1
 entries:
-  showroom-mcp:
+  showroom-docs-mcp:
   - annotations:
       artifacthub.io/category: ai-machine-learning
       artifacthub.io/changes: |
-        - kind: fixed
-          description: "Maintainer email corrected to maximiliano.pizarro.5@gmail.com"
         - kind: added
-          description: ".helmignore added based on n8n-helm-chart"
+          description: "Optional MCP Inspector deployment with OpenShift Route for testing"
         - kind: fixed
-          description: "artifacthub-repo.yml included in Jekyll config for Artifact Hub compatibility"
-        - kind: fixed
-          description: "README.md included in chart package for Artifact Hub display"
+          description: "Chart name reverted to showroom-docs-mcp for Artifact Hub consistency"
+        - kind: changed
+          description: "Removed empty crds/crdsExamples/signKey annotations"
       artifacthub.io/containsSecurityUpdates: "false"
       artifacthub.io/images: |
         - name: showroom-docs-mcp
@@ -19,7 +17,7 @@ entries:
       artifacthub.io/license: Apache-2.0
       artifacthub.io/links: |
         - name: Artifact Hub
-          url: https://artifacthub.io/packages/helm/showroom-mcp/showroom-mcp
+          url: https://artifacthub.io/packages/helm/showroom-docs-mcp/showroom-docs-mcp
         - name: Documentation
           url: https://maximilianopizarro.github.io/showroom-docs-mcp
         - name: Quay.io Image
@@ -46,13 +44,13 @@ entries:
         - title: Available Documentation Listing
           url: https://raw.githubusercontent.com/maximilianoPizarro/showroom-docs-mcp/main/docs/assets/images/lightspeed-doc-list.png
     apiVersion: v2
-    appVersion: 1.6.0
-    created: "2026-03-28T15:06:10.5469319-03:00"
+    appVersion: 1.7.0
+    created: "2026-03-28T15:11:37.2442153-03:00"
     description: Quarkus MCP Server that indexes Red Hat documentation and the "IA
       Development From Zero To Hero" workshop for OpenShift Lightspeed RAG. Provides
       46 indexed documents covering 27 workshop modules, 9 Red Hat product docs (auto-sanitized
       from PDF), and 10 developer products with quick-start examples.
-    digest: 19d7ba5b607b1c22f6c1d327c4c1289df3a8e6e7508d4c775f43c1a9b0013640
+    digest: 82033156ca3b001ec7f8ba3e91e71dcf22cd4284043a7f92df14d2dd671f5d75
     home: https://maximilianopizarro.github.io/showroom-docs-mcp
     icon: https://raw.githubusercontent.com/maximilianoPizarro/showroom-docs-mcp/main/docs/assets/images/logo.svg
     keywords:
@@ -76,11 +74,11 @@ entries:
     - email: maximiliano.pizarro.5@gmail.com
       name: maximilianoPizarro
       url: https://github.com/maximilianoPizarro
-    name: showroom-mcp
+    name: showroom-docs-mcp
     sources:
     - https://github.com/maximilianoPizarro/showroom-docs-mcp
     type: application
     urls:
-    - https://maximilianopizarro.github.io/showroom-docs-mcp/showroom-mcp-1.6.0.tgz
-    version: 1.6.0
-generated: "2026-03-28T15:06:10.5459287-03:00"
+    - https://maximilianopizarro.github.io/showroom-docs-mcp/showroom-docs-mcp-1.7.0.tgz
+    version: 1.7.0
+generated: "2026-03-28T15:11:37.243211-03:00"

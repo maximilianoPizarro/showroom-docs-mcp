@@ -1,0 +1,34 @@
+{{- if .Values.inspector.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "showroom-docs-mcp.fullname" . }}-inspector
+  namespace: {{ .Values.namespace }}
+  labels:
+    {{- include "showroom-docs-mcp.labels" . | nindent 4 }}
+    app.kubernetes.io/component: inspector
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ include "showroom-docs-mcp.fullname" . }}-inspector
+  template:
+    metadata:
+      labels:
+        app: {{ include "showroom-docs-mcp.fullname" . }}-inspector
+        app.kubernetes.io/component: inspector
+    spec:
+      containers:
+        - name: inspector
+          image: "{{ .Values.inspector.image.repository }}:{{ .Values.inspector.image.tag }}"
+          imagePullPolicy: {{ .Values.inspector.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.inspector.service.port }}
+              protocol: TCP
+              name: http
+          env:
+            - name: PORT
+              value: {{ .Values.inspector.service.port | quote }}
+          resources:
+            {{- toYaml .Values.inspector.resources | nindent 12 }}
+{{- end }}

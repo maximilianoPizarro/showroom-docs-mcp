@@ -1,13 +1,13 @@
 apiVersion: v2
-name: showroom-mcp
+name: showroom-docs-mcp
 description: >-
   Quarkus MCP Server that indexes Red Hat documentation and the
   "IA Development From Zero To Hero" workshop for OpenShift Lightspeed RAG.
   Provides 46 indexed documents covering 27 workshop modules, 9 Red Hat product
   docs (auto-sanitized from PDF), and 10 developer products with quick-start examples.
 type: application
-version: 1.6.0
-appVersion: "1.6.0"
+version: 1.7.0
+appVersion: "1.7.0"
 kubeVersion: ">=1.25.0-0"
 home: https://maximilianopizarro.github.io/showroom-docs-mcp
 icon: https://raw.githubusercontent.com/maximilianoPizarro/showroom-docs-mcp/main/docs/assets/images/logo.svg
@@ -43,7 +43,7 @@ annotations:
     - url: https://artifacthub.io/packages/olm/community-operators/lightspeed-operator
   artifacthub.io/links: |
     - name: Artifact Hub
-      url: https://artifacthub.io/packages/helm/showroom-mcp/showroom-mcp
+      url: https://artifacthub.io/packages/helm/showroom-docs-mcp/showroom-docs-mcp
     - name: Documentation
       url: https://maximilianopizarro.github.io/showroom-docs-mcp
     - name: Quay.io Image
@@ -69,11 +69,9 @@ annotations:
     - title: Available Documentation Listing
       url: https://raw.githubusercontent.com/maximilianoPizarro/showroom-docs-mcp/main/docs/assets/images/lightspeed-doc-list.png
   artifacthub.io/changes: |
-    - kind: fixed
-      description: "Maintainer email corrected to maximiliano.pizarro.5@gmail.com"
     - kind: added
-      description: ".helmignore added based on n8n-helm-chart"
+      description: "Optional MCP Inspector deployment with OpenShift Route for testing"
     - kind: fixed
-      description: "artifacthub-repo.yml included in Jekyll config for Artifact Hub compatibility"
-    - kind: fixed
-      description: "README.md included in chart package for Artifact Hub display"
+      description: "Chart name reverted to showroom-docs-mcp for Artifact Hub consistency"
+    - kind: changed
+      description: "Removed empty crds/crdsExamples/signKey annotations"
