@@ -1,5 +1,5 @@
 apiVersion: v2
-name: showroom-docs-mcp
+name: showroom-mcp
 description: >-
   Quarkus MCP Server that indexes Red Hat documentation and the
   "IA Development From Zero To Hero" workshop for OpenShift Lightspeed RAG.
@@ -43,7 +43,7 @@ annotations:
     - url: https://artifacthub.io/packages/olm/community-operators/lightspeed-operator
   artifacthub.io/links: |
     - name: Artifact Hub
-      url: https://artifacthub.io/packages/helm/showroom-docs-mcp/showroom-docs-mcp
+      url: https://artifacthub.io/packages/helm/showroom-mcp/showroom-mcp
     - name: Documentation
       url: https://maximilianopizarro.github.io/showroom-docs-mcp
     - name: Quay.io Image

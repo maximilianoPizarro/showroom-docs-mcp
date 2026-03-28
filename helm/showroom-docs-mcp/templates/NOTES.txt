@@ -1,10 +1,10 @@
 Showroom Docs MCP Server deployed successfully!
 
 1. Check the deployment:
-   kubectl get pods -n {{ .Values.namespace }} -l app={{ include "showroom-docs-mcp.fullname" . }}
+   kubectl get pods -n {{ .Values.namespace }} -l app={{ include "showroom-mcp.fullname" . }}
 
 2. MCP endpoint (Streamable HTTP):
-   http://{{ include "showroom-docs-mcp.fullname" . }}.{{ .Values.namespace }}.svc.cluster.local:{{ .Values.service.port }}/mcp
+   http://{{ include "showroom-mcp.fullname" . }}.{{ .Values.namespace }}.svc.cluster.local:{{ .Values.service.port }}/mcp
 
 3. Add to OLSConfig:
 
@@ -18,7 +18,7 @@ Showroom Docs MCP Server deployed successfully!
      mcpServers:
        - name: {{ .Values.olsConfig.mcpServerName }}
          timeout: {{ .Values.olsConfig.mcpServerTimeout }}
-         url: 'http://{{ include "showroom-docs-mcp.fullname" . }}.{{ .Values.namespace }}.svc.cluster.local:{{ .Values.service.port }}/mcp'
+         url: 'http://{{ include "showroom-mcp.fullname" . }}.{{ .Values.namespace }}.svc.cluster.local:{{ .Values.service.port }}/mcp'
 
 4. Available MCP Tools:
    - searchDocs:      Search documentation by keywords
@@ -31,4 +31,4 @@ Showroom Docs MCP Server deployed successfully!
    - "What is the Neuralbank workshop about?"
    - "Explain Developer Hub architecture"
 
-Documentation: https://maximilianopizarro.github.io/showroom-docs-mcp
+Documentation: https://maximilianopizarro.github.io/showroom-mcp

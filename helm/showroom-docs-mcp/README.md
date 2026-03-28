@@ -3,7 +3,7 @@
 ![Version: 1.6.0](https://img.shields.io/badge/Version-1.6.0-informational?style=flat-square)
 ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 ![AppVersion: 1.6.0](https://img.shields.io/badge/AppVersion-1.6.0-informational?style=flat-square)
-[![Artifact Hub](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/showroom-docs-mcp)](https://artifacthub.io/packages/helm/showroom-docs-mcp/showroom-docs-mcp)
+[![Artifact Hub](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/showroom-mcp)](https://artifacthub.io/packages/helm/showroom-mcp/showroom-mcp)
 
 Quarkus MCP Server that indexes Red Hat product documentation and the "IA Development From Zero To Hero" workshop for OpenShift Lightspeed.
 
@@ -27,7 +27,7 @@ This Helm chart deploys a [Model Context Protocol (MCP)](https://modelcontextpro
 ### Step 1: Add the Helm Repository
 
 ```bash
-helm repo add showroom-docs-mcp \
+helm repo add showroom-mcp \
   https://maximilianopizarro.github.io/showroom-docs-mcp/
 
 helm repo update
@@ -36,7 +36,7 @@ helm repo update
 ### Step 2: Install the Chart
 
 ```bash
-helm install showroom-docs-mcp showroom-docs-mcp/showroom-docs-mcp \
+helm install showroom-mcp showroom-mcp/showroom-mcp \
   --namespace openshift-lightspeed \
   --create-namespace \
   --set image.pullPolicy=Always
@@ -45,7 +45,7 @@ helm install showroom-docs-mcp showroom-docs-mcp/showroom-docs-mcp \
 With custom values:
 
 ```bash
-helm install showroom-docs-mcp showroom-docs-mcp/showroom-docs-mcp \
+helm install showroom-mcp showroom-mcp/showroom-mcp \
   --namespace openshift-lightspeed \
   --create-namespace \
   --set image.pullPolicy=Always \
@@ -58,7 +58,7 @@ Or from source:
 ```bash
 git clone https://github.com/maximilianoPizarro/showroom-docs-mcp.git
 cd showroom-docs-mcp
-helm install showroom-docs-mcp helm/showroom-docs-mcp \
+helm install showroom-mcp helm/showroom-docs-mcp \
   --namespace openshift-lightspeed
 ```
 
@@ -66,20 +66,20 @@ helm install showroom-docs-mcp helm/showroom-docs-mcp \
 
 ```bash
 # Check pod status
-oc get pods -n openshift-lightspeed -l app=showroom-docs-mcp
+oc get pods -n openshift-lightspeed -l app=showroom-mcp
 
 # Expected output:
-# NAME                                 READY   STATUS    RESTARTS   AGE
-# showroom-docs-mcp-xxxxxxxxxx-xxxxx   1/1     Running   0          30s
+# NAME                              READY   STATUS    RESTARTS   AGE
+# showroom-mcp-xxxxxxxxxx-xxxxx     1/1     Running   0          30s
 
 # Verify health endpoint
-oc exec -n openshift-lightspeed deploy/showroom-docs-mcp -- \
+oc exec -n openshift-lightspeed deploy/showroom-mcp -- \
   curl -s http://localhost:8080/q/health/ready
 
 # Expected: {"status":"UP","checks":[]}
 
 # Check application logs
-oc logs -n openshift-lightspeed -l app=showroom-docs-mcp --tail=20
+oc logs -n openshift-lightspeed -l app=showroom-mcp --tail=20
 ```
 
 ### Step 4: Configure OLSConfig
@@ -106,9 +106,9 @@ spec:
         type: rhoai_vllm
         url: 'http://llama-32-3b-instruct-openai.my-first-model.svc.cluster.local/v1'
   mcpServers:
-    - name: showroom-docs-mcp
+    - name: showroom-mcp
       timeout: 10
-      url: 'http://showroom-docs-mcp.openshift-lightspeed.svc.cluster.local:8080/mcp'
+      url: 'http://showroom-mcp.openshift-lightspeed.svc.cluster.local:8080/mcp'
   ols:
     conversationCache:
       postgres:
@@ -182,7 +182,7 @@ Open the OpenShift web console and click the Lightspeed chat icon. Ask:
 
 ```bash
 helm repo update
-helm upgrade showroom-docs-mcp showroom-docs-mcp/showroom-docs-mcp \
+helm upgrade showroom-mcp showroom-mcp/showroom-mcp \
   --namespace openshift-lightspeed \
   --set image.pullPolicy=Always
 ```
@@ -196,10 +196,10 @@ oc rollout restart deploy/lightspeed-app-server -n openshift-lightspeed
 ## Uninstalling the Chart
 
 ```bash
-helm uninstall showroom-docs-mcp -n openshift-lightspeed
+helm uninstall showroom-mcp -n openshift-lightspeed
 ```
 
-After uninstalling, remove the `showroom-docs-mcp` entry from your OLSConfig `mcpServers` list and reapply.
+After uninstalling, remove the `showroom-mcp` entry from your OLSConfig `mcpServers` list and reapply.
 
 ## Troubleshooting
 
@@ -207,7 +207,7 @@ After uninstalling, remove the `showroom-docs-mcp` entry from your OLSConfig `mc
 |---------|-------|-----|
 | Pod `CrashLoopBackOff` | Old cached image | Set `image.pullPolicy=Always` and reinstall |
 | `405 Method Not Allowed` in OLS logs | URL ends with `/mcp/sse` | Change OLSConfig URL to end with `/mcp` |
-| `Connection refused` | MCP pod not running | Check `oc get pods -l app=showroom-docs-mcp` |
+| `Connection refused` | MCP pod not running | Check `oc get pods -l app=showroom-mcp` |
 | `NoSuchMethodError: LaunchMode.isProduction()` | Quarkus version mismatch | Rebuild image with Quarkus 3.27.3+ |
 | `Tool 'listWorkshopSections' not found` | Old tool names cached | Restart `lightspeed-app-server` deployment |
 | Truncated LLM responses | Low `maxTokensForResponse` | Increase to `4096` in OLSConfig |
@@ -238,7 +238,7 @@ After uninstalling, remove the `showroom-docs-mcp` entry from your OLSConfig `mc
 | `tolerations` | list | `[]` | Pod tolerations |
 | `affinity` | object | `{}` | Pod affinity rules |
 | `olsConfig.enabled` | bool | `false` | Enable OLSConfig integration |
-| `olsConfig.mcpServerName` | string | `showroom-docs-mcp` | MCP server name in OLSConfig |
+| `olsConfig.mcpServerName` | string | `showroom-mcp` | MCP server name in OLSConfig |
 | `olsConfig.mcpServerTimeout` | int | `10` | MCP server timeout (seconds) |
 
 ## MCP Tools

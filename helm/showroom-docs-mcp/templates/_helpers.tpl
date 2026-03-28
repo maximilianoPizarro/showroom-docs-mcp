@@ -1,14 +1,14 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "showroom-docs-mcp.name" -}}
+{{- define "showroom-mcp.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Create a default fully qualified app name.
 */}}
-{{- define "showroom-docs-mcp.fullname" -}}
+{{- define "showroom-mcp.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -24,9 +24,9 @@ Create a default fully qualified app name.
 {{/*
 Common labels
 */}}
-{{- define "showroom-docs-mcp.labels" -}}
-helm.sh/chart: {{ include "showroom-docs-mcp.name" . }}-{{ .Chart.Version | replace "+" "_" }}
-{{ include "showroom-docs-mcp.selectorLabels" . }}
+{{- define "showroom-mcp.labels" -}}
+helm.sh/chart: {{ include "showroom-mcp.name" . }}-{{ .Chart.Version | replace "+" "_" }}
+{{ include "showroom-mcp.selectorLabels" . }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
 app.kubernetes.io/part-of: openshift-lightspeed
@@ -35,8 +35,8 @@ app.kubernetes.io/part-of: openshift-lightspeed
 {{/*
 Selector labels
 */}}
-{{- define "showroom-docs-mcp.selectorLabels" -}}
-app: {{ include "showroom-docs-mcp.fullname" . }}
-app.kubernetes.io/name: {{ include "showroom-docs-mcp.name" . }}
+{{- define "showroom-mcp.selectorLabels" -}}
+app: {{ include "showroom-mcp.fullname" . }}
+app.kubernetes.io/name: {{ include "showroom-mcp.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}

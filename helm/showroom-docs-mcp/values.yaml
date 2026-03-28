@@ -42,5 +42,5 @@ affinity: {}
 
 olsConfig:
   enabled: false
-  mcpServerName: showroom-docs-mcp
+  mcpServerName: showroom-mcp
   mcpServerTimeout: 10
