@@ -41,7 +41,7 @@ tolerations: []
 affinity: {}
 
 inspector:
-  enabled: false
+  enabled: true
   image:
     repository: mcpuse/inspector
     tag: latest
