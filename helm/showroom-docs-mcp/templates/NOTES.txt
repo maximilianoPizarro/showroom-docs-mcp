@@ -32,11 +32,17 @@ Showroom Docs MCP Server deployed successfully!
    - "Explain Developer Hub architecture"
 
 {{- if .Values.inspector.enabled }}
-6. MCP Inspector (testing UI):
-   oc get route {{ include "showroom-docs-mcp.fullname" . }}-inspector -n {{ .Values.namespace }}
+6. MCP Inspector (testing UI without Lightspeed):
 
-   Connect to MCP server URL:
-   http://{{ include "showroom-docs-mcp.fullname" . }}.{{ .Values.namespace }}.svc.cluster.local:{{ .Values.service.port }}/mcp
+   Get the Inspector URL:
+   oc get route {{ include "showroom-docs-mcp.fullname" . }}-inspector -n {{ .Values.namespace }} -o jsonpath='{.spec.host}'
+
+   Open the URL in your browser, then in the Connect panel:
+     - Transport Type: Streamable HTTP
+     - URL: http://{{ include "showroom-docs-mcp.fullname" . }}.{{ .Values.namespace }}.svc.cluster.local:{{ .Values.service.port }}/mcp
+     - Click "Connect"
+
+   Test the tools: searchDocs, listDocSections, getDocSection, getDocSummary
 {{- end }}
 
 Documentation: https://maximilianopizarro.github.io/showroom-docs-mcp

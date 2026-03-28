@@ -48,7 +48,7 @@ inspector:
     pullPolicy: IfNotPresent
   service:
     type: ClusterIP
-    port: 6274
+    port: 8080
   route:
     enabled: true
     tls:
