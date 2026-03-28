@@ -6,8 +6,8 @@ description: >-
   Provides 46 indexed documents covering 27 workshop modules, 9 Red Hat product
   docs (auto-sanitized from PDF), and 10 developer products with quick-start examples.
 type: application
-version: 1.4.0
-appVersion: "1.4.0"
+version: 1.5.0
+appVersion: "1.5.0"
 kubeVersion: ">=1.25.0-0"
 home: https://maximilianopizarro.github.io/showroom-docs-mcp
 icon: https://raw.githubusercontent.com/maximilianoPizarro/showroom-docs-mcp/main/docs/assets/images/logo.svg
@@ -70,13 +70,13 @@ annotations:
     - title: Available Documentation Listing
       url: https://raw.githubusercontent.com/maximilianoPizarro/showroom-docs-mcp/main/docs/assets/images/lightspeed-doc-list.png
   artifacthub.io/changes: |
-    - kind: added
-      description: "OpenShift console screenshots showing MCP tools in action"
-    - kind: added
-      description: "6 Artifact Hub screenshots: topology, chat, search, summary, doc-index, doc-list"
-    - kind: changed
-      description: "GitHub Pages documentation updated with live OpenShift Lightspeed captures"
     - kind: fixed
-      description: "Helm repo index.yaml serving fixed for Artifact Hub compatibility"
+      description: "Maintainer email corrected to maximiliano.pizarro.5@gmail.com"
+    - kind: added
+      description: ".helmignore added based on n8n-helm-chart"
+    - kind: fixed
+      description: "artifacthub-repo.yml included in Jekyll config for Artifact Hub compatibility"
+    - kind: fixed
+      description: "README.md included in chart package for Artifact Hub display"
   artifacthub.io/crds: ""
   artifacthub.io/crdsExamples: ""
