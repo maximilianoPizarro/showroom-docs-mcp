@@ -1,0 +1,19 @@
+{{- if .Values.litellm.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "showroom-docs-mcp.fullname" . }}-litellm
+  namespace: {{ .Values.namespace }}
+  labels:
+    {{- include "showroom-docs-mcp.labels" . | nindent 4 }}
+    app.kubernetes.io/component: litellm
+spec:
+  type: ClusterIP
+  selector:
+    app: {{ include "showroom-docs-mcp.fullname" . }}-litellm
+  ports:
+    - port: {{ .Values.litellm.service.port }}
+      targetPort: {{ .Values.litellm.service.port }}
+      protocol: TCP
+      name: http
+{{- end }}

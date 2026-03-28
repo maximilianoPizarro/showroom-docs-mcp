@@ -63,6 +63,31 @@ inspector:
       cpu: 200m
       memory: 256Mi
 
+litellm:
+  enabled: false
+  image:
+    repository: litellm/litellm-non_root
+    tag: main-stable
+    pullPolicy: IfNotPresent
+  service:
+    port: 4000
+  route:
+    enabled: true
+    tls:
+      termination: edge
+  masterKey: "sk-showroom-mcp-1234"
+  granite:
+    modelId: isvc-granite-31-8b-fp8
+    apiBase: "https://isvc-granite-31-8b-fp8-predictor.sandbox-shared-models.svc.cluster.local:8443/v1"
+    apiKey: ""
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
+
 olsConfig:
   enabled: false
   mcpServerName: showroom-docs-mcp

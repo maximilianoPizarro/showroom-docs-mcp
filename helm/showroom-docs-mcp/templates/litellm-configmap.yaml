@@ -1,0 +1,22 @@
+{{- if .Values.litellm.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "showroom-docs-mcp.fullname" . }}-litellm
+  namespace: {{ .Values.namespace }}
+  labels:
+    {{- include "showroom-docs-mcp.labels" . | nindent 4 }}
+    app.kubernetes.io/component: litellm
+data:
+  config.yaml: |
+    model_list:
+      - model_name: granite
+        litellm_params:
+          model: openai/{{ .Values.litellm.granite.modelId }}
+          api_base: {{ .Values.litellm.granite.apiBase }}
+          api_key: os.environ/GRANITE_API_KEY
+          ssl_verify: false
+
+    general_settings:
+      master_key: os.environ/LITELLM_MASTER_KEY
+{{- end }}

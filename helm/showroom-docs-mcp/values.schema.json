@@ -223,6 +223,92 @@
       },
       "description": "MCP Inspector for testing tools without Lightspeed"
     },
+    "litellm": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable LiteLLM proxy for OpenAI-compatible access to Granite models"
+        },
+        "image": {
+          "type": "object",
+          "properties": {
+            "repository": {
+              "type": "string",
+              "default": "litellm/litellm-non_root",
+              "description": "LiteLLM container image (non-root for OpenShift)"
+            },
+            "tag": {
+              "type": "string",
+              "default": "main-stable",
+              "description": "LiteLLM image tag"
+            }
+          }
+        },
+        "service": {
+          "type": "object",
+          "properties": {
+            "port": {
+              "type": "integer",
+              "default": 4000,
+              "description": "LiteLLM service port"
+            }
+          }
+        },
+        "route": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "default": true,
+              "description": "Create OpenShift Route for LiteLLM"
+            },
+            "tls": {
+              "type": "object",
+              "properties": {
+                "termination": {
+                  "type": "string",
+                  "enum": ["edge", "passthrough", "reencrypt"],
+                  "default": "edge"
+                }
+              }
+            }
+          }
+        },
+        "masterKey": {
+          "type": "string",
+          "default": "sk-showroom-mcp-1234",
+          "description": "Bearer token required to call the LiteLLM proxy"
+        },
+        "granite": {
+          "type": "object",
+          "properties": {
+            "modelId": {
+              "type": "string",
+              "default": "isvc-granite-31-8b-fp8",
+              "description": "vLLM model ID on the inference server"
+            },
+            "apiBase": {
+              "type": "string",
+              "default": "https://isvc-granite-31-8b-fp8-predictor.sandbox-shared-models.svc.cluster.local:8443/v1",
+              "description": "Granite inference endpoint (internal cluster URL)"
+            },
+            "apiKey": {
+              "type": "string",
+              "default": "",
+              "description": "Bearer token for Granite endpoint (use: --set litellm.granite.apiKey=$(oc whoami -t))"
+            }
+          },
+          "description": "Granite model connection settings"
+        },
+        "resources": {
+          "type": "object",
+          "description": "LiteLLM container resource requests and limits"
+        }
+      },
+      "description": "LiteLLM proxy for OpenAI-compatible access to internal Granite models (Developer Sandbox)"
+    },
     "olsConfig": {
       "type": "object",
       "properties": {

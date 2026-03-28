@@ -43,17 +43,26 @@ Showroom Docs MCP Server deployed successfully!
 
    https://<INSPECTOR_HOST>/?autoConnect=http://{{ include "showroom-docs-mcp.fullname" . }}.{{ .Values.namespace }}.svc.cluster.local:{{ .Values.service.port }}/mcp&tab=tools
 
-7. Inspector Chat with Granite (Developer Sandbox):
+{{- end }}
 
-   To test MCP tools with an LLM from the Inspector:
-   a) Open the Inspector and click the "Chat" tab
-   b) Click "Configure API Key"
-   c) Configure:
-      - Provider: OpenAI (compatible with vLLM/RHOAI)
-      - Model:    granite-3-8b-instruct
-      - API Key:  your-api-token
-      - Base URL: http://<model-service>.<namespace>.svc.cluster.local/v1
-   d) Start chatting - the Inspector will use MCP tools automatically
+{{- if .Values.litellm.enabled }}
+
+7. LiteLLM Proxy (OpenAI-compatible Granite endpoint):
+
+   Get the LiteLLM URL:
+   oc get route {{ include "showroom-docs-mcp.fullname" . }}-litellm -n {{ .Values.namespace }} -o jsonpath='{.spec.host}'
+
+   Test the proxy:
+   LITELLM_HOST=$(oc get route {{ include "showroom-docs-mcp.fullname" . }}-litellm -n {{ .Values.namespace }} -o jsonpath='{.spec.host}')
+
+   curl -s https://${LITELLM_HOST}/v1/chat/completions \
+     -H "Authorization: Bearer {{ .Values.litellm.masterKey }}" \
+     -H "Content-Type: application/json" \
+     -d '{"model":"granite","messages":[{"role":"user","content":"Hello"}]}'
+
+   Note: The Granite OAuth token expires after ~24h. Refresh with:
+   helm upgrade {{ .Release.Name }} showroom-docs-mcp/showroom-docs-mcp \
+     --set litellm.granite.apiKey=$(oc whoami -t)
 {{- end }}
 
 Documentation: https://maximilianopizarro.github.io/showroom-docs-mcp

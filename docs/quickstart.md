@@ -159,19 +159,27 @@ helm install showroom-docs-mcp showroom-docs-mcp/showroom-docs-mcp \
   --set image.pullPolicy=Always
 ```
 
-The Inspector auto-connects to the MCP server. To use the **Chat** tab with Granite:
+The Inspector auto-connects to the MCP server. To enable the **LiteLLM proxy** for OpenAI-compatible access to Granite:
 
-1. Open the Inspector URL:
-   ```bash
-   oc get route showroom-docs-mcp-inspector -o jsonpath='{.spec.host}'
-   ```
-2. Click the **Chat** tab
-3. Click **Configure API Key** and set:
-   - **Provider**: OpenAI (vLLM/RHOAI compatible)
-   - **Model**: `granite-3-8b-instruct`
-   - **API Key**: your inference token
-   - **Base URL**: `http://<model-service>.<namespace>.svc.cluster.local/v1`
-4. Ask questions - the Inspector calls MCP tools automatically
+```bash
+helm upgrade showroom-docs-mcp showroom-docs-mcp/showroom-docs-mcp \
+  --set namespace=$(oc project -q) \
+  --set litellm.enabled=true \
+  --set litellm.granite.apiKey=$(oc whoami -t)
+```
+
+Test the proxy:
+
+```bash
+LITELLM_HOST=$(oc get route showroom-docs-mcp-litellm -o jsonpath='{.spec.host}')
+
+curl -s https://${LITELLM_HOST}/v1/chat/completions \
+  -H "Authorization: Bearer sk-showroom-mcp-1234" \
+  -H "Content-Type: application/json" \
+  -d '{"model":"granite","messages":[{"role":"user","content":"Hello"}]}'
+```
+
+> **Note**: The OAuth token expires after ~24h. Refresh with `--set litellm.granite.apiKey=$(oc whoami -t)`.
 
 ## Local Development
 

@@ -6,8 +6,8 @@ description: >-
   Provides 46 indexed documents covering 27 workshop modules, 9 Red Hat product
   docs (auto-sanitized from PDF), and 10 developer products with quick-start examples.
 type: application
-version: 1.9.0
-appVersion: "1.9.0"
+version: 2.0.0
+appVersion: "2.0.0"
 kubeVersion: ">=1.25.0-0"
 home: https://maximilianopizarro.github.io/showroom-docs-mcp
 icon: https://raw.githubusercontent.com/maximilianoPizarro/showroom-docs-mcp/main/docs/assets/images/logo.svg
@@ -74,10 +74,8 @@ annotations:
       url: https://raw.githubusercontent.com/maximilianoPizarro/showroom-docs-mcp/main/docs/assets/images/mcp-inspector-query.png
   artifacthub.io/changes: |
     - kind: added
-      description: "Inspector auto-connects to MCP server on startup via --url flag"
+      description: "Optional LiteLLM proxy deployment for OpenAI-compatible access to Granite models"
     - kind: added
-      description: "Developer Sandbox quick start with Granite model configuration"
+      description: "LiteLLM ConfigMap, Deployment, Service, and Route templates"
     - kind: added
-      description: "Inspector Chat tab instructions for LLM testing with Granite"
-    - kind: changed
-      description: "Default LLM model changed from llama to granite-3-8b-instruct"
+      description: "Developer Sandbox Granite model integration via LiteLLM"
