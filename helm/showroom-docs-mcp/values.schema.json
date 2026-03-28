@@ -243,6 +243,12 @@
               "type": "string",
               "default": "v1.82.3-stable",
               "description": "LiteLLM image tag"
+            },
+            "pullPolicy": {
+              "type": "string",
+              "enum": ["Always", "IfNotPresent", "Never"],
+              "default": "IfNotPresent",
+              "description": "Image pull policy"
             }
           }
         },

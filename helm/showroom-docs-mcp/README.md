@@ -248,7 +248,7 @@ After uninstalling, remove the `showroom-docs-mcp` entry from your OLSConfig `mc
 | `inspector.route.tls.termination` | string | `edge` | TLS termination type |
 | `litellm.enabled` | bool | `false` | Enable LiteLLM proxy |
 | `litellm.image.repository` | string | `litellm/litellm-non_root` | LiteLLM image |
-| `litellm.image.tag` | string | `main-stable` | LiteLLM image tag |
+| `litellm.image.tag` | string | `v1.82.3-stable` | LiteLLM image tag |
 | `litellm.service.port` | int | `4000` | LiteLLM service port |
 | `litellm.route.enabled` | bool | `true` | Create Route for LiteLLM |
 | `litellm.masterKey` | string | `sk-showroom-mcp-1234` | Proxy bearer token |
