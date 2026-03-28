@@ -29,6 +29,10 @@ spec:
           env:
             - name: PORT
               value: {{ .Values.inspector.service.port | quote }}
+            - name: HOME
+              value: /tmp
+            - name: npm_config_cache
+              value: /tmp/.npm
           resources:
             {{- toYaml .Values.inspector.resources | nindent 12 }}
 {{- end }}
