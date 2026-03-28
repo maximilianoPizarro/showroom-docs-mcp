@@ -39,8 +39,6 @@ annotations:
   artifacthub.io/operator: "false"
   artifacthub.io/containsSecurityUpdates: "false"
   artifacthub.io/prerelease: "false"
-  artifacthub.io/recommendations: |
-    - url: https://artifacthub.io/packages/olm/community-operators/lightspeed-operator
   artifacthub.io/links: |
     - name: Artifact Hub
       url: https://artifacthub.io/packages/helm/showroom-docs-mcp/showroom-docs-mcp
