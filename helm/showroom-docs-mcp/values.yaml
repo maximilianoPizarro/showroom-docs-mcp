@@ -51,6 +51,7 @@ inspector:
     port: 8080
   route:
     enabled: true
+    timeout: "300s"
     tls:
       termination: edge
   resources:

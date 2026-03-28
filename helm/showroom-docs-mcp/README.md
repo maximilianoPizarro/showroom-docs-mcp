@@ -1,8 +1,8 @@
 # Showroom Docs MCP Server
 
-![Version: 1.7.0](https://img.shields.io/badge/Version-1.7.0-informational?style=flat-square)
+![Version: 1.8.0](https://img.shields.io/badge/Version-1.8.0-informational?style=flat-square)
 ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
-![AppVersion: 1.7.0](https://img.shields.io/badge/AppVersion-1.7.0-informational?style=flat-square)
+![AppVersion: 1.8.0](https://img.shields.io/badge/AppVersion-1.8.0-informational?style=flat-square)
 [![Artifact Hub](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/showroom-docs-mcp)](https://artifacthub.io/packages/helm/showroom-docs-mcp/showroom-docs-mcp)
 
 Quarkus MCP Server that indexes Red Hat product documentation and the "IA Development From Zero To Hero" workshop for OpenShift Lightspeed.
@@ -212,6 +212,7 @@ After uninstalling, remove the `showroom-docs-mcp` entry from your OLSConfig `mc
 | `Tool 'listWorkshopSections' not found` | Old tool names cached | Restart `lightspeed-app-server` deployment |
 | Truncated LLM responses | Low `maxTokensForResponse` | Increase to `4096` in OLSConfig |
 | LLM ignores documentation / hallucinates | MCP tools not loaded | Verify tools loaded in OLS logs |
+| Inspector disconnects quickly | Route timeout too low | Increase `inspector.route.timeout` (default: `300s`) |
 
 ## Values
 
@@ -237,6 +238,13 @@ After uninstalling, remove the `showroom-docs-mcp` entry from your OLSConfig `mc
 | `nodeSelector` | object | `{}` | Node selector constraints |
 | `tolerations` | list | `[]` | Pod tolerations |
 | `affinity` | object | `{}` | Pod affinity rules |
+| `inspector.enabled` | bool | `true` | Enable MCP Inspector deployment |
+| `inspector.image.repository` | string | `mcpuse/inspector` | Inspector container image |
+| `inspector.image.tag` | string | `latest` | Inspector image tag |
+| `inspector.service.port` | int | `8080` | Inspector service port |
+| `inspector.route.enabled` | bool | `true` | Create OpenShift Route for Inspector |
+| `inspector.route.timeout` | string | `300s` | Route timeout for MCP connections |
+| `inspector.route.tls.termination` | string | `edge` | TLS termination type |
 | `olsConfig.enabled` | bool | `false` | Enable OLSConfig integration |
 | `olsConfig.mcpServerName` | string | `showroom-docs-mcp` | MCP server name in OLSConfig |
 | `olsConfig.mcpServerTimeout` | int | `10` | MCP server timeout (seconds) |

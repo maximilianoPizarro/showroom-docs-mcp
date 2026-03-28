@@ -177,6 +177,11 @@
               "default": true,
               "description": "Create OpenShift Route for Inspector"
             },
+            "timeout": {
+              "type": "string",
+              "default": "300s",
+              "description": "HAProxy route timeout for long-lived MCP connections (prevents early disconnect)"
+            },
             "tls": {
               "type": "object",
               "properties": {

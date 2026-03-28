@@ -46,6 +46,8 @@ The chart includes a `values.schema.json` for input validation. Key configurable
 | `resources.requests.memory` | `256Mi` | Memory request |
 | `resources.limits.cpu` | `500m` | CPU limit |
 | `resources.limits.memory` | `512Mi` | Memory limit |
+| `inspector.enabled` | `true` | Enable MCP Inspector deployment |
+| `inspector.route.timeout` | `300s` | Route timeout for MCP connections |
 | `olsConfig.enabled` | `false` | Enable OLSConfig integration |
 | `olsConfig.mcpServerName` | `showroom-docs-mcp` | MCP server name in OLSConfig |
 | `olsConfig.mcpServerTimeout` | `10` | MCP timeout (seconds) |

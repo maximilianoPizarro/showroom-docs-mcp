@@ -6,8 +6,8 @@ description: >-
   Provides 46 indexed documents covering 27 workshop modules, 9 Red Hat product
   docs (auto-sanitized from PDF), and 10 developer products with quick-start examples.
 type: application
-version: 1.7.0
-appVersion: "1.7.0"
+version: 1.8.0
+appVersion: "1.8.0"
 kubeVersion: ">=1.25.0-0"
 home: https://maximilianopizarro.github.io/showroom-docs-mcp
 icon: https://raw.githubusercontent.com/maximilianoPizarro/showroom-docs-mcp/main/docs/assets/images/logo.svg
@@ -66,10 +66,16 @@ annotations:
       url: https://raw.githubusercontent.com/maximilianoPizarro/showroom-docs-mcp/main/docs/assets/images/lightspeed-doc-index.png
     - title: Available Documentation Listing
       url: https://raw.githubusercontent.com/maximilianoPizarro/showroom-docs-mcp/main/docs/assets/images/lightspeed-doc-list.png
+    - title: MCP Inspector - Connect
+      url: https://raw.githubusercontent.com/maximilianoPizarro/showroom-docs-mcp/main/docs/assets/images/mcp-inspector-connect.png
+    - title: MCP Inspector - Tools
+      url: https://raw.githubusercontent.com/maximilianoPizarro/showroom-docs-mcp/main/docs/assets/images/mcp-inspector-tools.png
+    - title: MCP Inspector - Query
+      url: https://raw.githubusercontent.com/maximilianoPizarro/showroom-docs-mcp/main/docs/assets/images/mcp-inspector-query.png
   artifacthub.io/changes: |
     - kind: added
-      description: "Optional MCP Inspector deployment with OpenShift Route for testing"
+      description: "Screenshots gallery page for GitHub Pages documentation"
+    - kind: added
+      description: "MCP Inspector screenshots to Artifact Hub"
     - kind: fixed
-      description: "Chart name reverted to showroom-docs-mcp for Artifact Hub consistency"
-    - kind: changed
-      description: "Removed empty crds/crdsExamples/signKey annotations"
+      description: "Inspector Route timeout to prevent early disconnects (300s)"

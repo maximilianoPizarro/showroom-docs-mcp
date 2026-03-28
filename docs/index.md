@@ -204,4 +204,22 @@ Once deployed, open the OpenShift Lightspeed chat and ask:
 | API Management | 1 | [docs.redhat.com](https://docs.redhat.com/en/documentation/red_hat_openshift_api_management/1) |
 | OpenShift AI | 1 | [docs.redhat.com](https://docs.redhat.com/en/documentation/red_hat_openshift_ai_cloud_service/1) |
 
-[Full installation guide](quickstart/) -- [Architecture](architecture/) -- [OLSConfig configuration](configuration/)
+## Screenshots
+
+<p align="center">
+  <img src="{{ '/assets/images/topology-lightspeed-chat.png' | relative_url }}" alt="Lightspeed Chat with MCP" width="100%"/>
+</p>
+
+<p align="center"><em>OpenShift Lightspeed answering questions using MCP tools</em></p>
+
+<p align="center">
+  <img src="{{ '/assets/images/mcp-inspector-tools.png' | relative_url }}" alt="MCP Inspector" width="100%"/>
+</p>
+
+<p align="center"><em>MCP Inspector showing the 4 available tools</em></p>
+
+[View all screenshots](screenshots/)
+
+---
+
+[Full installation guide](quickstart/) -- [Architecture](architecture/) -- [OLSConfig configuration](configuration/) -- [Screenshots](screenshots/)

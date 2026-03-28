@@ -55,5 +55,7 @@ navigation:
     url: /api-tools/
   - title: Content Index
     url: /content-index/
+  - title: Screenshots
+    url: /screenshots/
   - title: "Espanol"
     url: /es/
