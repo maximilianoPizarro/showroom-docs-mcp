@@ -19,8 +19,9 @@ kramdown:
   syntax_highlighter: rouge
 
 include:
-  - index.yaml
   - "*.tgz"
+  - index.yaml
+  - artifacthub-repo.yml
 
 exclude:
   - Gemfile
