@@ -122,6 +122,97 @@
       "default": {},
       "description": "Pod affinity rules"
     },
+    "inspector": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable MCP Inspector deployment for testing tools"
+        },
+        "image": {
+          "type": "object",
+          "properties": {
+            "repository": {
+              "type": "string",
+              "default": "mcpuse/inspector",
+              "description": "MCP Inspector container image"
+            },
+            "tag": {
+              "type": "string",
+              "default": "latest",
+              "description": "MCP Inspector image tag"
+            },
+            "pullPolicy": {
+              "type": "string",
+              "enum": ["Always", "IfNotPresent", "Never"],
+              "default": "IfNotPresent",
+              "description": "Image pull policy"
+            }
+          }
+        },
+        "service": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": ["ClusterIP", "NodePort", "LoadBalancer"],
+              "default": "ClusterIP",
+              "description": "Inspector service type"
+            },
+            "port": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 65535,
+              "default": 8080,
+              "description": "Inspector service port"
+            }
+          }
+        },
+        "route": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "default": true,
+              "description": "Create OpenShift Route for Inspector"
+            },
+            "tls": {
+              "type": "object",
+              "properties": {
+                "termination": {
+                  "type": "string",
+                  "enum": ["edge", "passthrough", "reencrypt"],
+                  "default": "edge",
+                  "description": "TLS termination type"
+                }
+              }
+            }
+          }
+        },
+        "resources": {
+          "type": "object",
+          "properties": {
+            "requests": {
+              "type": "object",
+              "properties": {
+                "cpu": { "type": "string", "default": "50m" },
+                "memory": { "type": "string", "default": "128Mi" }
+              }
+            },
+            "limits": {
+              "type": "object",
+              "properties": {
+                "cpu": { "type": "string", "default": "200m" },
+                "memory": { "type": "string", "default": "256Mi" }
+              }
+            }
+          },
+          "description": "Inspector container resource requests and limits"
+        }
+      },
+      "description": "MCP Inspector for testing tools without Lightspeed"
+    },
     "olsConfig": {
       "type": "object",
       "properties": {
