@@ -1,6 +1,4 @@
 target/
-*.tgz
-!docs/*.tgz
 .idea/
 *.iml
 .settings/
@@ -18,6 +16,4 @@ _site/
 Gemfile.lock
 pdfs/
 *.py
-docs/*.png
-!docs/assets/images/*.png
 workshop-raw/
