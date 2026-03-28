@@ -108,12 +108,12 @@ spec:
       - credentialsSecretRef:
           name: ols-llm-credentials
         models:
-          - name: llama-32-3b-instruct
+          - name: granite-3-8b-instruct
             parameters:
               maxTokensForResponse: 8192
         name: red_hat_openshift_ai
         type: rhoai_vllm
-        url: 'http://llama-32-3b-instruct-openai.my-first-model.svc.cluster.local/v1'
+        url: 'http://granite-3-8b-instruct.my-model.svc.cluster.local/v1'
   mcpServers:
     - name: showroom-docs-mcp
       timeout: 10
@@ -124,7 +124,7 @@ spec:
         maxConnections: 2000
         sharedBuffers: 256MB
       type: postgres
-    defaultModel: llama-32-3b-instruct
+    defaultModel: granite-3-8b-instruct
     defaultProvider: red_hat_openshift_ai
     deployment:
       api:

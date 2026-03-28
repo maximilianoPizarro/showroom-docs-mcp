@@ -1,4 +1,5 @@
 {{- if .Values.inspector.enabled }}
+{{- $mcpUrl := printf "http://%s.%s.svc.cluster.local:%s/mcp" (include "showroom-docs-mcp.fullname" .) .Values.namespace (toString (int .Values.service.port)) }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -24,13 +25,17 @@ spec:
         - name: inspector
           image: "{{ .Values.inspector.image.repository }}:{{ .Values.inspector.image.tag }}"
           imagePullPolicy: {{ .Values.inspector.image.pullPolicy }}
+          command: ["npx", "@mcp-use/inspector"]
+          args:
+            - "--port"
+            - {{ .Values.inspector.service.port | quote }}
+            - "--url"
+            - {{ .Values.inspector.mcpServerUrl | default $mcpUrl | quote }}
           ports:
             - containerPort: {{ .Values.inspector.service.port }}
               protocol: TCP
               name: http
           env:
-            - name: PORT
-              value: {{ .Values.inspector.service.port | quote }}
             - name: HOME
               value: /tmp
             - name: npm_config_cache

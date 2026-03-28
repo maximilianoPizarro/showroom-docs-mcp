@@ -32,17 +32,28 @@ Showroom Docs MCP Server deployed successfully!
    - "Explain Developer Hub architecture"
 
 {{- if .Values.inspector.enabled }}
-6. MCP Inspector (testing UI without Lightspeed):
+
+6. MCP Inspector (testing UI):
 
    Get the Inspector URL:
    oc get route {{ include "showroom-docs-mcp.fullname" . }}-inspector -n {{ .Values.namespace }} -o jsonpath='{.spec.host}'
 
-   Open the URL in your browser, then in the Connect panel:
-     - Transport Type: Streamable HTTP
-     - URL: http://{{ include "showroom-docs-mcp.fullname" . }}.{{ .Values.namespace }}.svc.cluster.local:{{ .Values.service.port }}/mcp
-     - Click "Connect"
+   The Inspector auto-connects to the MCP server on startup.
+   If it disconnects, use the auto-connect URL:
 
-   Test the tools: searchDocs, listDocSections, getDocSection, getDocSummary
+   https://<INSPECTOR_HOST>/?autoConnect=http://{{ include "showroom-docs-mcp.fullname" . }}.{{ .Values.namespace }}.svc.cluster.local:{{ .Values.service.port }}/mcp&tab=tools
+
+7. Inspector Chat with Granite (Developer Sandbox):
+
+   To test MCP tools with an LLM from the Inspector:
+   a) Open the Inspector and click the "Chat" tab
+   b) Click "Configure API Key"
+   c) Configure:
+      - Provider: OpenAI (compatible with vLLM/RHOAI)
+      - Model:    granite-3-8b-instruct
+      - API Key:  your-api-token
+      - Base URL: http://<model-service>.<namespace>.svc.cluster.local/v1
+   d) Start chatting - the Inspector will use MCP tools automatically
 {{- end }}
 
 Documentation: https://maximilianopizarro.github.io/showroom-docs-mcp

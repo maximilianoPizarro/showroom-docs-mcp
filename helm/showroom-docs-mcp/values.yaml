@@ -46,6 +46,7 @@ inspector:
     repository: mcpuse/inspector
     tag: latest
     pullPolicy: IfNotPresent
+  mcpServerUrl: ""
   service:
     type: ClusterIP
     port: 8080
@@ -66,3 +67,8 @@ olsConfig:
   enabled: false
   mcpServerName: showroom-docs-mcp
   mcpServerTimeout: 10
+  llm:
+    provider: rhoai_vllm
+    model: granite-3-8b-instruct
+    url: ""
+    credentialsSecret: ols-llm-credentials

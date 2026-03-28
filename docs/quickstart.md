@@ -146,6 +146,33 @@ Once deployed, open the OpenShift Lightspeed chat in the console and try these q
   <img src="{{ '/assets/images/architecture-diagram.svg' | relative_url }}?v=2" alt="Architecture: OpenShift Lightspeed + MCP" width="100%"/>
 </p>
 
+## Developer Sandbox Quick Start
+
+For [Red Hat Developer Sandbox](https://developers.redhat.com/developer-sandbox), deploy the MCP server with the Inspector to test tools with Granite:
+
+```bash
+helm repo add showroom-docs-mcp \
+  https://maximilianopizarro.github.io/showroom-docs-mcp/
+
+helm install showroom-docs-mcp showroom-docs-mcp/showroom-docs-mcp \
+  --set namespace=$(oc project -q) \
+  --set image.pullPolicy=Always
+```
+
+The Inspector auto-connects to the MCP server. To use the **Chat** tab with Granite:
+
+1. Open the Inspector URL:
+   ```bash
+   oc get route showroom-docs-mcp-inspector -o jsonpath='{.spec.host}'
+   ```
+2. Click the **Chat** tab
+3. Click **Configure API Key** and set:
+   - **Provider**: OpenAI (vLLM/RHOAI compatible)
+   - **Model**: `granite-3-8b-instruct`
+   - **API Key**: your inference token
+   - **Base URL**: `http://<model-service>.<namespace>.svc.cluster.local/v1`
+4. Ask questions - the Inspector calls MCP tools automatically
+
 ## Local Development
 
 ```bash

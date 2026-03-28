@@ -1,8 +1,8 @@
 # Showroom Docs MCP Server
 
-![Version: 1.8.0](https://img.shields.io/badge/Version-1.8.0-informational?style=flat-square)
+![Version: 1.9.0](https://img.shields.io/badge/Version-1.9.0-informational?style=flat-square)
 ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
-![AppVersion: 1.8.0](https://img.shields.io/badge/AppVersion-1.8.0-informational?style=flat-square)
+![AppVersion: 1.9.0](https://img.shields.io/badge/AppVersion-1.9.0-informational?style=flat-square)
 [![Artifact Hub](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/showroom-docs-mcp)](https://artifacthub.io/packages/helm/showroom-docs-mcp/showroom-docs-mcp)
 
 Quarkus MCP Server that indexes Red Hat product documentation and the "IA Development From Zero To Hero" workshop for OpenShift Lightspeed.
@@ -99,12 +99,12 @@ spec:
       - credentialsSecretRef:
           name: ols-llm-credentials
         models:
-          - name: llama-32-3b-instruct
+          - name: granite-3-8b-instruct
             parameters:
               maxTokensForResponse: 8192
         name: red_hat_openshift_ai
         type: rhoai_vllm
-        url: 'http://llama-32-3b-instruct-openai.my-first-model.svc.cluster.local/v1'
+        url: 'http://granite-3-8b-instruct.my-model.svc.cluster.local/v1'
   mcpServers:
     - name: showroom-docs-mcp
       timeout: 10
@@ -115,7 +115,7 @@ spec:
         maxConnections: 2000
         sharedBuffers: 256MB
       type: postgres
-    defaultModel: llama-32-3b-instruct
+    defaultModel: granite-3-8b-instruct
     defaultProvider: red_hat_openshift_ai
     deployment:
       api:
@@ -241,6 +241,7 @@ After uninstalling, remove the `showroom-docs-mcp` entry from your OLSConfig `mc
 | `inspector.enabled` | bool | `true` | Enable MCP Inspector deployment |
 | `inspector.image.repository` | string | `mcpuse/inspector` | Inspector container image |
 | `inspector.image.tag` | string | `latest` | Inspector image tag |
+| `inspector.mcpServerUrl` | string | `""` (auto-generated) | Override MCP server URL for auto-connect |
 | `inspector.service.port` | int | `8080` | Inspector service port |
 | `inspector.route.enabled` | bool | `true` | Create OpenShift Route for Inspector |
 | `inspector.route.timeout` | string | `300s` | Route timeout for MCP connections |
@@ -248,6 +249,58 @@ After uninstalling, remove the `showroom-docs-mcp` entry from your OLSConfig `mc
 | `olsConfig.enabled` | bool | `false` | Enable OLSConfig integration |
 | `olsConfig.mcpServerName` | string | `showroom-docs-mcp` | MCP server name in OLSConfig |
 | `olsConfig.mcpServerTimeout` | int | `10` | MCP server timeout (seconds) |
+
+## MCP Inspector
+
+The chart includes an optional MCP Inspector deployment for testing tools without OpenShift Lightspeed. The Inspector auto-connects to the MCP server on startup.
+
+### Access the Inspector
+
+```bash
+INSPECTOR_HOST=$(oc get route showroom-docs-mcp-inspector -n openshift-lightspeed -o jsonpath='{.spec.host}')
+echo "https://${INSPECTOR_HOST}"
+```
+
+### Auto-connect URL
+
+If the connection drops, use the auto-connect URL parameter:
+
+```
+https://<INSPECTOR_HOST>/?autoConnect=http://showroom-docs-mcp.openshift-lightspeed.svc.cluster.local:8080/mcp&tab=tools
+```
+
+### Chat with Granite (Developer Sandbox)
+
+The Inspector includes a **Chat** tab with LLM integration (BYOK) for testing MCP tools via natural language:
+
+1. Open the Inspector and click the **Chat** tab
+2. Click **Configure API Key**
+3. Configure:
+   - **Provider**: OpenAI (compatible with vLLM/RHOAI endpoints)
+   - **Model**: `granite-3-8b-instruct`
+   - **API Key**: your inference API token
+   - **Base URL**: `http://<model-service>.<namespace>.svc.cluster.local/v1`
+4. Start chatting - the Inspector calls MCP tools automatically based on your questions
+
+### Developer Sandbox Quick Start
+
+For Red Hat Developer Sandbox, deploy with your namespace:
+
+```bash
+helm repo add showroom-docs-mcp \
+  https://maximilianopizarro.github.io/showroom-docs-mcp/
+
+helm install showroom-docs-mcp showroom-docs-mcp/showroom-docs-mcp \
+  --set namespace=$(oc project -q) \
+  --set image.pullPolicy=Always
+```
+
+### Disable Inspector
+
+```bash
+helm install showroom-docs-mcp showroom-docs-mcp/showroom-docs-mcp \
+  --set inspector.enabled=false
+```
 
 ## MCP Tools
 

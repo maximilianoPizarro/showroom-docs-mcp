@@ -130,6 +130,11 @@
           "default": true,
           "description": "Enable MCP Inspector deployment for testing tools"
         },
+        "mcpServerUrl": {
+          "type": "string",
+          "default": "",
+          "description": "Override MCP server URL for auto-connect (empty = auto-generated from chart values)"
+        },
         "image": {
           "type": "object",
           "properties": {
@@ -236,6 +241,32 @@
           "minimum": 1,
           "default": 10,
           "description": "MCP server timeout in seconds"
+        },
+        "llm": {
+          "type": "object",
+          "properties": {
+            "provider": {
+              "type": "string",
+              "default": "rhoai_vllm",
+              "description": "LLM provider type (rhoai_vllm, watsonx, openai)"
+            },
+            "model": {
+              "type": "string",
+              "default": "granite-3-8b-instruct",
+              "description": "LLM model name"
+            },
+            "url": {
+              "type": "string",
+              "default": "",
+              "description": "LLM inference endpoint URL"
+            },
+            "credentialsSecret": {
+              "type": "string",
+              "default": "ols-llm-credentials",
+              "description": "Secret name containing the API token"
+            }
+          },
+          "description": "LLM configuration for OLSConfig"
         }
       },
       "description": "OLSConfig integration settings"
