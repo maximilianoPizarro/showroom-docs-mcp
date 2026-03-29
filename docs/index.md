@@ -47,6 +47,7 @@ title: Home
 - **Smart truncation** at paragraph boundaries to avoid cut responses
 - **Container image** ready for OpenShift deployment
 - **Helm chart** for declarative installation
+- **LiteLLM proxy** (optional) for OpenAI-compatible access to Granite models in Developer Sandbox
 
 ## Indexed Documentation
 
