@@ -121,3 +121,109 @@ Once connected, the Inspector shows all 4 MCP tools with their descriptions: `ge
 </p>
 
 Executing the `getDocSection` tool from the Inspector UI, showing the tool parameters and JSON response with the documentation content.
+
+---
+
+## Developer Sandbox - Step-by-Step Guide
+
+The following screenshots demonstrate the complete manual procedure for deploying and testing the Showroom Docs MCP Server on a [Red Hat Developer Sandbox](https://developers.redhat.com/developer-sandbox) with LiteLLM proxy and IBM Granite model.
+
+### Step 1: Deploy with Helm
+
+Deploy the chart to your Developer Sandbox namespace. The Helm chart deploys three components: the MCP server, the MCP Inspector, and the LiteLLM proxy (with PostgreSQL for the dashboard).
+
+```bash
+helm repo add showroom-docs-mcp \
+  https://maximilianopizarro.github.io/showroom-docs-mcp/
+
+helm install showroom-docs-mcp showroom-docs-mcp/showroom-docs-mcp \
+  --set namespace=$(oc project -q) \
+  --set image.pullPolicy=Always \
+  --set litellm.granite.apiKey=$(oc whoami -t)
+```
+
+### Step 2: MCP Inspector - Connected with 4 Tools
+
+<p align="center">
+  <img src="{{ '/assets/images/inspector-connected-tools.png' | relative_url }}" alt="MCP Inspector - Connected with 4 Tools" width="100%"/>
+</p>
+
+The MCP Inspector auto-connects to the MCP server via the internal Kubernetes service URL (`http://showroom-docs-mcp.<namespace>.svc.cluster.local:8080/mcp`). The Tools tab displays all 4 available tools: `getDocSection`, `getDocSummary`, `listDocSections`, and `searchDocs`.
+
+### Step 3: MCP Inspector - Execute a Tool
+
+<p align="center">
+  <img src="{{ '/assets/images/inspector-tool-result.png' | relative_url }}" alt="MCP Inspector - Tool Execution Result" width="100%"/>
+</p>
+
+Executing the `listDocSections` tool from the Inspector. The result panel shows the JSON response with the full documentation index (197ms response time), confirming the MCP server is operational and returning data correctly.
+
+### Step 4: LiteLLM Dashboard - Registered MCP Server
+
+<p align="center">
+  <img src="{{ '/assets/images/litellm-mcp-servers.png' | relative_url }}" alt="LiteLLM Dashboard - MCP Servers" width="100%"/>
+</p>
+
+The LiteLLM Dashboard (v1.82.3) **MCP Servers** page shows the `showroom_docs_mcp` server registered and connected. The MCP server is configured via the Helm chart's `litellm-configmap.yaml` with the internal service URL and HTTP transport.
+
+### Step 5: LiteLLM Dashboard - Granite Model
+
+<p align="center">
+  <img src="{{ '/assets/images/litellm-models-granite.png' | relative_url }}" alt="LiteLLM Dashboard - Granite Model" width="100%"/>
+</p>
+
+The **Models + Endpoints** page shows the IBM Granite model (`openai/isvc-granite-31-8b-fp8`) registered and available through the LiteLLM proxy. The model is preconfigured to connect to the Developer Sandbox shared inference service.
+
+### Step 6: LiteLLM Playground - Select Granite Model
+
+<p align="center">
+  <img src="{{ '/assets/images/litellm-select-model.png' | relative_url }}" alt="LiteLLM Playground - Select Model" width="100%"/>
+</p>
+
+In the LiteLLM **Playground**, open the "Select Model" dropdown to choose the `granite` model for chat testing.
+
+### Step 7: LiteLLM Playground - Chat with Granite
+
+<p align="center">
+  <img src="{{ '/assets/images/litellm-playground-granite.png' | relative_url }}" alt="LiteLLM Playground - Granite Selected" width="100%"/>
+</p>
+
+The Playground with the `granite` model selected, ready to start a conversation. The configuration panel shows the Endpoint Type (`/v1/chat/completions`), the selected model, and optional fields for Tags and MCP Servers.
+
+### Step 8: LiteLLM Playground - Granite Response
+
+<p align="center">
+  <img src="{{ '/assets/images/litellm-chat-response.png' | relative_url }}" alt="LiteLLM Playground - Granite Response" width="100%"/>
+</p>
+
+The Granite model responds through the LiteLLM proxy with information about Red Hat OpenShift. Performance metrics show **TTFT: 0.29s** (Time to First Token) and **Total Latency: 15.16s**, with token usage stats (In: 66, Out: 395, Total: 461).
+
+### API Testing with curl
+
+You can also test the LiteLLM proxy directly via the OpenAI-compatible API:
+
+```bash
+LITELLM_HOST=$(oc get route showroom-docs-mcp-litellm -o jsonpath='{.spec.host}')
+
+curl -s https://${LITELLM_HOST}/v1/chat/completions \
+  -H "Authorization: Bearer sk-showroom-mcp-1234" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "granite",
+    "messages": [{"role": "user", "content": "What is OpenShift?"}]
+  }'
+```
+
+### LiteLLM Dashboard Credentials
+
+| Field | Value |
+|-------|-------|
+| **Username** | `admin` |
+| **Password** | `sk-showroom-mcp-1234` |
+
+> **Note**: The Granite API key uses an OpenShift OAuth token that expires after ~24 hours. Refresh it with:
+> ```bash
+> helm upgrade showroom-docs-mcp showroom-docs-mcp/showroom-docs-mcp \
+>   --set namespace=$(oc project -q) \
+>   --set litellm.granite.apiKey=$(oc whoami -t)
+> ```
