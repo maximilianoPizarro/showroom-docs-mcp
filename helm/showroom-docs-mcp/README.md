@@ -246,7 +246,7 @@ After uninstalling, remove the `showroom-docs-mcp` entry from your OLSConfig `mc
 | `inspector.route.enabled` | bool | `true` | Create OpenShift Route for Inspector |
 | `inspector.route.timeout` | string | `300s` | Route timeout for MCP connections |
 | `inspector.route.tls.termination` | string | `edge` | TLS termination type |
-| `litellm.enabled` | bool | `false` | Enable LiteLLM proxy |
+| `litellm.enabled` | bool | `true` | Enable LiteLLM proxy |
 | `litellm.image.repository` | string | `litellm/litellm-non_root` | LiteLLM image |
 | `litellm.image.tag` | string | `v1.82.3-stable` | LiteLLM image tag |
 | `litellm.service.port` | int | `4000` | LiteLLM service port |

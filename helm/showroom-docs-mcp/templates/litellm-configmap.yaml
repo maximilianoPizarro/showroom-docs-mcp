@@ -16,6 +16,15 @@ data:
           api_base: {{ .Values.litellm.granite.apiBase }}
           api_key: os.environ/GRANITE_API_KEY
           ssl_verify: false
+          drop_params: true
+          additional_drop_params:
+            - tool_choice
+            - tools
+        model_info:
+          supports_function_calling: false
+
+    litellm_settings:
+      drop_params: true
 
     general_settings:
       master_key: os.environ/LITELLM_MASTER_KEY

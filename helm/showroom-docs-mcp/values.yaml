@@ -64,7 +64,7 @@ inspector:
       memory: 256Mi
 
 litellm:
-  enabled: false
+  enabled: true
   image:
     repository: litellm/litellm-non_root
     tag: v1.82.3-stable

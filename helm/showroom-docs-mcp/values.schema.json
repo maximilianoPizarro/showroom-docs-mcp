@@ -228,7 +228,7 @@
       "properties": {
         "enabled": {
           "type": "boolean",
-          "default": false,
+          "default": true,
           "description": "Enable LiteLLM proxy for OpenAI-compatible access to Granite models"
         },
         "image": {
