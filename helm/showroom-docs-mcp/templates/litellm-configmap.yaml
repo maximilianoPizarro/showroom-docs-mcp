@@ -19,9 +19,13 @@ data:
           drop_params: true
           additional_drop_params:
             - tool_choice
-            - tools
         model_info:
-          supports_function_calling: false
+          supports_function_calling: true
+
+    mcp_servers:
+      showroom_docs_mcp:
+        url: http://{{ include "showroom-docs-mcp.fullname" . }}.{{ .Values.namespace }}.svc.cluster.local:{{ .Values.service.port }}/mcp
+        transport: http
 
     litellm_settings:
       drop_params: true
