@@ -5,11 +5,15 @@ entries:
       artifacthub.io/category: ai-machine-learning
       artifacthub.io/changes: |
         - kind: added
-          description: "Optional LiteLLM proxy deployment for OpenAI-compatible access to Granite models"
+          description: "LiteLLM proxy with PostgreSQL dashboard for OpenAI-compatible Granite access"
         - kind: added
-          description: "LiteLLM ConfigMap, Deployment, Service, and Route templates"
+          description: "MCP server registered in LiteLLM MCP Gateway with 4 tools"
         - kind: added
-          description: "Developer Sandbox Granite model integration via LiteLLM"
+          description: "Red Hat RHEL9 PostgreSQL 15 for LiteLLM dashboard persistence"
+        - kind: fixed
+          description: "Drop tool_choice and tools params for vLLM servers without --tool-call-parser"
+        - kind: changed
+          description: "LiteLLM enabled by default with preconfigured Granite model"
       artifacthub.io/containsSecurityUpdates: "false"
       artifacthub.io/images: |
         - name: showroom-docs-mcp
@@ -49,12 +53,12 @@ entries:
           url: https://raw.githubusercontent.com/maximilianoPizarro/showroom-docs-mcp/main/docs/assets/images/mcp-inspector-query.png
     apiVersion: v2
     appVersion: 2.0.0
-    created: "2026-03-28T22:59:08.4336381-03:00"
+    created: "2026-03-28T23:41:23.8477118-03:00"
     description: Quarkus MCP Server that indexes Red Hat documentation and the "IA
       Development From Zero To Hero" workshop for OpenShift Lightspeed RAG. Provides
       46 indexed documents covering 27 workshop modules, 9 Red Hat product docs (auto-sanitized
       from PDF), and 10 developer products with quick-start examples.
-    digest: 8d93ca0353bf41199f485cff9c188edcb9709626d1429263b21c769af6e61a6a
+    digest: f66276e46956a4190f402042fad7d63a1798a3d1d50cb9bd9a7279942030220e
     home: https://maximilianopizarro.github.io/showroom-docs-mcp
     icon: https://raw.githubusercontent.com/maximilianoPizarro/showroom-docs-mcp/main/docs/assets/images/logo.svg
     keywords:
@@ -135,7 +139,7 @@ entries:
           url: https://raw.githubusercontent.com/maximilianoPizarro/showroom-docs-mcp/main/docs/assets/images/mcp-inspector-query.png
     apiVersion: v2
     appVersion: 1.9.0
-    created: "2026-03-28T22:59:08.4326386-03:00"
+    created: "2026-03-28T23:41:23.845706-03:00"
     description: Quarkus MCP Server that indexes Red Hat documentation and the "IA
       Development From Zero To Hero" workshop for OpenShift Lightspeed RAG. Provides
       46 indexed documents covering 27 workshop modules, 9 Red Hat product docs (auto-sanitized
@@ -219,7 +223,7 @@ entries:
           url: https://raw.githubusercontent.com/maximilianoPizarro/showroom-docs-mcp/main/docs/assets/images/mcp-inspector-query.png
     apiVersion: v2
     appVersion: 1.8.0
-    created: "2026-03-28T22:59:08.4316399-03:00"
+    created: "2026-03-28T23:41:23.8441126-03:00"
     description: Quarkus MCP Server that indexes Red Hat documentation and the "IA
       Development From Zero To Hero" workshop for OpenShift Lightspeed RAG. Provides
       46 indexed documents covering 27 workshop modules, 9 Red Hat product docs (auto-sanitized
@@ -297,7 +301,7 @@ entries:
           url: https://raw.githubusercontent.com/maximilianoPizarro/showroom-docs-mcp/main/docs/assets/images/lightspeed-doc-list.png
     apiVersion: v2
     appVersion: 1.7.0
-    created: "2026-03-28T22:59:08.4306385-03:00"
+    created: "2026-03-28T23:41:23.8441126-03:00"
     description: Quarkus MCP Server that indexes Red Hat documentation and the "IA
       Development From Zero To Hero" workshop for OpenShift Lightspeed RAG. Provides
       46 indexed documents covering 27 workshop modules, 9 Red Hat product docs (auto-sanitized
@@ -333,4 +337,4 @@ entries:
     urls:
     - https://maximilianopizarro.github.io/showroom-docs-mcp/showroom-docs-mcp-1.7.0.tgz
     version: 1.7.0
-generated: "2026-03-28T22:59:08.4296396-03:00"
+generated: "2026-03-28T23:41:23.8431084-03:00"

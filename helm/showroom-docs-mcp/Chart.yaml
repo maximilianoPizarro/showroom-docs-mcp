@@ -74,8 +74,12 @@ annotations:
       url: https://raw.githubusercontent.com/maximilianoPizarro/showroom-docs-mcp/main/docs/assets/images/mcp-inspector-query.png
   artifacthub.io/changes: |
     - kind: added
-      description: "Optional LiteLLM proxy deployment for OpenAI-compatible access to Granite models"
+      description: "LiteLLM proxy with PostgreSQL dashboard for OpenAI-compatible Granite access"
     - kind: added
-      description: "LiteLLM ConfigMap, Deployment, Service, and Route templates"
+      description: "MCP server registered in LiteLLM MCP Gateway with 4 tools"
     - kind: added
-      description: "Developer Sandbox Granite model integration via LiteLLM"
+      description: "Red Hat RHEL9 PostgreSQL 15 for LiteLLM dashboard persistence"
+    - kind: fixed
+      description: "Drop tool_choice and tools params for vLLM servers without --tool-call-parser"
+    - kind: changed
+      description: "LiteLLM enabled by default with preconfigured Granite model"
