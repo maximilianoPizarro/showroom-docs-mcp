@@ -126,7 +126,7 @@ Executing the `getDocSection` tool from the Inspector UI, showing the tool param
 
 ## Developer Sandbox - Step-by-Step Guide
 
-The following screenshots demonstrate the complete manual procedure for deploying and testing the Showroom Docs MCP Server on a [Red Hat Developer Sandbox](https://developers.redhat.com/developer-sandbox) with LiteLLM proxy and IBM Granite model.
+The following screenshots demonstrate the complete manual procedure for deploying and testing the Showroom Docs MCP Server on a [Red Hat Developer Sandbox](https://developers.redhat.com/developer-sandbox) with LiteLLM proxy and Qwen3 model (with native tool calling support).
 
 ### Step 1: Deploy with Helm
 
@@ -139,7 +139,7 @@ helm repo add showroom-docs-mcp \
 helm install showroom-docs-mcp showroom-docs-mcp/showroom-docs-mcp \
   --set namespace=$(oc project -q) \
   --set image.pullPolicy=Always \
-  --set litellm.granite.apiKey=$(oc whoami -t)
+  --set litellm.model.apiKey=$(oc whoami -t)
 ```
 
 ### Step 2: MCP Inspector - Connected with 4 Tools
@@ -166,37 +166,37 @@ Executing the `listDocSections` tool from the Inspector. The result panel shows 
 
 The LiteLLM Dashboard (v1.82.3) **MCP Servers** page shows the `showroom_docs_mcp` server registered and connected. The MCP server is configured via the Helm chart's `litellm-configmap.yaml` with the internal service URL and HTTP transport.
 
-### Step 5: LiteLLM Dashboard - Granite Model
+### Step 5: LiteLLM Dashboard - Qwen3 Model
 
 <p align="center">
-  <img src="{{ '/assets/images/litellm-models-granite.png' | relative_url }}" alt="LiteLLM Dashboard - Granite Model" width="100%"/>
+  <img src="{{ '/assets/images/litellm-models-granite.png' | relative_url }}" alt="LiteLLM Dashboard - Model" width="100%"/>
 </p>
 
-The **Models + Endpoints** page shows the IBM Granite model (`openai/isvc-granite-31-8b-fp8`) registered and available through the LiteLLM proxy. The model is preconfigured to connect to the Developer Sandbox shared inference service.
+The **Models + Endpoints** page shows the Qwen3 model (`openai/isvc-qwen3-8b-fp8`) registered and available through the LiteLLM proxy. The model supports native tool calling via vLLM's `--tool-call-parser`.
 
-### Step 6: LiteLLM Playground - Select Granite Model
+### Step 6: LiteLLM Playground - Select Model
 
 <p align="center">
   <img src="{{ '/assets/images/litellm-select-model.png' | relative_url }}" alt="LiteLLM Playground - Select Model" width="100%"/>
 </p>
 
-In the LiteLLM **Playground**, open the "Select Model" dropdown to choose the `granite` model for chat testing.
+In the LiteLLM **Playground**, open the "Select Model" dropdown to choose the `qwen3` model for chat testing.
 
-### Step 7: LiteLLM Playground - Chat with Granite
-
-<p align="center">
-  <img src="{{ '/assets/images/litellm-playground-granite.png' | relative_url }}" alt="LiteLLM Playground - Granite Selected" width="100%"/>
-</p>
-
-The Playground with the `granite` model selected, ready to start a conversation. The configuration panel shows the Endpoint Type (`/v1/chat/completions`), the selected model, and optional fields for Tags and MCP Servers.
-
-### Step 8: LiteLLM Playground - Granite Response
+### Step 7: LiteLLM Playground - Chat with Qwen3
 
 <p align="center">
-  <img src="{{ '/assets/images/litellm-chat-response.png' | relative_url }}" alt="LiteLLM Playground - Granite Response" width="100%"/>
+  <img src="{{ '/assets/images/litellm-playground-granite.png' | relative_url }}" alt="LiteLLM Playground - Qwen3 Selected" width="100%"/>
 </p>
 
-The Granite model responds through the LiteLLM proxy with information about Red Hat OpenShift. Performance metrics show **TTFT: 0.29s** (Time to First Token) and **Total Latency: 15.16s**, with token usage stats (In: 66, Out: 395, Total: 461).
+The Playground with the `qwen3` model selected, ready to start a conversation. The configuration panel shows the Endpoint Type (`/v1/chat/completions`), the selected model, and optional fields for Tags and MCP Servers.
+
+### Step 8: LiteLLM Playground - Qwen3 Response
+
+<p align="center">
+  <img src="{{ '/assets/images/litellm-chat-response.png' | relative_url }}" alt="LiteLLM Playground - Qwen3 Response" width="100%"/>
+</p>
+
+The Qwen3 model responds through the LiteLLM proxy. With native tool calling support, the model can automatically invoke MCP tools when needed.
 
 ### API Testing with curl
 
@@ -209,7 +209,7 @@ curl -s https://${LITELLM_HOST}/v1/chat/completions \
   -H "Authorization: Bearer sk-showroom-mcp-1234" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "granite",
+    "model": "qwen3",
     "messages": [{"role": "user", "content": "What is OpenShift?"}]
   }'
 ```
@@ -221,9 +221,9 @@ curl -s https://${LITELLM_HOST}/v1/chat/completions \
 | **Username** | `admin` |
 | **Password** | `sk-showroom-mcp-1234` |
 
-> **Note**: The Granite API key uses an OpenShift OAuth token that expires after ~24 hours. Refresh it with:
+> **Note**: The API key uses an OpenShift OAuth token that expires after ~24 hours. Refresh it with:
 > ```bash
 > helm upgrade showroom-docs-mcp showroom-docs-mcp/showroom-docs-mcp \
 >   --set namespace=$(oc project -q) \
->   --set litellm.granite.apiKey=$(oc whoami -t)
+>   --set litellm.model.apiKey=$(oc whoami -t)
 > ```

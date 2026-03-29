@@ -229,7 +229,7 @@
         "enabled": {
           "type": "boolean",
           "default": true,
-          "description": "Enable LiteLLM proxy for OpenAI-compatible access to Granite models"
+          "description": "Enable LiteLLM proxy for OpenAI-compatible access to LLM models"
         },
         "image": {
           "type": "object",
@@ -287,26 +287,31 @@
           "default": "sk-showroom-mcp-1234",
           "description": "Bearer token required to call the LiteLLM proxy"
         },
-        "granite": {
+        "model": {
           "type": "object",
           "properties": {
+            "name": {
+              "type": "string",
+              "default": "qwen3",
+              "description": "Model alias name used in LiteLLM API requests"
+            },
             "modelId": {
               "type": "string",
-              "default": "isvc-granite-31-8b-fp8",
+              "default": "isvc-qwen3-8b-fp8",
               "description": "vLLM model ID on the inference server"
             },
             "apiBase": {
               "type": "string",
-              "default": "https://isvc-granite-31-8b-fp8-predictor.sandbox-shared-models.svc.cluster.local:8443/v1",
-              "description": "Granite inference endpoint (internal cluster URL)"
+              "default": "https://isvc-qwen3-8b-fp8-predictor.sandbox-shared-models.svc.cluster.local:8443/v1",
+              "description": "Model inference endpoint (internal cluster URL)"
             },
             "apiKey": {
               "type": "string",
               "default": "",
-              "description": "Bearer token for Granite endpoint (use: --set litellm.granite.apiKey=$(oc whoami -t))"
+              "description": "Bearer token for model endpoint (use: --set litellm.model.apiKey=$(oc whoami -t))"
             }
           },
-          "description": "Granite model connection settings"
+          "description": "LLM model connection settings (default: Qwen3-8b-fp8 with tool calling support)"
         },
         "postgres": {
           "type": "object",
@@ -352,7 +357,7 @@
           "description": "LiteLLM container resource requests and limits"
         }
       },
-      "description": "LiteLLM proxy for OpenAI-compatible access to internal Granite models (Developer Sandbox)"
+      "description": "LiteLLM proxy for OpenAI-compatible access to internal LLM models (Developer Sandbox)"
     },
     "olsConfig": {
       "type": "object",

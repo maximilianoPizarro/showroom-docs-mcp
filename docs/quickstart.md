@@ -148,7 +148,7 @@ Once deployed, open the OpenShift Lightspeed chat in the console and try these q
 
 ## Developer Sandbox Quick Start
 
-For [Red Hat Developer Sandbox](https://developers.redhat.com/developer-sandbox), deploy the MCP server with the Inspector and LiteLLM proxy to test tools with IBM Granite:
+For [Red Hat Developer Sandbox](https://developers.redhat.com/developer-sandbox), deploy the MCP server with the Inspector and LiteLLM proxy to test tools with Qwen3 (supports native tool calling):
 
 ```bash
 helm repo add showroom-docs-mcp \
@@ -157,7 +157,7 @@ helm repo add showroom-docs-mcp \
 helm install showroom-docs-mcp showroom-docs-mcp/showroom-docs-mcp \
   --set namespace=$(oc project -q) \
   --set image.pullPolicy=Always \
-  --set litellm.granite.apiKey=$(oc whoami -t)
+  --set litellm.model.apiKey=$(oc whoami -t)
 ```
 
 This deploys three components:
@@ -166,7 +166,7 @@ This deploys three components:
 |-----------|-------------|-------|
 | **MCP Server** | Quarkus MCP server with 4 tools | `showroom-docs-mcp` |
 | **MCP Inspector** | Web UI for testing MCP tools | `showroom-docs-mcp-inspector` |
-| **LiteLLM Proxy** | OpenAI-compatible API proxy for Granite | `showroom-docs-mcp-litellm` |
+| **LiteLLM Proxy** | OpenAI-compatible API proxy for Qwen3 | `showroom-docs-mcp-litellm` |
 
 Test the LiteLLM proxy:
 
@@ -176,12 +176,12 @@ LITELLM_HOST=$(oc get route showroom-docs-mcp-litellm -o jsonpath='{.spec.host}'
 curl -s https://${LITELLM_HOST}/v1/chat/completions \
   -H "Authorization: Bearer sk-showroom-mcp-1234" \
   -H "Content-Type: application/json" \
-  -d '{"model":"granite","messages":[{"role":"user","content":"Hello"}]}'
+  -d '{"model":"qwen3","messages":[{"role":"user","content":"Hello"}]}'
 ```
 
 Access the LiteLLM Dashboard at `https://<litellm-route>/ui` with credentials: **admin** / **sk-showroom-mcp-1234**.
 
-> **Note**: The OAuth token expires after ~24h. Refresh with `--set litellm.granite.apiKey=$(oc whoami -t)`.
+> **Note**: The OAuth token expires after ~24h. Refresh with `--set litellm.model.apiKey=$(oc whoami -t)`.
 
 For a visual step-by-step walkthrough with screenshots, see the [Developer Sandbox Guide]({{ '/screenshots/#developer-sandbox---step-by-step-guide' | relative_url }}).
 

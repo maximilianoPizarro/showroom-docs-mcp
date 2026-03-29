@@ -1,8 +1,8 @@
 # Showroom Docs MCP Server
 
-![Version: 2.0.0](https://img.shields.io/badge/Version-2.0.0-informational?style=flat-square)
+![Version: 2.1.0](https://img.shields.io/badge/Version-2.1.0-informational?style=flat-square)
 ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
-![AppVersion: 2.0.0](https://img.shields.io/badge/AppVersion-2.0.0-informational?style=flat-square)
+![AppVersion: 2.1.0](https://img.shields.io/badge/AppVersion-2.1.0-informational?style=flat-square)
 [![Artifact Hub](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/showroom-docs-mcp)](https://artifacthub.io/packages/helm/showroom-docs-mcp/showroom-docs-mcp)
 
 Quarkus MCP Server that indexes Red Hat product documentation and the "IA Development From Zero To Hero" workshop for OpenShift Lightspeed.
@@ -252,9 +252,10 @@ After uninstalling, remove the `showroom-docs-mcp` entry from your OLSConfig `mc
 | `litellm.service.port` | int | `4000` | LiteLLM service port |
 | `litellm.route.enabled` | bool | `true` | Create Route for LiteLLM |
 | `litellm.masterKey` | string | `sk-showroom-mcp-1234` | Proxy bearer token |
-| `litellm.granite.modelId` | string | `isvc-granite-31-8b-fp8` | vLLM model ID |
-| `litellm.granite.apiBase` | string | `https://...svc.cluster.local:8443/v1` | Granite endpoint |
-| `litellm.granite.apiKey` | string | `""` | OAuth token for Granite |
+| `litellm.model.name` | string | `qwen3` | Model alias for LiteLLM API |
+| `litellm.model.modelId` | string | `isvc-qwen3-8b-fp8` | vLLM model ID |
+| `litellm.model.apiBase` | string | `https://...svc.cluster.local:8443/v1` | Model endpoint |
+| `litellm.model.apiKey` | string | `""` | OAuth token for model |
 | `olsConfig.enabled` | bool | `false` | Enable OLSConfig integration |
 | `olsConfig.mcpServerName` | string | `showroom-docs-mcp` | MCP server name in OLSConfig |
 | `olsConfig.mcpServerTimeout` | int | `10` | MCP server timeout (seconds) |
@@ -313,7 +314,7 @@ helm install showroom-docs-mcp showroom-docs-mcp/showroom-docs-mcp \
 
 ## LiteLLM Proxy (Developer Sandbox)
 
-Optional LiteLLM proxy that exposes the Developer Sandbox Granite model as an OpenAI-compatible API endpoint.
+Optional LiteLLM proxy that exposes the Developer Sandbox Qwen3 model as an OpenAI-compatible API endpoint with native tool calling support.
 
 ### Enable LiteLLM
 
@@ -321,7 +322,7 @@ Optional LiteLLM proxy that exposes the Developer Sandbox Granite model as an Op
 helm upgrade showroom-docs-mcp showroom-docs-mcp/showroom-docs-mcp \
   --set namespace=$(oc project -q) \
   --set litellm.enabled=true \
-  --set litellm.granite.apiKey=$(oc whoami -t)
+  --set litellm.model.apiKey=$(oc whoami -t)
 ```
 
 ### Test the Proxy
@@ -332,16 +333,16 @@ LITELLM_HOST=$(oc get route showroom-docs-mcp-litellm -o jsonpath='{.spec.host}'
 curl -s https://${LITELLM_HOST}/v1/chat/completions \
   -H "Authorization: Bearer sk-showroom-mcp-1234" \
   -H "Content-Type: application/json" \
-  -d '{"model":"granite","messages":[{"role":"user","content":"Hello"}]}'
+  -d '{"model":"qwen3","messages":[{"role":"user","content":"Hello"}]}'
 ```
 
 ### Available Models
 
-| Model | Endpoint |
-|-------|----------|
-| `granite` | `isvc-granite-31-8b-fp8-predictor.sandbox-shared-models.svc.cluster.local:8443` |
+| Model | Endpoint | Tool Calling |
+|-------|----------|--------------|
+| `qwen3` | `isvc-qwen3-8b-fp8-predictor.sandbox-shared-models.svc.cluster.local:8443` | Yes |
 
-> **Note**: The OAuth token expires after ~24h. Refresh with: `helm upgrade ... --set litellm.granite.apiKey=$(oc whoami -t)`
+> **Note**: The OAuth token expires after ~24h. Refresh with: `helm upgrade ... --set litellm.model.apiKey=$(oc whoami -t)`
 
 ## MCP Tools
 

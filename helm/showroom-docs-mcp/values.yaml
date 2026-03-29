@@ -76,9 +76,10 @@ litellm:
     tls:
       termination: edge
   masterKey: "sk-showroom-mcp-1234"
-  granite:
-    modelId: isvc-granite-31-8b-fp8
-    apiBase: "https://isvc-granite-31-8b-fp8-predictor.sandbox-shared-models.svc.cluster.local:8443/v1"
+  model:
+    name: qwen3
+    modelId: isvc-qwen3-8b-fp8
+    apiBase: "https://isvc-qwen3-8b-fp8-predictor.sandbox-shared-models.svc.cluster.local:8443/v1"
     apiKey: ""
   postgres:
     enabled: true

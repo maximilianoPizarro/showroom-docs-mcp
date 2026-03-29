@@ -36,8 +36,8 @@ spec:
           env:
             - name: LITELLM_MASTER_KEY
               value: {{ .Values.litellm.masterKey | quote }}
-            - name: GRANITE_API_KEY
-              value: {{ .Values.litellm.granite.apiKey | quote }}
+            - name: MODEL_API_KEY
+              value: {{ .Values.litellm.model.apiKey | quote }}
             - name: SSL_VERIFY
               value: "False"
             - name: LITELLM_SSL_VERIFY

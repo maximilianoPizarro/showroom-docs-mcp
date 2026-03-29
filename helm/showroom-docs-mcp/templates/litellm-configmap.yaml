@@ -10,11 +10,11 @@ metadata:
 data:
   config.yaml: |
     model_list:
-      - model_name: granite
+      - model_name: {{ .Values.litellm.model.name }}
         litellm_params:
-          model: openai/{{ .Values.litellm.granite.modelId }}
-          api_base: {{ .Values.litellm.granite.apiBase }}
-          api_key: os.environ/GRANITE_API_KEY
+          model: openai/{{ .Values.litellm.model.modelId }}
+          api_base: {{ .Values.litellm.model.apiBase }}
+          api_key: os.environ/MODEL_API_KEY
           ssl_verify: false
           drop_params: true
           additional_drop_params:

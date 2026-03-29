@@ -47,7 +47,7 @@ Showroom Docs MCP Server deployed successfully!
 
 {{- if .Values.litellm.enabled }}
 
-7. LiteLLM Proxy (OpenAI-compatible Granite endpoint):
+7. LiteLLM Proxy (OpenAI-compatible {{ .Values.litellm.model.name }} endpoint):
 
    Get the LiteLLM URL:
    oc get route {{ include "showroom-docs-mcp.fullname" . }}-litellm -n {{ .Values.namespace }} -o jsonpath='{.spec.host}'
@@ -58,11 +58,11 @@ Showroom Docs MCP Server deployed successfully!
    curl -s https://${LITELLM_HOST}/v1/chat/completions \
      -H "Authorization: Bearer {{ .Values.litellm.masterKey }}" \
      -H "Content-Type: application/json" \
-     -d '{"model":"granite","messages":[{"role":"user","content":"Hello"}]}'
+     -d '{"model":"{{ .Values.litellm.model.name }}","messages":[{"role":"user","content":"Hello"}]}'
 
-   Note: The Granite OAuth token expires after ~24h. Refresh with:
+   Note: The OAuth token expires after ~24h. Refresh with:
    helm upgrade {{ .Release.Name }} showroom-docs-mcp/showroom-docs-mcp \
-     --set litellm.granite.apiKey=$(oc whoami -t)
+     --set litellm.model.apiKey=$(oc whoami -t)
 {{- end }}
 
 Documentation: https://maximilianopizarro.github.io/showroom-docs-mcp
