@@ -308,6 +308,45 @@
           },
           "description": "Granite model connection settings"
         },
+        "postgres": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "default": true,
+              "description": "Enable PostgreSQL for LiteLLM dashboard (Red Hat RHEL9 image)"
+            },
+            "image": {
+              "type": "object",
+              "properties": {
+                "repository": {
+                  "type": "string",
+                  "default": "registry.redhat.io/rhel9/postgresql-15"
+                },
+                "tag": {
+                  "type": "string",
+                  "default": "latest"
+                }
+              }
+            },
+            "user": {
+              "type": "string",
+              "default": "litellm",
+              "description": "PostgreSQL username"
+            },
+            "password": {
+              "type": "string",
+              "default": "litellm",
+              "description": "PostgreSQL password"
+            },
+            "database": {
+              "type": "string",
+              "default": "litellm",
+              "description": "PostgreSQL database name"
+            }
+          },
+          "description": "PostgreSQL database for LiteLLM dashboard (ephemeral storage)"
+        },
         "resources": {
           "type": "object",
           "description": "LiteLLM container resource requests and limits"
