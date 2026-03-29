@@ -49,12 +49,12 @@ entries:
           url: https://raw.githubusercontent.com/maximilianoPizarro/showroom-docs-mcp/main/docs/assets/images/mcp-inspector-query.png
     apiVersion: v2
     appVersion: 2.0.0
-    created: "2026-03-28T22:39:51.0195895-03:00"
+    created: "2026-03-28T22:52:53.8252909-03:00"
     description: Quarkus MCP Server that indexes Red Hat documentation and the "IA
       Development From Zero To Hero" workshop for OpenShift Lightspeed RAG. Provides
       46 indexed documents covering 27 workshop modules, 9 Red Hat product docs (auto-sanitized
       from PDF), and 10 developer products with quick-start examples.
-    digest: 8c3a6d32016eac78c3e6144eef48560ea9f7dee26f5418d5d5393691e0fb3ef8
+    digest: 9eaac516b4ff5feb8150696ec01aa84a67e0f9bfc6564e40bdf2d9ee6debb515
     home: https://maximilianopizarro.github.io/showroom-docs-mcp
     icon: https://raw.githubusercontent.com/maximilianoPizarro/showroom-docs-mcp/main/docs/assets/images/logo.svg
     keywords:
@@ -135,7 +135,7 @@ entries:
           url: https://raw.githubusercontent.com/maximilianoPizarro/showroom-docs-mcp/main/docs/assets/images/mcp-inspector-query.png
     apiVersion: v2
     appVersion: 1.9.0
-    created: "2026-03-28T22:39:51.0190691-03:00"
+    created: "2026-03-28T22:52:53.8247697-03:00"
     description: Quarkus MCP Server that indexes Red Hat documentation and the "IA
       Development From Zero To Hero" workshop for OpenShift Lightspeed RAG. Provides
       46 indexed documents covering 27 workshop modules, 9 Red Hat product docs (auto-sanitized
@@ -219,7 +219,7 @@ entries:
           url: https://raw.githubusercontent.com/maximilianoPizarro/showroom-docs-mcp/main/docs/assets/images/mcp-inspector-query.png
     apiVersion: v2
     appVersion: 1.8.0
-    created: "2026-03-28T22:39:51.0180076-03:00"
+    created: "2026-03-28T22:52:53.8237182-03:00"
     description: Quarkus MCP Server that indexes Red Hat documentation and the "IA
       Development From Zero To Hero" workshop for OpenShift Lightspeed RAG. Provides
       46 indexed documents covering 27 workshop modules, 9 Red Hat product docs (auto-sanitized
@@ -297,7 +297,7 @@ entries:
           url: https://raw.githubusercontent.com/maximilianoPizarro/showroom-docs-mcp/main/docs/assets/images/lightspeed-doc-list.png
     apiVersion: v2
     appVersion: 1.7.0
-    created: "2026-03-28T22:39:51.0174838-03:00"
+    created: "2026-03-28T22:52:53.8221145-03:00"
     description: Quarkus MCP Server that indexes Red Hat documentation and the "IA
       Development From Zero To Hero" workshop for OpenShift Lightspeed RAG. Provides
       46 indexed documents covering 27 workshop modules, 9 Red Hat product docs (auto-sanitized
@@ -333,4 +333,4 @@ entries:
     urls:
     - https://maximilianopizarro.github.io/showroom-docs-mcp/showroom-docs-mcp-1.7.0.tgz
     version: 1.7.0
-generated: "2026-03-28T22:39:51.0149786-03:00"
+generated: "2026-03-28T22:52:53.8210531-03:00"
